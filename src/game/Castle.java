@@ -13,6 +13,12 @@ public class Castle {
 		this.position = position;
 	}
 
+	/*** METHODS **************************************************/
+
+	public String toString() {
+		return "Castle { position: " + this.position.toString() + " }";
+	}
+
 	/*** GETTER/SETTER ********************************************/
 
 	public Position getPosition() {
