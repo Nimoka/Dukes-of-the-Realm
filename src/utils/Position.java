@@ -1,5 +1,7 @@
 package utils;
 
+import java.util.Random;
+
 public class Position {
 	/*** VARIABLES ************************************************/
 
@@ -14,6 +16,13 @@ public class Position {
 	}
 
 	/*** METHODS **************************************************/
+
+	public static Position random(int width, int height) {
+		Random generator = new Random();
+		int x = generator.nextInt(width);
+		int y = generator.nextInt(height);
+		return new Position(x, y);
+	}
 
 	public String toString() {
 		return "Position { x: " + this.x + ", y: " + this.y + " }";
