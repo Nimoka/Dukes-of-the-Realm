@@ -1,0 +1,11 @@
+### Java ###
+*.class
+*.log
+
+### Intellij ###
+.idea/
+out/
+
+### macOS ###
+.DS_Store
+._*
