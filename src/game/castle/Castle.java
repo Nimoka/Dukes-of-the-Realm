@@ -1,6 +1,7 @@
 package game.castle;
 
 import game.castle.production.Production;
+import game.entities.EntityGroup;
 import utils.Position;
 import utils.Settings;
 
@@ -9,13 +10,13 @@ public class Castle {
 
 	private Position position;
 	private Production production;
-	private game.entities.Group stock;
+	private EntityGroup stock;
 
 	/*** CONSTRUCTORS *********************************************/
 
 	public Castle(Position position) {
 		this.position = position;
-		this.stock = new game.entities.Group(Settings.CASTLE_NB_CATAPULT, Settings.CASTLE_NB_KNIGHT, Settings.CASTLE_NB_PIKEMAN);
+		this.stock = new EntityGroup(Settings.CASTLE_NB_CATAPULT, Settings.CASTLE_NB_KNIGHT, Settings.CASTLE_NB_PIKEMAN);
 	}
 
 	/*** METHODS **************************************************/
@@ -30,7 +31,7 @@ public class Castle {
 		return this.position;
 	}
 
-	public game.entities.Group getStock() {
+	public EntityGroup getStock() {
 		return this.stock;
 	}
 }

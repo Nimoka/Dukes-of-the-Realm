@@ -3,7 +3,7 @@ package game.entities;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
-public class Group {
+public class EntityGroup {
 	/*** VARIABLES ************************************************/
 
 	private ArrayList<Catapult> listCatapults;
@@ -12,20 +12,20 @@ public class Group {
 
 	/*** CONSTRUCTORS *********************************************/
 
-	public Group() {
+	public EntityGroup() {
 		this.listCatapults = new ArrayList<>();
 		this.listKnights = new ArrayList<>();
 		this.listPikemen = new ArrayList<>();
 	}
 
-	public Group(int nbCatapults, int nbKnights, int nbPikemen) {
+	public EntityGroup(int nbCatapults, int nbKnights, int nbPikemen) {
 		this();
 		this.addCatapults(nbCatapults);
 		this.addKnights(nbKnights);
 		this.addPikemen(nbPikemen);
 	}
 
-	public Group(ArrayList<Catapult> listCatapults, ArrayList<Knight> listKnights, ArrayList<Pikeman> listPikemen) {
+	public EntityGroup(ArrayList<Catapult> listCatapults, ArrayList<Knight> listKnights, ArrayList<Pikeman> listPikemen) {
 		this.listCatapults = listCatapults;
 		this.listKnights = listKnights;
 		this.listPikemen = listPikemen;
@@ -48,11 +48,11 @@ public class Group {
 			this.listPikemen.add(new Pikeman());
 	}
 
-	public Group split(int nbCatapults, int nbKnights, int nbPikemen) {
+	public EntityGroup split(int nbCatapults, int nbKnights, int nbPikemen) {
 		ArrayList<Catapult> listCatapults = this.listCatapults.stream().limit(nbCatapults).collect(Collectors.toCollection(ArrayList::new));
 		ArrayList<Knight> listKnights = this.listKnights.stream().limit(nbKnights).collect(Collectors.toCollection(ArrayList::new));
 		ArrayList<Pikeman> listPikemen = this.listPikemen.stream().limit(nbPikemen).collect(Collectors.toCollection(ArrayList::new));
-		Group result = new Group(listCatapults, listKnights, listPikemen);
+		EntityGroup result = new EntityGroup(listCatapults, listKnights, listPikemen);
 		this.listCatapults.removeAll(listCatapults);
 		this.listKnights.removeAll(listKnights);
 		this.listPikemen.removeAll(listPikemen);
