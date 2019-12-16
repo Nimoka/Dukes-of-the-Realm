@@ -26,4 +26,18 @@ public abstract class Settings {
 	public static int ENTITY_PIKEMAN_PROD_COST = 100;
 	public static int ENTITY_PIKEMAN_PROD_TIME = 5;
 	public static int ENTITY_PIKEMAN_SPEED = 2;
+
+	/*** METHODS **************************************************/
+
+	public static int CASTLE_LEVEL_GAIN(int currentLevel) {
+		return (10 * currentLevel);
+	}
+
+	public static int CASTLE_LEVEL_PROD_COST(int currentLevel) {
+		return (1000 * (currentLevel + 1));
+	}
+
+	public static int CASTLE_LEVEL_PROD_TIME(int currentLevel) {
+		return (100 + 50 * (currentLevel + 1));
+	}
 }
