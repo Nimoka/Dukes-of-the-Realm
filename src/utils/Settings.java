@@ -7,6 +7,10 @@ public abstract class Settings {
 	public static int BOARD_NB_CASTLES = 8;
 	public static int BOARD_WIDTH = 32;
 
+	public static int CASTLE_NB_CATAPULT = 0;
+	public static int CASTLE_NB_KNIGHT = 0;
+	public static int CASTLE_NB_PIKEMAN = 0;
+
 	public static int ENTITY_CATAPULT_ATTACK = 10;
 	public static int ENTITY_CATAPULT_HEALTH = 5;
 	public static int ENTITY_CATAPULT_PROD_COST = 1000;
