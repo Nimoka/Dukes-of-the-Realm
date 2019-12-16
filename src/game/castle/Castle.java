@@ -1,5 +1,6 @@
-package game;
+package game.castle;
 
+import game.castle.production.Production;
 import utils.Position;
 import utils.Settings;
 
@@ -7,6 +8,7 @@ public class Castle {
 	/*** VARIABLES ************************************************/
 
 	private Position position;
+	private Production production;
 	private game.entities.Group stock;
 
 	/*** CONSTRUCTORS *********************************************/

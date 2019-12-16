@@ -1,5 +1,6 @@
 package game;
 
+import game.castle.Castle;
 import utils.Position;
 import utils.Settings;
 

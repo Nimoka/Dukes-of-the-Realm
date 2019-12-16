@@ -3,9 +3,9 @@ package game.entities;
 public abstract class Entity {
 	/*** VARIABLES ************************************************/
 
-	protected int pointAttack = 0;
-	protected int pointHealth = 0;
-	protected int speed = 0;
+	protected int pointAttack;
+	protected int pointHealth;
+	protected int speed;
 
 	/*** GETTER/SETTER ********************************************/
 
