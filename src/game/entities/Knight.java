@@ -6,6 +6,7 @@ public class Knight extends Entity {
 	/*** CONSTRUCTORS *********************************************/
 
 	public Knight() {
+		super();
 		this.pointAttack = Settings.ENTITY_KNIGHT_ATTACK;
 		this.pointHealth = Settings.ENTITY_KNIGHT_HEALTH;
 		this.speed = Settings.ENTITY_KNIGHT_SPEED;

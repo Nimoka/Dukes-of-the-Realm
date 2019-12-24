@@ -3,12 +3,12 @@ package game.entities;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
-public class EntityGroup {
+public abstract class EntityGroup {
 	/*** VARIABLES ************************************************/
 
-	private ArrayList<Catapult> listCatapults;
-	private ArrayList<Knight> listKnights;
-	private ArrayList<Pikeman> listPikemen;
+	protected ArrayList<Catapult> listCatapults;
+	protected ArrayList<Knight> listKnights;
+	protected ArrayList<Pikeman> listPikemen;
 
 	/*** CONSTRUCTORS *********************************************/
 
@@ -55,17 +55,6 @@ public class EntityGroup {
 	private void addPikemen(int nb) {
 		for (int i = 0; i < nb; i++)
 			this.listPikemen.add(new Pikeman());
-	}
-
-	public EntityGroup split(int nbCatapults, int nbKnights, int nbPikemen) {
-		ArrayList<Catapult> listCatapults = this.listCatapults.stream().limit(nbCatapults).collect(Collectors.toCollection(ArrayList::new));
-		ArrayList<Knight> listKnights = this.listKnights.stream().limit(nbKnights).collect(Collectors.toCollection(ArrayList::new));
-		ArrayList<Pikeman> listPikemen = this.listPikemen.stream().limit(nbPikemen).collect(Collectors.toCollection(ArrayList::new));
-		EntityGroup result = new EntityGroup(listCatapults, listKnights, listPikemen);
-		this.listCatapults.removeAll(listCatapults);
-		this.listKnights.removeAll(listKnights);
-		this.listPikemen.removeAll(listPikemen);
-		return result;
 	}
 
 	/*** GETTER/SETTER ********************************************/

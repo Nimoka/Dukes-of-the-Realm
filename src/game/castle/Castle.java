@@ -4,8 +4,9 @@ import game.castle.action.Action;
 import game.castle.production.EntityProduction;
 import game.castle.production.LevelProduction;
 import game.castle.production.Production;
+import game.entities.Army;
 import game.entities.Entity;
-import game.entities.EntityGroup;
+import game.entities.Stock;
 import utils.Position;
 import utils.Settings;
 
@@ -16,7 +17,7 @@ public class Castle {
 	private int level;
 	private Position position;
 	private Production production;
-	private EntityGroup stock;
+	private Stock stock;
 	private int treasure;
 
 	/*** CONSTRUCTORS *********************************************/
@@ -24,13 +25,13 @@ public class Castle {
 	public Castle(Position position) {
 		this.level = Settings.CASTLE_LEVEL;
 		this.position = position;
-		this.stock = new EntityGroup(Settings.CASTLE_NB_CATAPULT, Settings.CASTLE_NB_KNIGHT, Settings.CASTLE_NB_PIKEMAN);
+		this.stock = new Stock(Settings.CASTLE_NB_CATAPULT, Settings.CASTLE_NB_KNIGHT, Settings.CASTLE_NB_PIKEMAN);
 	}
 
 	/*** METHODS **************************************************/
 
 	public void launchNewAction(Castle target, int nbCatapults, int nbKnights, int nbPikemen) {
-		EntityGroup army = stock.split(nbCatapults, nbKnights, nbPikemen);
+		Army army = this.stock.createArmy(nbCatapults, nbKnights, nbPikemen);
 		currentAction = new Action(target, army);
 		// to continue
 	}
@@ -49,6 +50,10 @@ public class Castle {
 		this.treasure += Settings.CASTLE_LEVEL_GAIN(this.level);
 		this.production.nextTurn();
 		this.currentAction.nextTurn();
+	}
+
+	public void receiveAttack() {
+		this.stock.receiveAttack();
 	}
 
 	public void terminateProduction() {
@@ -74,7 +79,7 @@ public class Castle {
 		return this.position;
 	}
 
-	public EntityGroup getStock() {
+	public Stock getStock() {
 		return this.stock;
 	}
 
