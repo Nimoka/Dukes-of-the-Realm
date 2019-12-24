@@ -1,6 +1,7 @@
 package game.castle.action;
 
 import game.castle.Castle;
+import game.entities.Entity;
 import game.entities.EntityGroup;
 
 public class Action {
@@ -14,5 +15,12 @@ public class Action {
 	public Action(Castle target, EntityGroup army) {
 		this.army = army;
 		this.target = target;
+	}
+
+	/*** METHODS **************************************************/
+
+	public void nextTurn() {
+		for (Entity entity: army.getListEntities())
+			entity.nextTurn();
 	}
 }

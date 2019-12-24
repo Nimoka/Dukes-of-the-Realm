@@ -10,4 +10,10 @@ public class Catapult extends Entity {
 		this.pointHealth = Settings.ENTITY_CATAPULT_HEALTH;
 		this.speed = Settings.ENTITY_CATAPULT_SPEED;
 	}
+
+	/*** METHODS **************************************************/
+
+	public void nextTurn() {
+		super.nextTurn();
+	}
 }

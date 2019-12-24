@@ -10,4 +10,10 @@ public class Pikeman extends Entity {
 		this.pointHealth = Settings.ENTITY_PIKEMAN_HEALTH;
 		this.speed = Settings.ENTITY_PIKEMAN_SPEED;
 	}
+
+	/*** METHODS **************************************************/
+
+	public void nextTurn() {
+		super.nextTurn();
+	}
 }

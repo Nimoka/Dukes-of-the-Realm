@@ -7,6 +7,11 @@ public abstract class Entity {
 	protected int pointHealth;
 	protected int speed;
 
+	/*** METHODS **************************************************/
+
+	public void nextTurn() {
+	}
+
 	/*** GETTER/SETTER ********************************************/
 
 	public int getPointAttack() {

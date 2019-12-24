@@ -1,12 +1,14 @@
 package game.castle.production;
 
+import game.castle.Castle;
 import game.entities.*;
 import utils.Settings;
 
 public class EntityProduction extends Production {
 	/*** CONSTRUCTORS *********************************************/
 
-	public EntityProduction(Class<Entity> type) {
+	public EntityProduction(Castle castle, Class<Entity> type) {
+		this.castle = castle;
 		if (Catapult.class.equals(type)) {
 			this.object = new Catapult();
 			this.timer = Settings.ENTITY_CATAPULT_PROD_TIME;
@@ -20,5 +22,11 @@ public class EntityProduction extends Production {
 			this.timer = Settings.ENTITY_PIKEMAN_PROD_TIME;
 			this.cost = Settings.ENTITY_PIKEMAN_PROD_COST;
 		}
+	}
+
+	/*** GETTER/SETTER ********************************************/
+
+	public Entity getEntity() {
+		return (Entity) this.object;
 	}
 }

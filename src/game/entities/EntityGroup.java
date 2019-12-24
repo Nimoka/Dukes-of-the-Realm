@@ -33,6 +33,15 @@ public class EntityGroup {
 
 	/*** METHODS **************************************************/
 
+	public void add(Entity entity) {
+		if (entity.getClass() == Catapult.class)
+			this.listCatapults.add((Catapult) entity);
+		else if (entity.getClass() == Knight.class)
+			this.listKnights.add((Knight) entity);
+		else if (entity.getClass() == Pikeman.class)
+			this.listPikemen.add((Pikeman) entity);
+	}
+
 	private void addCatapults(int nb) {
 		for (int i = 0; i < nb; i++)
 			this.listCatapults.add(new Catapult());

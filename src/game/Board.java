@@ -27,6 +27,7 @@ public class Board {
 				position = Position.random(Settings.BOARD_WIDTH, Settings.BOARD_HEIGHT);
 			} while (!positionEmpty(position));
 			this.castles.add(new Castle(position));
+			// to continue
 		}
 	}
 

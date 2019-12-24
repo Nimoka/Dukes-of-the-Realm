@@ -10,4 +10,10 @@ public class Knight extends Entity {
 		this.pointHealth = Settings.ENTITY_KNIGHT_HEALTH;
 		this.speed = Settings.ENTITY_KNIGHT_SPEED;
 	}
+
+	/*** METHODS **************************************************/
+
+	public void nextTurn() {
+		super.nextTurn();
+	}
 }
