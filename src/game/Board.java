@@ -9,12 +9,14 @@ import java.util.ArrayList;
 public class Board {
 	/*** VARIABLES ************************************************/
 
-	private ArrayList<Castle> castles = null;
+	private ArrayList<Castle> castles;
+	private int currentTurn;
 
 	/*** CONSTRUCTORS *********************************************/
 
 	public Board() {
 		this.createCastles();
+		this.currentTurn = 1;
 	}
 
 	/*** METHODS **************************************************/
@@ -29,6 +31,12 @@ public class Board {
 			this.castles.add(new Castle(position));
 			// to continue
 		}
+	}
+
+	public void nextTurn() {
+		this.currentTurn++;
+		for (Castle castle: this.castles)
+			castle.nextTurn();
 	}
 
 	public boolean positionEmpty(Position position) {
