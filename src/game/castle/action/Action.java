@@ -1,8 +1,8 @@
 package game.castle.action;
 
 import game.castle.Castle;
-import game.entities.Army;
-import game.entities.Entity;
+import game.entity.group.Army;
+import game.entity.Entity;
 
 public class Action {
 	/*** VARIABLES ************************************************/

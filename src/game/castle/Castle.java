@@ -4,9 +4,9 @@ import game.castle.action.Action;
 import game.castle.production.EntityProduction;
 import game.castle.production.LevelProduction;
 import game.castle.production.Production;
-import game.entities.Army;
-import game.entities.Entity;
-import game.entities.Stock;
+import game.entity.group.Army;
+import game.entity.Entity;
+import game.entity.group.Stock;
 import utils.Position;
 import utils.Settings;
 

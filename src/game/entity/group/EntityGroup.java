@@ -1,7 +1,11 @@
-package game.entities;
+package game.entity.group;
+
+import game.entity.Catapult;
+import game.entity.Entity;
+import game.entity.Knight;
+import game.entity.Pikeman;
 
 import java.util.ArrayList;
-import java.util.stream.Collectors;
 
 public abstract class EntityGroup {
 	/*** VARIABLES ************************************************/

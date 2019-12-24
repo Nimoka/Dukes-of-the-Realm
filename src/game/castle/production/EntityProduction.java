@@ -1,7 +1,7 @@
 package game.castle.production;
 
 import game.castle.Castle;
-import game.entities.*;
+import game.entity.*;
 import utils.Settings;
 
 public class EntityProduction extends Production {

@@ -1,4 +1,8 @@
-package game.entities;
+package game.entity.group;
+
+import game.entity.Catapult;
+import game.entity.Knight;
+import game.entity.Pikeman;
 
 import java.util.ArrayList;
 
