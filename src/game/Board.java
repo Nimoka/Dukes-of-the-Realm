@@ -10,11 +10,14 @@ public class Board {
 	/*** VARIABLES ************************************************/
 
 	private ArrayList<Castle> castles;
+	private ArrayList<Duke> dukes;
 	private int currentTurn;
 
 	/*** CONSTRUCTORS *********************************************/
 
 	public Board() {
+		this.dukes = new ArrayList<>();
+		this.createDukes();
 		this.createCastles();
 		this.currentTurn = 1;
 	}
@@ -31,13 +34,18 @@ public class Board {
 
 	private void createCastles() {
 		this.castles = new ArrayList<>();
-		for (int i = 0; i < Settings.BOARD_NB_CASTLES; i++) {
+		for (Duke duke: this.dukes) {
 			Position position;
 			do {
 				position = Position.random(Settings.BOARD_WIDTH, Settings.BOARD_HEIGHT);
 			} while (!checkCastleDistance(position));
-			this.castles.add(new Castle(position));
+			this.castles.add(new Castle(duke, position));
 		}
+	}
+
+	private void createDukes() {
+		for (int i = 0; i < Settings.BOARD_NB_DUKES + 1; i++)
+			this.dukes.add(new Duke());
 	}
 
 	public void nextTurn() {
@@ -62,5 +70,9 @@ public class Board {
 
 	public int getCurrentTurn() {
 		return this.currentTurn;
+	}
+
+	public ArrayList<Duke> getDukes() {
+		return this.dukes;
 	}
 }

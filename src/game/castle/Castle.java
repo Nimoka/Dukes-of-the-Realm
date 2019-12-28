@@ -1,5 +1,6 @@
 package game.castle;
 
+import game.Duke;
 import game.castle.action.Action;
 import game.castle.production.EntityProduction;
 import game.castle.production.LevelProduction;
@@ -15,6 +16,7 @@ public class Castle {
 
 	private Action currentAction;
 	private CastleDirection direction;
+	private Duke duke;
 	private int level;
 	private Position position;
 	private Production production;
@@ -23,8 +25,9 @@ public class Castle {
 
 	/*** CONSTRUCTORS *********************************************/
 
-	public Castle(Position position) {
+	public Castle(Duke duke, Position position) {
 		this.direction = CastleDirection.getRandom();
+		this.duke = duke;
 		this.level = Settings.CASTLE_LEVEL;
 		this.position = position;
 		this.stock = new Stock(Settings.CASTLE_NB_CATAPULT, Settings.CASTLE_NB_KNIGHT, Settings.CASTLE_NB_PIKEMAN);

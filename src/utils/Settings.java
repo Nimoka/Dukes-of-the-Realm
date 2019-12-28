@@ -4,7 +4,7 @@ public abstract class Settings {
 	/*** CONSTANTS ************************************************/
 
 	public static int BOARD_HEIGHT = 24;
-	public static int BOARD_NB_CASTLES = 8;
+	public static int BOARD_NB_DUKES = 8;
 	public static int BOARD_WIDTH = 32;
 
 	public static int CASTLE_DISTANCE = 4;
