@@ -17,6 +17,10 @@ public class Position {
 
 	/*** METHODS **************************************************/
 
+	public double distance(Position position) {
+		return Math.sqrt(Math.pow((this.x - position.getX()), 2) + Math.pow((this.y - position.getY()), 2));
+	}
+
 	public static Position random(int width, int height) {
 		Random generator = new Random();
 		int x = generator.nextInt(width);
@@ -42,6 +46,7 @@ public class Position {
 	public int getY() {
 		return this.y;
 	}
+
 	public void setX(int value) {
 		this.x = value;
 	}

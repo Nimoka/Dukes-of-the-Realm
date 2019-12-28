@@ -21,15 +21,22 @@ public class Board {
 
 	/*** METHODS **************************************************/
 
+	public boolean checkCastleDistance(Position position) {
+		for (Castle castle: this.castles) {
+			if (castle.getPosition().distance(position) < Settings.CASTLE_DISTANCE)
+				return false;
+		}
+		return true;
+	}
+
 	private void createCastles() {
 		this.castles = new ArrayList<>();
 		for (int i = 0; i < Settings.BOARD_NB_CASTLES; i++) {
 			Position position;
 			do {
 				position = Position.random(Settings.BOARD_WIDTH, Settings.BOARD_HEIGHT);
-			} while (!positionEmpty(position));
+			} while (!checkCastleDistance(position));
 			this.castles.add(new Castle(position));
-			// to continue
 		}
 	}
 
@@ -39,19 +46,21 @@ public class Board {
 			castle.nextTurn();
 	}
 
-	public boolean positionEmpty(Position position) {
-		for (Castle castle: this.castles) {
-			if (castle.getPosition().equals(position))
-				return false;
-		}
-		return true;
-	}
-
 	public String toString() {
 		String result = "Board { castles:\n";
 		for (Castle castle: this.castles)
 			result += '\t' + castle.toString() + '\n';
 		result += "}";
 		return result;
+	}
+
+	/*** GETTER/SETTER ********************************************/
+
+	public ArrayList<Castle> getCastles() {
+		return this.castles;
+	}
+
+	public int getCurrentTurn() {
+		return this.currentTurn;
 	}
 }

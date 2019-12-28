@@ -7,6 +7,7 @@ public abstract class Settings {
 	public static int BOARD_NB_CASTLES = 8;
 	public static int BOARD_WIDTH = 32;
 
+	public static int CASTLE_DISTANCE = 4;
 	public static int CASTLE_LEVEL = 1;
 	public static int CASTLE_NB_CATAPULT = 0;
 	public static int CASTLE_NB_KNIGHT = 0;
