@@ -14,6 +14,7 @@ public class Castle {
 	/*** VARIABLES ************************************************/
 
 	private Action currentAction;
+	private CastleDirection direction;
 	private int level;
 	private Position position;
 	private Production production;
@@ -23,6 +24,7 @@ public class Castle {
 	/*** CONSTRUCTORS *********************************************/
 
 	public Castle(Position position) {
+		this.direction = CastleDirection.getRandom();
 		this.level = Settings.CASTLE_LEVEL;
 		this.position = position;
 		this.stock = new Stock(Settings.CASTLE_NB_CATAPULT, Settings.CASTLE_NB_KNIGHT, Settings.CASTLE_NB_PIKEMAN);
