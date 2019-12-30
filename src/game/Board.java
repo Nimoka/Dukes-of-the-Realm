@@ -32,6 +32,9 @@ public class Board {
 		return true;
 	}
 
+	public void checkMatchState() {
+	}
+
 	private void createCastles() {
 		this.castles = new ArrayList<>();
 		for (Duke duke: this.dukes) {
@@ -52,6 +55,7 @@ public class Board {
 		this.currentTurn++;
 		for (Castle castle: this.castles)
 			castle.nextTurn();
+		checkMatchState();
 	}
 
 	public String toString() {
