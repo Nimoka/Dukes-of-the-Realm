@@ -1,12 +1,16 @@
 import game.Board;
 import game.Duke;
 import game.castle.Castle;
+import game.entity.Catapult;
+import game.entity.Knight;
+import game.entity.Pikeman;
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import render.BoardRender;
 import render.CastleRender;
+import render.EntityRender;
 import utils.Position;
 import utils.Settings;
 
@@ -47,8 +51,23 @@ public class Main extends Application {
 		createBoard();
 		initializeStage(stage);
 
-		Castle test = new Castle(new Duke(), Position.random(10, 10));
-		CastleRender testR = new CastleRender(test);
-		rootGroup.getChildren().add(testR.getCanvas());
+		Castle testCs = new Castle(new Duke(), Position.random(10, 10));
+		CastleRender testCsR = new CastleRender(testCs);
+		rootGroup.getChildren().add(testCsR.getCanvas());
+
+		Catapult testCt = new Catapult();
+		EntityRender testCtR = new EntityRender(testCt);
+		testCtR.getCanvas().setTranslateX(Settings.DISPLAY_CELL_WIDTH + 20);
+		rootGroup.getChildren().add(testCtR.getCanvas());
+
+		Knight testK = new Knight();
+		EntityRender testKR = new EntityRender(testK);
+		testKR.getCanvas().setTranslateX((Settings.DISPLAY_CELL_WIDTH + 20) * 2);
+		rootGroup.getChildren().add(testKR.getCanvas());
+
+		Pikeman testP = new Pikeman();
+		EntityRender testPR = new EntityRender(testP);
+		testPR.getCanvas().setTranslateX((Settings.DISPLAY_CELL_WIDTH + 20) * 3);
+		rootGroup.getChildren().add(testPR.getCanvas());
 	}
 }

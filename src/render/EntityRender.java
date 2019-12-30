@@ -1,23 +1,63 @@
 package render;
 
-import game.Board;
+import game.entity.Catapult;
 import game.entity.Entity;
+import game.entity.Knight;
+import game.entity.Pikeman;
+import static utils.Settings.*;
+
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 
 public class EntityRender extends Render {
 	/*** VARIABLES ************************************************/
 
 	private Entity entity;
+	private Rectangle entityShape;
 
 	/*** CONSTRUCTORS *********************************************/
 
 	public EntityRender(Entity entity) {
 		this.entity = entity;
+		initialize();
 	}
 
 	/*** METHODS **************************************************/
 
-	public void initialize() {
+	protected void initialize() {
+		super.initialize();
+		if (Catapult.class.equals(this.entity.getClass())) {
+			initializeShapeAsCatapult();
+		} else if (Knight.class.equals(this.entity.getClass())) {
+			initializeShapeAsKnight();
+		} else if (Pikeman.class.equals(this.entity.getClass())) {
+			initializeShapeAsPikeman();
+		}
+		update();
+	}
 
+	private void initializeShapeAsCatapult() {
+		this.entityShape = new Rectangle();
+		this.entityShape.setWidth(DISPLAY_CELL_WIDTH * .3);
+		this.entityShape.setHeight(DISPLAY_CELL_HEIGHT * .12);
+		this.entityShape.setFill(Color.BROWN);
+		this.canvas.getChildren().add(this.entityShape);
+	}
+
+	private void initializeShapeAsKnight() {
+		this.entityShape = new Rectangle();
+		this.entityShape.setWidth(DISPLAY_CELL_WIDTH * .2);
+		this.entityShape.setHeight(DISPLAY_CELL_HEIGHT * .1);
+		this.entityShape.setFill(Color.BLACK);
+		this.canvas.getChildren().add(this.entityShape);
+	}
+
+	private void initializeShapeAsPikeman() {
+		this.entityShape = new Rectangle();
+		this.entityShape.setWidth(DISPLAY_CELL_WIDTH * .05);
+		this.entityShape.setHeight(DISPLAY_CELL_HEIGHT * .14);
+		this.entityShape.setFill(Color.BLUE);
+		this.canvas.getChildren().add(this.entityShape);
 	}
 
 	/*** GETTER/SETTER ********************************************/

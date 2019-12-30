@@ -11,12 +11,13 @@ public class BoardRender extends Render {
 
 	public BoardRender(Board board) {
 		this.board = board;
+		initialize();
 	}
 
 	/*** METHODS **************************************************/
 
-	public void initialize() {
-
+	protected void initialize() {
+		super.initialize();
 	}
 
 	/*** GETTER/SETTER ********************************************/
