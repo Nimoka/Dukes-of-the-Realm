@@ -1,18 +1,11 @@
 import game.Board;
-import game.Duke;
-import game.castle.Castle;
-import game.entity.Catapult;
-import game.entity.Knight;
-import game.entity.Pikeman;
+import render.BoardRender;
+import static utils.Settings.*;
+
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import render.BoardRender;
-import render.CastleRender;
-import render.EntityRender;
-import utils.Position;
-import utils.Settings;
 
 public class Main extends Application {
 	/*** VARIABLES ************************************************/
@@ -36,11 +29,11 @@ public class Main extends Application {
 	}
 
 	private void initializeStage(Stage stage) {
-		stage.setTitle(Settings.WINDOW_TITLE);
-		stage.setHeight(Settings.WINDOW_DEFAULT_HEIGHT);
-		stage.setWidth(Settings.WINDOW_DEFAULT_WIDTH);
-		stage.setMinHeight(Settings.WINDOW_MIN_HEIGHT);
-		stage.setMinWidth(Settings.WINDOW_MIN_WIDTH);
+		stage.setTitle(WINDOW_TITLE);
+		stage.setHeight(WINDOW_DEFAULT_HEIGHT);
+		stage.setWidth(WINDOW_DEFAULT_WIDTH);
+		stage.setMinHeight(WINDOW_MIN_HEIGHT);
+		stage.setMinWidth(WINDOW_MIN_WIDTH);
 		initializeScene();
 		stage.setScene(this.scene);
 		stage.show();

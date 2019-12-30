@@ -2,7 +2,7 @@ package game;
 
 import game.castle.Castle;
 import utils.Position;
-import utils.Settings;
+import static utils.Settings.*;
 
 import java.util.ArrayList;
 
@@ -26,7 +26,7 @@ public class Board {
 
 	public boolean checkCastleDistance(Position position) {
 		for (Castle castle: this.castles) {
-			if (castle.getPosition().distance(position) < Settings.CASTLE_DISTANCE)
+			if (castle.getPosition().distance(position) < CASTLE_DISTANCE)
 				return false;
 		}
 		return true;
@@ -40,14 +40,14 @@ public class Board {
 		for (Duke duke: this.dukes) {
 			Position position;
 			do {
-				position = Position.random(Settings.BOARD_WIDTH, Settings.BOARD_HEIGHT);
+				position = Position.random(BOARD_WIDTH, BOARD_HEIGHT);
 			} while (!checkCastleDistance(position));
 			this.castles.add(new Castle(duke, position));
 		}
 	}
 
 	private void createDukes() {
-		for (int i = 0; i < Settings.BOARD_NB_DUKES + 1; i++)
+		for (int i = 0; i < BOARD_NB_DUKES + 1; i++)
 			this.dukes.add(new Duke());
 	}
 

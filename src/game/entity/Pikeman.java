@@ -1,15 +1,15 @@
 package game.entity;
 
-import utils.Settings;
+import static utils.Settings.*;
 
 public class Pikeman extends Entity {
 	/*** CONSTRUCTORS *********************************************/
 
 	public Pikeman() {
 		super();
-		this.pointAttack = Settings.ENTITY_PIKEMAN_ATTACK;
-		this.pointHealth = Settings.ENTITY_PIKEMAN_HEALTH;
-		this.speed = Settings.ENTITY_PIKEMAN_SPEED;
+		this.pointAttack = ENTITY_PIKEMAN_ATTACK;
+		this.pointHealth = ENTITY_PIKEMAN_HEALTH;
+		this.speed = ENTITY_PIKEMAN_SPEED;
 	}
 
 	/*** METHODS **************************************************/

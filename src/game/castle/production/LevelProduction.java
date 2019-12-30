@@ -1,7 +1,7 @@
 package game.castle.production;
 
 import game.castle.Castle;
-import utils.Settings;
+import static utils.Settings.*;
 
 public class LevelProduction extends Production {
 	/*** CONSTRUCTORS *********************************************/
@@ -10,8 +10,8 @@ public class LevelProduction extends Production {
 		this.castle = castle;
 		int currentLevel = castle.getLevel();
 		this.object = (Integer) (currentLevel + 1);
-		this.cost = Settings.CASTLE_LEVEL_PROD_COST(currentLevel);
-		this.timer = Settings.CASTLE_LEVEL_PROD_TIME(currentLevel);
+		this.cost = CASTLE_LEVEL_PROD_COST(currentLevel);
+		this.timer = CASTLE_LEVEL_PROD_TIME(currentLevel);
 	}
 
 	/*** GETTER/SETTER ********************************************/

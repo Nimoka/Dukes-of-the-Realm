@@ -1,9 +1,10 @@
 package render;
 
 import game.castle.Castle;
+import static utils.Settings.*;
+
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
-import static utils.Settings.*;
 
 public class CastleRender extends Render {
 	/*** VARIABLES ************************************************/

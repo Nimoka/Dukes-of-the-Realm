@@ -9,7 +9,7 @@ import game.entity.group.Army;
 import game.entity.Entity;
 import game.entity.group.Stock;
 import utils.Position;
-import utils.Settings;
+import static utils.Settings.*;
 
 public class Castle {
 	/*** VARIABLES ************************************************/
@@ -28,9 +28,9 @@ public class Castle {
 	public Castle(Duke duke, Position position) {
 		this.direction = CastleDirection.getRandom();
 		this.duke = duke;
-		this.level = Settings.CASTLE_LEVEL;
+		this.level = CASTLE_LEVEL;
 		this.position = position;
-		this.stock = new Stock(Settings.CASTLE_NB_CATAPULT, Settings.CASTLE_NB_KNIGHT, Settings.CASTLE_NB_PIKEMAN);
+		this.stock = new Stock(CASTLE_NB_CATAPULT, CASTLE_NB_KNIGHT, CASTLE_NB_PIKEMAN);
 	}
 
 	/*** METHODS **************************************************/
@@ -52,7 +52,7 @@ public class Castle {
 	}
 
 	public void nextTurn() {
-		this.treasure += Settings.CASTLE_LEVEL_GAIN(this.level);
+		this.treasure += CASTLE_LEVEL_GAIN(this.level);
 		this.production.nextTurn();
 		this.currentAction.nextTurn();
 	}
