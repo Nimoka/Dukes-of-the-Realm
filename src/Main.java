@@ -1,9 +1,13 @@
 import game.Board;
+import game.Duke;
+import game.castle.Castle;
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import render.BoardRender;
+import render.CastleRender;
+import utils.Position;
 import utils.Settings;
 
 public class Main extends Application {
@@ -42,5 +46,9 @@ public class Main extends Application {
 	public void start(Stage stage) throws Exception {
 		createBoard();
 		initializeStage(stage);
+
+		Castle test = new Castle(new Duke(), Position.random(10, 10));
+		CastleRender testR = new CastleRender(test);
+		rootGroup.getChildren().add(testR.getCanvas());
 	}
 }

@@ -13,8 +13,8 @@ public abstract class Settings {
 	public static int CASTLE_NB_KNIGHT = 0;
 	public static int CASTLE_NB_PIKEMAN = 0;
 
-	public static int DISPLAY_CELL_HEIGHT = 30;
-	public static int DISPLAY_CELL_WIDTH = 30;
+	public static int DISPLAY_CELL_HEIGHT = 48;
+	public static int DISPLAY_CELL_WIDTH = 48;
 
 	public static int ENTITY_CATAPULT_ATTACK = 10;
 	public static int ENTITY_CATAPULT_HEALTH = 5;
