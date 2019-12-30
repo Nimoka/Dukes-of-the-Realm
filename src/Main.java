@@ -50,24 +50,5 @@ public class Main extends Application {
 	public void start(Stage stage) throws Exception {
 		createBoard();
 		initializeStage(stage);
-
-		Castle testCs = new Castle(new Duke(), Position.random(10, 10));
-		CastleRender testCsR = new CastleRender(testCs);
-		rootGroup.getChildren().add(testCsR.getCanvas());
-
-		Catapult testCt = new Catapult();
-		EntityRender testCtR = new EntityRender(testCt);
-		testCtR.getCanvas().setTranslateX(Settings.DISPLAY_CELL_WIDTH + 20);
-		rootGroup.getChildren().add(testCtR.getCanvas());
-
-		Knight testK = new Knight();
-		EntityRender testKR = new EntityRender(testK);
-		testKR.getCanvas().setTranslateX((Settings.DISPLAY_CELL_WIDTH + 20) * 2);
-		rootGroup.getChildren().add(testKR.getCanvas());
-
-		Pikeman testP = new Pikeman();
-		EntityRender testPR = new EntityRender(testP);
-		testPR.getCanvas().setTranslateX((Settings.DISPLAY_CELL_WIDTH + 20) * 3);
-		rootGroup.getChildren().add(testPR.getCanvas());
 	}
 }
