@@ -76,6 +76,10 @@ public class Castle {
 
 	/*** GETTER/SETTER ********************************************/
 
+	public CastleDirection getDirection() {
+		return this.direction;
+	}
+
 	public int getLevel() {
 		return this.level;
 	}

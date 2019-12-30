@@ -17,6 +17,10 @@ public class Position {
 
 	/*** METHODS **************************************************/
 
+	public static Position convertBoardToDisplay(Position position) {
+		return new Position((position.getX() * Settings.DISPLAY_CELL_WIDTH), (position.getY() * Settings.DISPLAY_CELL_HEIGHT));
+	}
+
 	public double distance(Position position) {
 		return Math.sqrt(Math.pow((this.x - position.getX()), 2) + Math.pow((this.y - position.getY()), 2));
 	}

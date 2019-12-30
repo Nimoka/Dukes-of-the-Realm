@@ -13,6 +13,9 @@ public abstract class Settings {
 	public static int CASTLE_NB_KNIGHT = 0;
 	public static int CASTLE_NB_PIKEMAN = 0;
 
+	public static int DISPLAY_CELL_HEIGHT = 30;
+	public static int DISPLAY_CELL_WIDTH = 30;
+
 	public static int ENTITY_CATAPULT_ATTACK = 10;
 	public static int ENTITY_CATAPULT_HEALTH = 5;
 	public static int ENTITY_CATAPULT_PROD_COST = 1000;
@@ -28,6 +31,12 @@ public abstract class Settings {
 	public static int ENTITY_PIKEMAN_PROD_COST = 100;
 	public static int ENTITY_PIKEMAN_PROD_TIME = 5;
 	public static int ENTITY_PIKEMAN_SPEED = 2;
+
+	public static int WINDOW_DEFAULT_HEIGHT = 800;
+	public static int WINDOW_DEFAULT_WIDTH = 1280;
+	public static int WINDOW_MIN_HEIGHT = 400;
+	public static int WINDOW_MIN_WIDTH = 600;
+	public static String WINDOW_TITLE = "Dukes of the Realm";
 
 	/*** METHODS **************************************************/
 
