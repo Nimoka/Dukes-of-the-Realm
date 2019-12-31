@@ -1,6 +1,7 @@
 package game.entity;
 
 import game.castle.action.Action;
+import utils.Position;
 
 public abstract class Entity {
 	/*** VARIABLES ************************************************/
@@ -9,12 +10,13 @@ public abstract class Entity {
 	protected EntityState currentState;
 	protected int pointAttack;
 	protected int pointHealth;
+	protected Position position;
 	protected int speed;
 
 	/*** CONSTRUCTORS *********************************************/
 
 	public Entity() {
-		currentState = EntityState.SLEEP;
+		this.currentState = EntityState.SLEEP;
 	}
 
 	/*** METHODS **************************************************/
