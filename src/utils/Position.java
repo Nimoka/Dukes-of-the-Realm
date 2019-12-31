@@ -17,8 +17,8 @@ public class Position {
 
 	/*** METHODS **************************************************/
 
-	public static Position convertBoardToDisplay(Position position) {
-		return new Position((position.getX() * Settings.DISPLAY_CELL_WIDTH), (position.getY() * Settings.DISPLAY_CELL_HEIGHT));
+	public Position convertBoardToDisplay() {
+		return new Position((this.x * Settings.DISPLAY_CELL_WIDTH), (this.y * Settings.DISPLAY_CELL_HEIGHT));
 	}
 
 	public double distance(Position position) {

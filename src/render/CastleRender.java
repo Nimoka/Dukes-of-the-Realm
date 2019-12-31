@@ -53,6 +53,8 @@ public class CastleRender extends Render {
 	}
 
 	public void update() {
+		this.canvas.setTranslateX(this.castle.getPosition().convertBoardToDisplay().getX());
+		this.canvas.setTranslateY(this.castle.getPosition().convertBoardToDisplay().getY());
 		switch (this.castle.getDirection()) {
 			case EAST:
 				this.canvas.setRotate(90);
