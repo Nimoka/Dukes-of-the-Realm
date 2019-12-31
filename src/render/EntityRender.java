@@ -38,24 +38,24 @@ public class EntityRender extends Render {
 
 	private void initializeShapeAsCatapult() {
 		this.entityShape = new Rectangle();
-		this.entityShape.setWidth(DISPLAY_CELL_WIDTH * .3);
-		this.entityShape.setHeight(DISPLAY_CELL_HEIGHT * .12);
+		this.entityShape.setWidth(BOARD_CELL_STYLE_WIDTH * .3);
+		this.entityShape.setHeight(BOARD_CELL_STYLE_HEIGHT * .12);
 		this.entityShape.setFill(Color.BROWN);
 		this.canvas.getChildren().add(this.entityShape);
 	}
 
 	private void initializeShapeAsKnight() {
 		this.entityShape = new Rectangle();
-		this.entityShape.setWidth(DISPLAY_CELL_WIDTH * .2);
-		this.entityShape.setHeight(DISPLAY_CELL_HEIGHT * .1);
+		this.entityShape.setWidth(BOARD_CELL_STYLE_WIDTH * .2);
+		this.entityShape.setHeight(BOARD_CELL_STYLE_HEIGHT * .1);
 		this.entityShape.setFill(Color.BLACK);
 		this.canvas.getChildren().add(this.entityShape);
 	}
 
 	private void initializeShapeAsPikeman() {
 		this.entityShape = new Rectangle();
-		this.entityShape.setWidth(DISPLAY_CELL_WIDTH * .05);
-		this.entityShape.setHeight(DISPLAY_CELL_HEIGHT * .14);
+		this.entityShape.setWidth(BOARD_CELL_STYLE_WIDTH * .05);
+		this.entityShape.setHeight(BOARD_CELL_STYLE_HEIGHT * .14);
 		this.entityShape.setFill(Color.BLUE);
 		this.canvas.getChildren().add(this.entityShape);
 	}

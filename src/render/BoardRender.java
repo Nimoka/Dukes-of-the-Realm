@@ -6,7 +6,6 @@ import static utils.Settings.*;
 import java.util.ArrayList;
 
 import game.castle.Castle;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 
@@ -37,9 +36,9 @@ public class BoardRender extends Render {
 
 	private void initializeBackground() {
 		this.background = new Rectangle();
-		this.background.setHeight(DISPLAY_CELL_HEIGHT * BOARD_HEIGHT);
-		this.background.setWidth(DISPLAY_CELL_WIDTH * BOARD_WIDTH);
-		this.background.setFill(Color.LAWNGREEN);
+		this.background.setHeight(BOARD_CELL_STYLE_HEIGHT * BOARD_DIM_HEIGHT);
+		this.background.setWidth(BOARD_CELL_STYLE_WIDTH * BOARD_DIM_WIDTH);
+		this.background.setFill(BOARD_STYLE_BACKGROUND_COLOR);
 		this.canvas.getChildren().add(this.background);
 	}
 
@@ -49,25 +48,25 @@ public class BoardRender extends Render {
 
 	private void initializeLines() {
 		this.lines = new ArrayList<>();
-		for (int i = 0; i <= BOARD_WIDTH; i++) {
+		for (int i = 0; i <= BOARD_DIM_WIDTH; i++) {
 			Line line = new Line();
-			line.setStartX(i * DISPLAY_CELL_WIDTH);
-			line.setEndX(i * DISPLAY_CELL_WIDTH);
+			line.setStartX(i * BOARD_CELL_STYLE_WIDTH);
+			line.setEndX(i * BOARD_CELL_STYLE_WIDTH);
 			line.setStartY(0);
 			line.setEndY(this.background.getHeight());
 			this.lines.add(line);
 		}
-		for (int j = 0; j <= BOARD_HEIGHT; j++) {
+		for (int j = 0; j <= BOARD_DIM_HEIGHT; j++) {
 			Line line = new Line();
 			line.setStartX(0);
 			line.setEndX(this.background.getWidth());
-			line.setStartY(j * DISPLAY_CELL_HEIGHT);
-			line.setEndY(j * DISPLAY_CELL_HEIGHT);
+			line.setStartY(j * BOARD_CELL_STYLE_HEIGHT);
+			line.setEndY(j * BOARD_CELL_STYLE_HEIGHT);
 			this.lines.add(line);
 		}
 		for (Line line: lines) {
-			line.setStroke(Color.DARKGREEN);
-			line.setStrokeWidth(1);
+			line.setStroke(BOARD_STYLE_LINES_COLOR);
+			line.setStrokeWidth(BOARD_STYLE_LINES_WIDTH);
 		}
 		this.canvas.getChildren().addAll(this.lines);
 	}

@@ -28,9 +28,9 @@ public class Castle {
 	public Castle(Duke duke, Position position) {
 		this.direction = CastleDirection.getRandom();
 		this.duke = duke;
-		this.level = CASTLE_LEVEL;
+		this.level = CASTLE_DEFAULT_LEVEL;
 		this.position = position;
-		this.stock = new Stock(CASTLE_NB_CATAPULT, CASTLE_NB_KNIGHT, CASTLE_NB_PIKEMAN);
+		this.stock = new Stock(CASTLE_DEFAULT_NB_CATAPULT, CASTLE_DEFAULT_NB_KNIGHT, CASTLE_DEFAULT_NB_PIKEMAN);
 	}
 
 	/*** METHODS **************************************************/

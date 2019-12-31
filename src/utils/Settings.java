@@ -1,20 +1,27 @@
 package utils;
 
+import javafx.scene.paint.Color;
+
 public abstract class Settings {
 	/*** CONSTANTS ************************************************/
 
-	public static int BOARD_HEIGHT = 24;
+	public static int BOARD_CELL_STYLE_HEIGHT = 48;
+	public static int BOARD_CELL_STYLE_WIDTH = 48;
+	public static int BOARD_DIM_HEIGHT = 24;
+	public static int BOARD_DIM_WIDTH = 32;
 	public static int BOARD_NB_DUKES = 8;
-	public static int BOARD_WIDTH = 32;
+	public static Color BOARD_STYLE_BACKGROUND_COLOR = Color.rgb(140, 220, 0);
+	public static Color BOARD_STYLE_LINES_COLOR = Color.rgb(100, 125, 25);
+	public static double BOARD_STYLE_LINES_WIDTH = 1.;
 
+	public static int CASTLE_DEFAULT_LEVEL = 1;
+	public static int CASTLE_DEFAULT_NB_CATAPULT = 0;
+	public static int CASTLE_DEFAULT_NB_KNIGHT = 0;
+	public static int CASTLE_DEFAULT_NB_PIKEMAN = 0;
 	public static int CASTLE_DISTANCE = 4;
-	public static int CASTLE_LEVEL = 1;
-	public static int CASTLE_NB_CATAPULT = 0;
-	public static int CASTLE_NB_KNIGHT = 0;
-	public static int CASTLE_NB_PIKEMAN = 0;
-
-	public static int DISPLAY_CELL_HEIGHT = 48;
-	public static int DISPLAY_CELL_WIDTH = 48;
+	public static Color CASTLE_STYLE_FILL_COLOR = Color.LIGHTGREY;
+	public static Color CASTLE_STYLE_STROKE_COLOR = Color.DARKGREY;
+	public static double CASTLE_STYLE_STROKE_WIDTH = 4.;
 
 	public static int ENTITY_CATAPULT_ATTACK = 10;
 	public static int ENTITY_CATAPULT_HEALTH = 5;

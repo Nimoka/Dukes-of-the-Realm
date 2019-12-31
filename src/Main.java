@@ -36,8 +36,8 @@ public class Main extends Application {
 			stage.setMinHeight(WINDOW_MIN_HEIGHT);
 			stage.setMinWidth(WINDOW_MIN_WIDTH);
 		} else {
-			stage.setHeight(DISPLAY_CELL_HEIGHT * BOARD_HEIGHT); // to change
-			stage.setWidth(DISPLAY_CELL_WIDTH * BOARD_WIDTH);
+			stage.setHeight(BOARD_CELL_STYLE_HEIGHT * BOARD_DIM_HEIGHT); // to change
+			stage.setWidth(BOARD_CELL_STYLE_WIDTH * BOARD_DIM_WIDTH);
 			stage.setResizable(false);
 		}
 		initializeScene();

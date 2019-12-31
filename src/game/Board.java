@@ -40,7 +40,7 @@ public class Board {
 		for (Duke duke: this.dukes) {
 			Position position;
 			do {
-				position = Position.random(BOARD_WIDTH, BOARD_HEIGHT);
+				position = Position.random(BOARD_DIM_WIDTH, BOARD_DIM_HEIGHT);
 			} while (!checkCastleDistance(position));
 			this.castles.add(new Castle(duke, position));
 		}
