@@ -24,9 +24,15 @@ public class CastleRender extends Render {
 
 	protected void initialize() {
 		super.initialize();
+		initializeCanvas();
 		initializeCastleShape();
 		initializeCastleDoorShape();
 		update();
+	}
+
+	private void initializeCanvas() {
+		this.canvas.setPrefWidth(BOARD_CELL_STYLE_WIDTH);
+		this.canvas.setPrefHeight(BOARD_CELL_STYLE_HEIGHT);
 	}
 
 	private void initializeCastleShape() {

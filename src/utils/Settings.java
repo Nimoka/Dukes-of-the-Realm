@@ -7,8 +7,8 @@ public abstract class Settings {
 
 	public static int BOARD_CELL_STYLE_HEIGHT = 48;
 	public static int BOARD_CELL_STYLE_WIDTH = 48;
-	public static int BOARD_DIM_HEIGHT = 24;
-	public static int BOARD_DIM_WIDTH = 32;
+	public static int BOARD_DIM_HEIGHT = 16;
+	public static int BOARD_DIM_WIDTH = 24;
 	public static int BOARD_NB_DUKES = 8;
 	public static Color BOARD_STYLE_BACKGROUND_COLOR = Color.rgb(140, 220, 0);
 	public static Color BOARD_STYLE_LINES_COLOR = Color.rgb(100, 125, 25);

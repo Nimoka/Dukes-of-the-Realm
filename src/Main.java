@@ -25,7 +25,7 @@ public class Main extends Application {
 
 	private void initializeScene() {
 		this.rootGroup = new Group();
-		this.scene = new Scene(rootGroup);
+		this.scene = new Scene(rootGroup, (BOARD_CELL_STYLE_WIDTH * BOARD_DIM_WIDTH), (BOARD_CELL_STYLE_HEIGHT * BOARD_DIM_HEIGHT));
 	}
 
 	private void initializeStage(Stage stage, boolean useDefault) {
@@ -35,9 +35,8 @@ public class Main extends Application {
 			stage.setWidth(WINDOW_DEFAULT_WIDTH);
 			stage.setMinHeight(WINDOW_MIN_HEIGHT);
 			stage.setMinWidth(WINDOW_MIN_WIDTH);
+			stage.setResizable(true);
 		} else {
-			stage.setHeight(BOARD_CELL_STYLE_HEIGHT * BOARD_DIM_HEIGHT); // to change
-			stage.setWidth(BOARD_CELL_STYLE_WIDTH * BOARD_DIM_WIDTH);
 			stage.setResizable(false);
 		}
 		initializeScene();
