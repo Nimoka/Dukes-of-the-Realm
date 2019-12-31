@@ -49,9 +49,5 @@ public class Main extends Application {
 	public void start(Stage stage) throws Exception {
 		createBoard();
 		initializeStage(stage, false);
-
-		Board board = new Board();
-		BoardRender boardRender = new BoardRender(board);
-		rootGroup.getChildren().add(boardRender.getCanvas());
 	}
 }
