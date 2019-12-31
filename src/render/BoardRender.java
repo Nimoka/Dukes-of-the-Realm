@@ -47,8 +47,6 @@ public class BoardRender extends Render {
 			line.setEndX(i * DISPLAY_CELL_WIDTH);
 			line.setStartY(0);
 			line.setEndY(this.background.getHeight());
-			line.setStroke(Color.DARKGREEN);
-			line.setStrokeWidth(1);
 			this.lines.add(line);
 		}
 		for (int j = 0; j <= BOARD_HEIGHT; j++) {
@@ -57,9 +55,11 @@ public class BoardRender extends Render {
 			line.setEndX(this.background.getWidth());
 			line.setStartY(j * DISPLAY_CELL_HEIGHT);
 			line.setEndY(j * DISPLAY_CELL_HEIGHT);
+			this.lines.add(line);
+		}
+		for (Line line: lines) {
 			line.setStroke(Color.DARKGREEN);
 			line.setStrokeWidth(1);
-			this.lines.add(line);
 		}
 		this.canvas.getChildren().addAll(this.lines);
 	}
