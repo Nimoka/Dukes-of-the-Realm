@@ -28,12 +28,18 @@ public class Main extends Application {
 		this.scene = new Scene(rootGroup);
 	}
 
-	private void initializeStage(Stage stage) {
+	private void initializeStage(Stage stage, boolean useDefault) {
 		stage.setTitle(WINDOW_TITLE);
-		stage.setHeight(WINDOW_DEFAULT_HEIGHT);
-		stage.setWidth(WINDOW_DEFAULT_WIDTH);
-		stage.setMinHeight(WINDOW_MIN_HEIGHT);
-		stage.setMinWidth(WINDOW_MIN_WIDTH);
+		if (useDefault) {
+			stage.setHeight(WINDOW_DEFAULT_HEIGHT);
+			stage.setWidth(WINDOW_DEFAULT_WIDTH);
+			stage.setMinHeight(WINDOW_MIN_HEIGHT);
+			stage.setMinWidth(WINDOW_MIN_WIDTH);
+		} else {
+			stage.setHeight(DISPLAY_CELL_HEIGHT * BOARD_HEIGHT); // to change
+			stage.setWidth(DISPLAY_CELL_WIDTH * BOARD_WIDTH);
+			stage.setResizable(false);
+		}
 		initializeScene();
 		stage.setScene(this.scene);
 		stage.show();
@@ -42,6 +48,10 @@ public class Main extends Application {
 	@Override
 	public void start(Stage stage) throws Exception {
 		createBoard();
-		initializeStage(stage);
+		initializeStage(stage, false);
+
+		Board board = new Board();
+		BoardRender boardRender = new BoardRender(board);
+		rootGroup.getChildren().add(boardRender.getCanvas());
 	}
 }
