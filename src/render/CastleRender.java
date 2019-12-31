@@ -27,6 +27,7 @@ public class CastleRender extends Render {
 		initializeCanvas();
 		initializeCastleShape();
 		initializeCastleDoorShape();
+		initializeCastlePosition();
 		update();
 	}
 
@@ -57,7 +58,7 @@ public class CastleRender extends Render {
 		this.canvas.getChildren().add(this.castleDoorShape);
 	}
 
-	public void update() {
+	public void initializeCastlePosition() {
 		this.canvas.setTranslateX(this.castle.getPosition().convertBoardToDisplay().getX());
 		this.canvas.setTranslateY(this.castle.getPosition().convertBoardToDisplay().getY());
 		switch (this.castle.getDirection()) {
@@ -71,6 +72,9 @@ public class CastleRender extends Render {
 				this.canvas.setRotate(270);
 				break;
 		}
+	}
+
+	public void update() {
 	}
 
 	/*** GETTER/SETTER ********************************************/
