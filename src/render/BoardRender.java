@@ -5,6 +5,7 @@ import static utils.Settings.*;
 
 import java.util.ArrayList;
 
+import game.castle.Castle;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
@@ -15,6 +16,7 @@ public class BoardRender extends Render {
 	private Board board;
 	private Rectangle background;
 	private ArrayList<Line> lines;
+	private ArrayList<CastleRender> castleRenders;
 
 	/*** CONSTRUCTORS *********************************************/
 
@@ -29,6 +31,8 @@ public class BoardRender extends Render {
 		super.initialize();
 		initializeBackground();
 		initializeLines();
+		initializeCastleRenders();
+		update();
 	}
 
 	private void initializeBackground() {
@@ -37,6 +41,10 @@ public class BoardRender extends Render {
 		this.background.setWidth(DISPLAY_CELL_WIDTH * BOARD_WIDTH);
 		this.background.setFill(Color.LAWNGREEN);
 		this.canvas.getChildren().add(this.background);
+	}
+
+	private void initializeCastleRenders() {
+		this.castleRenders = new ArrayList<>();
 	}
 
 	private void initializeLines() {
@@ -62,6 +70,21 @@ public class BoardRender extends Render {
 			line.setStrokeWidth(1);
 		}
 		this.canvas.getChildren().addAll(this.lines);
+	}
+
+	public void update() {
+		for (Castle castle: this.board.getCastles()) {
+			boolean needCreation = true;
+			for (CastleRender castleRender: this.castleRenders) {
+				if (castleRender.getCastle() == castle)
+					needCreation = false;
+			}
+			if (needCreation) {
+				CastleRender castleRender = new CastleRender(castle);
+				this.canvas.getChildren().add(castleRender.getCanvas());
+				this.castleRenders.add(castleRender);
+			}
+		}
 	}
 
 	/*** GETTER/SETTER ********************************************/

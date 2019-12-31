@@ -49,5 +49,6 @@ public class Main extends Application {
 	public void start(Stage stage) throws Exception {
 		createBoard();
 		initializeStage(stage, false);
+		this.rootGroup.getChildren().add(this.boardRender.getCanvas());
 	}
 }
