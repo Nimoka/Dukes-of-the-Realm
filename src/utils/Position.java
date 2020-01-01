@@ -41,6 +41,11 @@ public class Position {
 		this.y += dy;
 	}
 
+	public void translate(Position vector) {
+		this.x += vector.getX();
+		this.y += vector.getY();
+	}
+
 	/*** GETTER/SETTER ********************************************/
 
 	public int getX() {
