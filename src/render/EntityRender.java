@@ -1,13 +1,12 @@
 package render;
 
-import game.entity.Catapult;
-import game.entity.Entity;
-import game.entity.Knight;
-import game.entity.Pikeman;
+import game.entity.*;
+
 import static utils.Settings.*;
 
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import utils.Position;
 
 public class EntityRender extends Render {
 	/*** VARIABLES ************************************************/
@@ -58,6 +57,12 @@ public class EntityRender extends Render {
 		this.entityShape.setHeight(BOARD_CELL_STYLE_HEIGHT * .14);
 		this.entityShape.setFill(Color.BLUE);
 		this.canvas.getChildren().add(this.entityShape);
+	}
+
+	public void update() {
+		Position displayPosition = this.entity.getPosition().convertBoardToDisplay();
+		this.entityShape.setX(displayPosition.getX());
+		this.entityShape.setY(displayPosition.getY());
 	}
 
 	/*** GETTER/SETTER ********************************************/

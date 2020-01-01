@@ -21,6 +21,10 @@ public abstract class Entity {
 
 	/*** METHODS **************************************************/
 
+	public boolean isDead() {
+		return this.currentState == EntityState.DIE;
+	}
+
 	public void nextTurn() {
 		if (this.currentState == EntityState.ATTACK) {
 			this.currentAction.getTarget().receiveAttack();
@@ -32,12 +36,20 @@ public abstract class Entity {
 
 	/*** GETTER/SETTER ********************************************/
 
+	public EntityState getCurrentState() {
+		return this.currentState;
+	}
+
 	public int getPointAttack() {
 		return this.pointAttack;
 	}
 
 	public int getPointHealth() {
 		return this.pointHealth;
+	}
+
+	public Position getPosition() {
+		return this.position;
 	}
 
 	public int getSpeed() {
