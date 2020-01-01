@@ -69,4 +69,10 @@ public class ArmyRender extends Render {
 	public void update() {
 		checkEntitiesState();
 	}
+
+	/*** GETTER/SETTER ********************************************/
+
+	public Army getArmy() {
+		return this.army;
+	}
 }

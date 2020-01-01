@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import game.castle.Castle;
+import game.entity.group.Army;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
@@ -21,6 +22,9 @@ public class BoardRender extends Render {
 	private Pane castlesCanvas;
 	private ArrayList<CastleRender> castleRenders;
 
+	private Pane armiesCanvas;
+	private ArrayList<ArmyRender> armyRenders;
+
 	/*** CONSTRUCTORS *********************************************/
 
 	public BoardRender(Board board) {
@@ -30,12 +34,28 @@ public class BoardRender extends Render {
 
 	/*** METHODS **************************************************/
 
+	private void addArmyToRender(Army army) {
+		if (getArmyRenderFromArmy(army) == null) {
+			ArmyRender armyRender = new ArmyRender(army);
+			this.armyRenders.add(armyRender);
+			this.armiesCanvas.getChildren().add(armyRender.getCanvas());
+		}
+	}
+
 	private void addCastleToRender(Castle castle) {
 		if (getCastleRenderFromCastle(castle) == null) {
 			CastleRender castleRender = new CastleRender(castle);
 			this.castleRenders.add(castleRender);
 			this.castlesCanvas.getChildren().add(castleRender.getCanvas());
 		}
+	}
+
+	private ArmyRender getArmyRenderFromArmy(Army army) {
+		for (ArmyRender armyRender: this.armyRenders) {
+			if (armyRender.getArmy() == army)
+				return armyRender;
+		}
+		return null;
 	}
 
 	private CastleRender getCastleRenderFromCastle(Castle castle) {
@@ -51,6 +71,7 @@ public class BoardRender extends Render {
 		initializeBackground();
 		initializeLines();
 		initializeCastleRenders();
+		initializeArmyRenders();
 		update();
 	}
 
@@ -67,6 +88,11 @@ public class BoardRender extends Render {
 		this.castlesCanvas = new Pane();
 		for (Castle castle: this.board.getCastles())
 			addCastleToRender(castle);
+	}
+
+	private void initializeArmyRenders() {
+		this.armyRenders = new ArrayList<>();
+		this.armiesCanvas = new Pane();
 	}
 
 	private void initializeLines() {
@@ -92,6 +118,14 @@ public class BoardRender extends Render {
 			line.setStrokeWidth(BOARD_STYLE_LINES_WIDTH);
 		}
 		this.canvas.getChildren().addAll(this.lines);
+	}
+
+	private void removeArmyToRender(Army army) {
+		ArmyRender armyRender = getArmyRenderFromArmy(army);
+		if (armyRender != null) {
+			this.armiesCanvas.getChildren().remove(armyRender.getCanvas());
+			this.armyRenders.remove(armyRender);
+		}
 	}
 
 	private void removeCastleToRender(Castle castle) {
