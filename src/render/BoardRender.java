@@ -86,6 +86,7 @@ public class BoardRender extends Render {
 	private void initializeCastleRenders() {
 		this.castleRenders = new ArrayList<>();
 		this.castlesCanvas = new Pane();
+		this.canvas.getChildren().add(castlesCanvas);
 		for (Castle castle: this.board.getCastles())
 			addCastleToRender(castle);
 	}
@@ -93,6 +94,7 @@ public class BoardRender extends Render {
 	private void initializeArmyRenders() {
 		this.armyRenders = new ArrayList<>();
 		this.armiesCanvas = new Pane();
+		this.canvas.getChildren().add(armiesCanvas);
 	}
 
 	private void initializeLines() {
@@ -137,6 +139,18 @@ public class BoardRender extends Render {
 	}
 
 	public void update() {
+		updateCastles();
+		updateArmy();
+	}
+
+	private void updateArmy() {
+		for (ArmyRender armyRender: this.armyRenders)
+			armyRender.update();
+	}
+
+	private void updateCastles() {
+		for (CastleRender castleRender: this.castleRenders)
+			castleRender.update();
 	}
 
 	/*** GETTER/SETTER ********************************************/
