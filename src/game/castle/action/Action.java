@@ -3,11 +3,15 @@ package game.castle.action;
 import game.castle.Castle;
 import game.entity.group.Army;
 import game.entity.Entity;
+import utils.Position;
+
+import java.util.ArrayList;
 
 public class Action {
 	/*** VARIABLES ************************************************/
 
 	private Army army;
+	private ArrayList<Position> moves;
 	private Castle target;
 
 	/*** CONSTRUCTORS *********************************************/
