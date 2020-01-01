@@ -61,6 +61,7 @@ public class EntityRender extends Render {
 
 	public void update() {
 		Position displayPosition = this.entity.getPosition().convertBoardToDisplay();
+		displayPosition.translate(Position.random(BOARD_CELL_STYLE_WIDTH, BOARD_CELL_STYLE_HEIGHT));
 		this.entityShape.setX(displayPosition.getX());
 		this.entityShape.setY(displayPosition.getY());
 	}
