@@ -4,8 +4,10 @@ import game.Board;
 import static utils.Settings.*;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import game.castle.Castle;
+import javafx.scene.layout.Pane;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 
@@ -15,6 +17,8 @@ public class BoardRender extends Render {
 	private Board board;
 	private Rectangle background;
 	private ArrayList<Line> lines;
+
+	private Pane castlesCanvas;
 	private ArrayList<CastleRender> castleRenders;
 
 	/*** CONSTRUCTORS *********************************************/
@@ -25,6 +29,22 @@ public class BoardRender extends Render {
 	}
 
 	/*** METHODS **************************************************/
+
+	private void addCastleToRender(Castle castle) {
+		if (getCastleRenderFromCastle(castle) == null) {
+			CastleRender castleRender = new CastleRender(castle);
+			this.castleRenders.add(castleRender);
+			this.castlesCanvas.getChildren().add(castleRender.getCanvas());
+		}
+	}
+
+	private CastleRender getCastleRenderFromCastle(Castle castle) {
+		for (CastleRender castleRender: this.castleRenders) {
+			if (castleRender.getCastle() == castle)
+				return castleRender;
+		}
+		return null;
+	}
 
 	protected void initialize() {
 		super.initialize();
@@ -44,6 +64,9 @@ public class BoardRender extends Render {
 
 	private void initializeCastleRenders() {
 		this.castleRenders = new ArrayList<>();
+		this.castlesCanvas = new Pane();
+		for (Castle castle: this.board.getCastles())
+			addCastleToRender(castle);
 	}
 
 	private void initializeLines() {
@@ -71,19 +94,15 @@ public class BoardRender extends Render {
 		this.canvas.getChildren().addAll(this.lines);
 	}
 
-	public void update() {
-		for (Castle castle: this.board.getCastles()) {
-			boolean needCreation = true;
-			for (CastleRender castleRender: this.castleRenders) {
-				if (castleRender.getCastle() == castle)
-					needCreation = false;
-			}
-			if (needCreation) {
-				CastleRender castleRender = new CastleRender(castle);
-				this.canvas.getChildren().add(castleRender.getCanvas());
-				this.castleRenders.add(castleRender);
-			}
+	private void removeCastleToRender(Castle castle) {
+		CastleRender castleRender = getCastleRenderFromCastle(castle);
+		if (castleRender != null) {
+			this.castlesCanvas.getChildren().remove(castleRender.getCanvas());
+			this.castleRenders.remove(castleRender);
 		}
+	}
+
+	public void update() {
 	}
 
 	/*** GETTER/SETTER ********************************************/
