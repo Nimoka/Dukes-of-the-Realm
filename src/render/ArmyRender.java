@@ -10,8 +10,8 @@ public class ArmyRender extends Render {
 	/*** VARIABLES ************************************************/
 
 	private Army army;
-	private ArrayList<Entity> entities;
-	private ArrayList<EntityRender> entitiesRender;
+
+	private ArrayList<EntityRender> entityRenders;
 
 	/*** CONSTRUCTORS *********************************************/
 
@@ -25,20 +25,27 @@ public class ArmyRender extends Render {
 	private void addEntityToRender(Entity entity) {
 		if (getEntityRenderFromEntity(entity) == null) {
 			EntityRender entityRender = new EntityRender(entity);
-			this.entities.add(entity);
-			this.entitiesRender.add(entityRender);
+			this.entityRenders.add(entityRender);
 			this.canvas.getChildren().add(entityRender.getCanvas());
 		}
 	}
 
 	private void checkEntitiesState() {
-		Iterator iterator = this.entities.iterator();
+		Iterator iterator = this.entityRenders.iterator();
 		Entity entity = null;
 		while (iterator.hasNext()) {
-			entity = (Entity) iterator.next();
+			entity = ((EntityRender) iterator.next()).getEntity();
 			if (entity.isDead())
 				removeEntityToRender(entity);
 		}
+	}
+
+	private EntityRender getEntityRenderFromEntity(Entity entity) {
+		for (EntityRender entityRender: this.entityRenders) {
+			if (entityRender.getEntity() == entity)
+				return entityRender;
+		}
+		return null;
 	}
 
 	protected void initialize() {
@@ -51,19 +58,11 @@ public class ArmyRender extends Render {
 			addEntityToRender(entity);
 	}
 
-	private EntityRender getEntityRenderFromEntity(Entity entity) {
-		for (EntityRender entityRender: this.entitiesRender) {
-			if (entityRender.getEntity() == entity)
-				return entityRender;
-		}
-		return null;
-	}
-
 	private void removeEntityToRender(Entity entity) {
 		EntityRender entityRender = getEntityRenderFromEntity(entity);
 		if (entityRender != null) {
-			this.entitiesRender.remove(entityRender);
-			this.entities.remove(entity);
+			this.canvas.getChildren().remove(entityRender.getCanvas());
+			this.entityRenders.remove(entityRender);
 		}
 	}
 
