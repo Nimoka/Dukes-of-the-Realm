@@ -1,5 +1,6 @@
 package game.entity;
 
+import exceptions.castle.ExceptionPositionOutOfRoute;
 import game.castle.action.Action;
 import utils.Position;
 
@@ -26,7 +27,16 @@ public abstract class Entity {
 	}
 
 	public void nextTurn() {
-		if (this.currentState == EntityState.ATTACK) {
+		if (this.currentState == EntityState.MOVE) {
+			try {
+				this.position = this.currentAction.getNextPosition(this.position, this.speed);
+			} catch (ExceptionPositionOutOfRoute exception) {
+				exception.printStackTrace();
+				this.position = this.currentAction.getTarget().getPosition();
+			}
+			if (this.position.equals(this.currentAction.getTarget().getPosition()))
+				this.currentState = EntityState.ATTACK;
+		} else if (this.currentState == EntityState.ATTACK) {
 			this.currentAction.getTarget().receiveAttack();
 			this.pointAttack--;
 			if (this.pointAttack <= 0)
