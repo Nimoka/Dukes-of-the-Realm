@@ -24,12 +24,42 @@ public class Board {
 
 	/*** METHODS **************************************************/
 
+	public boolean checkCastle(Position position) {
+		for (Castle castle: this.castles) {
+			if (castle.getPosition().equals(position))
+				return true;
+		}
+		return false;
+	}
+
 	public boolean checkCastleDistance(Position position) {
 		for (Castle castle: this.castles) {
 			if (castle.getPosition().distance(position) < CASTLE_DISTANCE)
 				return false;
 		}
 		return true;
+	}
+
+	public ArrayList<Position> computeArmyRoute(Castle source, Castle target) {
+		ArrayList<Position> route = new ArrayList<>();
+		Position position = source.getPosition();
+		switch (source.getDirection()) {
+			case NORTH:
+				position.translate(0, -1);
+				break;
+			case EAST:
+				position.translate(1, 0);
+				break;
+			case SOUTH:
+				position.translate(0, 1);
+				break;
+			case WEST:
+				position.translate(-1, 0);
+				break;
+		}
+		route.add(position);
+		// to continue
+		return route;
 	}
 
 	public void checkMatchState() {
@@ -43,7 +73,7 @@ public class Board {
 				position = Position.random((BOARD_DIM_WIDTH - 2), (BOARD_DIM_HEIGHT - 2));
 				position.translate(1, 1);
 			} while (!checkCastleDistance(position));
-			this.castles.add(new Castle(duke, position));
+			this.castles.add(new Castle(this, duke, position));
 		}
 	}
 

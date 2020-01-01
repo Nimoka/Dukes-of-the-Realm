@@ -1,5 +1,6 @@
 package game.castle;
 
+import game.Board;
 import game.Duke;
 import game.castle.action.Action;
 import game.castle.production.EntityProduction;
@@ -14,6 +15,7 @@ import static utils.Settings.*;
 public class Castle {
 	/*** VARIABLES ************************************************/
 
+	private Board board;
 	private Action currentAction;
 	private CastleDirection direction;
 	private Duke duke;
@@ -25,7 +27,8 @@ public class Castle {
 
 	/*** CONSTRUCTORS *********************************************/
 
-	public Castle(Duke duke, Position position) {
+	public Castle(Board board, Duke duke, Position position) {
+		this.board = board;
 		this.direction = CastleDirection.getRandom();
 		this.duke = duke;
 		this.level = CASTLE_DEFAULT_LEVEL;
@@ -37,7 +40,7 @@ public class Castle {
 
 	public void launchNewAction(Castle target, int nbCatapults, int nbKnights, int nbPikemen) {
 		Army army = this.stock.createArmy(nbCatapults, nbKnights, nbPikemen);
-		currentAction = new Action(target, army);
+		currentAction = new Action(this, target, army);
 		// to continue
 	}
 
@@ -75,6 +78,10 @@ public class Castle {
 	}
 
 	/*** GETTER/SETTER ********************************************/
+
+	public Board getBoard() {
+		return this.board;
+	}
 
 	public CastleDirection getDirection() {
 		return this.direction;
