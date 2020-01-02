@@ -15,6 +15,11 @@ public class Position {
 		this.y = y;
 	}
 
+	public Position(Position position) {
+		this.x = position.getX();
+		this.y = position.getY();
+	}
+
 	/*** METHODS **************************************************/
 
 	public Position convertBoardToDisplay() {

@@ -24,12 +24,12 @@ public class Board {
 
 	/*** METHODS **************************************************/
 
-	public boolean checkCastle(Position position) {
+	public boolean checkEmptyCell(Position position) {
 		for (Castle castle: this.castles) {
 			if (castle.getPosition().equals(position))
-				return true;
+				return false;
 		}
-		return false;
+		return true;
 	}
 
 	public boolean checkCastleDistance(Position position) {
@@ -42,23 +42,33 @@ public class Board {
 
 	public ArrayList<Position> computeArmyRoute(Castle source, Castle target) {
 		ArrayList<Position> route = new ArrayList<>();
-		Position position = source.getPosition();
-		switch (source.getDirection()) {
-			case NORTH:
-				position.translate(0, -1);
-				break;
-			case EAST:
-				position.translate(1, 0);
-				break;
-			case SOUTH:
-				position.translate(0, 1);
-				break;
-			case WEST:
-				position.translate(-1, 0);
-				break;
-		}
+		Position targetPosition = target.getPosition();
+		Position position = getCastleDoorPosition(source);
 		route.add(position);
-		// to continue
+		int dx = targetPosition.getX() - position.getX();
+		int dy = targetPosition.getY() - position.getY();
+		while (position.distance(targetPosition) > 1) {
+			Position next = new Position(position);
+			if (Math.abs(dy) > Math.abs(dx)) {
+				next.translate(0, (dy > 0 ? 1 : -1));
+				if (!checkEmptyCell(next)) {
+					next.translate((dx > 0 ? 1 : -1), (dy > 0 ? -1 : 1));
+					dx += (dx > 0 ? -1 : 1);
+				} else {
+					dy += (dy > 0 ? -1 : 1);
+				}
+			} else {
+				next.translate((dx > 0 ? 1 : -1), 0);
+				if (!checkEmptyCell(next)) {
+					next.translate((dx > 0 ? -1 : 1), (dy > 0 ? 1 : -1));
+					dy += (dy > 0 ? -1 : 1);
+				} else {
+					dx += (dx > 0 ? -1 : 1);
+				}
+			}
+			position = next;
+			route.add(position);
+		}
 		return route;
 	}
 
@@ -80,6 +90,25 @@ public class Board {
 	private void createDukes() {
 		for (int i = 0; i < BOARD_NB_DUKES + 1; i++)
 			this.dukes.add(new Duke());
+	}
+
+	public Position getCastleDoorPosition(Castle castle) {
+		Position position = new Position(castle.getPosition());
+		switch (castle.getDirection()) {
+			case NORTH:
+				position.translate(0, -1);
+				break;
+			case EAST:
+				position.translate(1, 0);
+				break;
+			case SOUTH:
+				position.translate(0, 1);
+				break;
+			case WEST:
+				position.translate(-1, 0);
+				break;
+		}
+		return position;
 	}
 
 	public void nextTurn() {
