@@ -37,6 +37,9 @@ public class Action {
 	}
 
 	public void nextTurn() {
+		// if begins: send 3 entities (slowest) per turn
+		// if target is owned by the source: entities join the castle
+		// if target stock is empty: target is owned (keep only treasure and level)
 		for (Entity entity: this.army.getListEntities())
 			entity.nextTurn();
 	}

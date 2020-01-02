@@ -15,6 +15,8 @@ import static utils.Settings.*;
 public class Castle {
 	/*** VARIABLES ************************************************/
 
+	// make Action and Production as Queue
+
 	private Board board;
 	private Action currentAction;
 	private CastleDirection direction;
@@ -28,6 +30,8 @@ public class Castle {
 	/*** CONSTRUCTORS *********************************************/
 
 	public Castle(Board board, Duke duke, Position position) {
+		// if duke don't play: level, treasure and (big) stock random
+
 		this.board = board;
 		this.direction = CastleDirection.getRandom();
 		this.duke = duke;

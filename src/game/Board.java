@@ -24,6 +24,8 @@ public class Board {
 
 	/*** METHODS **************************************************/
 
+	// make load and save (using ObjectOutputStream and ObjectInputStream)
+
 	public boolean checkEmptyCell(Position position) {
 		for (Castle castle: this.castles) {
 			if (castle.getPosition().equals(position))
@@ -73,6 +75,8 @@ public class Board {
 	}
 
 	public void checkMatchState() {
+		// check nb of castles per duke
+		// if only one have castle(s) => end
 	}
 
 	private void createCastles() {

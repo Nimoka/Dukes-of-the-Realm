@@ -20,6 +20,10 @@ public class Position {
 		this.y = position.getY();
 	}
 
+	public Position(double x, double y) {
+		this((int) x, (int) y);
+	}
+
 	/*** METHODS **************************************************/
 
 	public Position convertBoardToDisplay() {
@@ -35,6 +39,10 @@ public class Position {
 		int x = generator.nextInt(width);
 		int y = generator.nextInt(height);
 		return new Position(x, y);
+	}
+
+	public static Position random(double width, double height) {
+		return random((int) width, (int) height);
 	}
 
 	public String toString() {

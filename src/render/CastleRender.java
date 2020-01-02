@@ -38,10 +38,10 @@ public class CastleRender extends Render {
 
 	private void initializeCastleShape() {
 		this.castleShape = new Rectangle();
-		this.castleShape.setX(BOARD_CELL_STYLE_WIDTH * .1);
-		this.castleShape.setY(BOARD_CELL_STYLE_HEIGHT * .1);
-		this.castleShape.setHeight(BOARD_CELL_STYLE_HEIGHT * .8);
-		this.castleShape.setWidth(BOARD_CELL_STYLE_WIDTH * .8);
+		this.castleShape.setX((BOARD_CELL_STYLE_WIDTH - CASTLE_STYLE_CASTLE_HEIGHT) / 2);
+		this.castleShape.setY((BOARD_CELL_STYLE_HEIGHT - CASTLE_STYLE_CASTLE_WIDTH) / 2);
+		this.castleShape.setHeight(CASTLE_STYLE_CASTLE_HEIGHT);
+		this.castleShape.setWidth(CASTLE_STYLE_CASTLE_WIDTH);
 		this.castleShape.setFill(CASTLE_STYLE_FILL_COLOR);
 		this.castleShape.setStroke(CASTLE_STYLE_STROKE_COLOR);
 		this.castleShape.setStrokeWidth(CASTLE_STYLE_STROKE_WIDTH);
@@ -50,10 +50,10 @@ public class CastleRender extends Render {
 
 	private void initializeCastleDoorShape() {
 		this.castleDoorShape = new Rectangle();
-		this.castleDoorShape.setX(BOARD_CELL_STYLE_WIDTH * .3);
-		this.castleDoorShape.setY(this.castleShape.getX() - this.castleShape.getStrokeWidth());
-		this.castleDoorShape.setHeight(CASTLE_STYLE_STROKE_WIDTH * 2);
-		this.castleDoorShape.setWidth(BOARD_CELL_STYLE_WIDTH * .4);
+		this.castleDoorShape.setX((BOARD_CELL_STYLE_WIDTH - CASTLE_STYLE_DOOR_WIDTH) / 2);
+		this.castleDoorShape.setY((BOARD_CELL_STYLE_WIDTH - CASTLE_STYLE_CASTLE_HEIGHT) / 2 - CASTLE_STYLE_STROKE_WIDTH);
+		this.castleDoorShape.setHeight(CASTLE_STYLE_DOOR_HEIGHT);
+		this.castleDoorShape.setWidth(CASTLE_STYLE_DOOR_WIDTH);
 		this.castleDoorShape.setFill(CASTLE_STYLE_STROKE_COLOR);
 		this.canvas.getChildren().add(this.castleDoorShape);
 	}

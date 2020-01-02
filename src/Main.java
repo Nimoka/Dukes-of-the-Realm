@@ -6,6 +6,10 @@ import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import utils.Position;
+import utils.Settings;
+
+import java.util.ArrayList;
 
 public class Main extends Application {
 	/*** VARIABLES ************************************************/
@@ -49,5 +53,21 @@ public class Main extends Application {
 		createBoard();
 		initializeStage(stage, false);
 		this.rootGroup.getChildren().add(this.boardRender.getCanvas());
+
+		// add timer (ApplicationHandler) to update the game
+		// add a status bar (on-click: duke, level (+ revenue), nb entities, treasure)
+		// add actions (status bar: add/remove production, on-click x2: send entities from first to second)
+		// add pause (space bar)
+		// check user interactions
+
+
+		for (int i = 0; i < BOARD_NB_DUKES - 1; i++) {
+			ArrayList<Position> route = board.computeArmyRoute(board.getCastles().get(i), board.getCastles().get(i + 1));
+			String message = "Route from " + board.getCastles().get(i).getPosition() + " to " + board.getCastles().get(i + 1).getPosition() + ":\n";
+			for (Position position : route) {
+				message += "\t> " + position + "\n";
+			}
+			System.out.println(message);
+		}
 	}
 }
