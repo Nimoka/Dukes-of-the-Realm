@@ -1,5 +1,6 @@
 package utils;
 
+import javafx.geometry.Insets;
 import javafx.scene.paint.Color;
 
 public abstract class Settings {
@@ -57,6 +58,9 @@ public abstract class Settings {
 	public static Color ENTITY_PIKEMAN_STYLE_COLOR = Color.rgb(180, 40, 0);
 	public static double ENTITY_PIKEMAN_STYLE_HEIGHT = BOARD_CELL_STYLE_HEIGHT * .14;
 	public static double ENTITY_PIKEMAN_STYLE_WIDTH = BOARD_CELL_STYLE_WIDTH * .05;
+
+	public static double HUD_STYLE_HEIGHT = 80.;
+	public static Insets HUD_STYLE_PADDING = new Insets(15, 15, 15, 15);
 
 	public static double WINDOW_DEFAULT_HEIGHT = 800;
 	public static double WINDOW_DEFAULT_WIDTH = 1280;

@@ -29,7 +29,7 @@ public class Main extends Application {
 
 	private void initializeScene() {
 		this.rootGroup = new Group();
-		this.scene = new Scene(rootGroup, (BOARD_CELL_STYLE_WIDTH * BOARD_DIM_WIDTH), (BOARD_CELL_STYLE_HEIGHT * BOARD_DIM_HEIGHT));
+		this.scene = new Scene(rootGroup, (BOARD_CELL_STYLE_WIDTH * BOARD_DIM_WIDTH), ((BOARD_CELL_STYLE_HEIGHT * BOARD_DIM_HEIGHT) + HUD_STYLE_HEIGHT));
 	}
 
 	private void initializeStage(Stage stage, boolean useDefault) {
@@ -55,8 +55,8 @@ public class Main extends Application {
 		this.rootGroup.getChildren().add(this.boardRender.getCanvas());
 
 		// add timer (ApplicationHandler) to update the game
-		// add a status bar (on-click: duke, level (+ revenue), nb entities, treasure)
-		// add actions (status bar: add/remove production, on-click x2: send entities from first to second)
+		// add a hud (on-click: duke, level (+ revenue), nb entities, treasure)
+		// add actions (hud: add/remove production, on-click x2: send entities from first to second)
 		// add pause (space bar)
 		// check user interactions
 	}
