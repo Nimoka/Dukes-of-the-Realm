@@ -1,4 +1,4 @@
-package exceptions.game;
+package exceptions;
 
 import utils.Position;
 
