@@ -13,16 +13,12 @@ import game.entity.group.Army;
 import game.entity.Entity;
 import game.entity.group.Stock;
 import utils.Position;
-
-import java.util.Queue;
-import java.util.Random;
-
 import static utils.Settings.*;
+
+import java.util.*;
 
 public class Castle {
 	/*** VARIABLES ************************************************/
-
-	// make Action and Production as Queue
 
 	private Board board;
 	private Action currentAction;
@@ -41,6 +37,7 @@ public class Castle {
 		this.direction = CastleDirection.random();
 		this.duke = duke;
 		this.position = position;
+		this.productions = new PriorityQueue<>();
 		if (duke.getType() == DukeType.PLAYER)
 			initializeDukePlayer();
 		else if (duke.getType() == DukeType.BARON)
@@ -48,6 +45,23 @@ public class Castle {
 	}
 
 	/*** METHODS **************************************************/
+
+	public void finishAction() {
+		this.currentAction = null;
+	}
+
+	public void finishProduction() throws ExceptionDukeNotPlayer, ExceptionEmptyProductionQueue {
+		if (this.duke.getType() == DukeType.BARON)
+			throw new ExceptionDukeNotPlayer(this.duke, "terminateProduction");
+		Production production = this.productions.poll();
+		if (production == null)
+			throw new ExceptionEmptyProductionQueue(this);
+		if (production.getClass() == LevelProduction.class)
+			this.level = ((LevelProduction) production).getLevel();
+		else if (production.getClass() == EntityProduction.class)
+			this.stock.addEntity(((EntityProduction) production).getEntity());
+		this.treasure -= production.getCost();
+	}
 
 	private void initializeDukePlayer() {
 		this.level = CASTLE_DEFAULT_LEVEL;
@@ -82,7 +96,7 @@ public class Castle {
 	}
 
 	public void nextTurn() {
-		this.treasure += CASTLE_LEVEL_GAIN(this.level);
+		this.treasure += CASTLE_LEVEL_GAIN(this.level, this.duke.getType());
 		this.productions.peek().nextTurn();
 		this.currentAction.nextTurn();
 	}
@@ -91,17 +105,9 @@ public class Castle {
 		this.stock.receiveAttack();
 	}
 
-	public void terminateProduction() throws ExceptionDukeNotPlayer, ExceptionEmptyProductionQueue {
-		if (this.duke.getType() == DukeType.BARON)
-			throw new ExceptionDukeNotPlayer(this.duke, "terminateProduction");
-		Production production = this.productions.poll();
-		if (production == null)
-			throw new ExceptionEmptyProductionQueue(this);
-		if (production.getClass() == LevelProduction.class)
-			this.level = ((LevelProduction) production).getLevel();
-		else if (production.getClass() == EntityProduction.class)
-			this.stock.addEntity(((EntityProduction) production).getEntity());
-		this.treasure -= production.getCost();
+	public void receiveConquer(Duke newDuke) {
+		this.duke = newDuke;
+		this.productions.clear();
 	}
 
 	public String toString() {

@@ -1,10 +1,13 @@
 package game.action;
 
 import exceptions.ExceptionPositionOutOfRoute;
+import game.Duke;
 import game.castle.Castle;
+import game.entity.EntityState;
 import game.entity.group.Army;
 import game.entity.Entity;
 import utils.Position;
+import static utils.Settings.*;
 
 import java.util.ArrayList;
 
@@ -13,6 +16,7 @@ public class Action {
 
 	private Army army;
 	private ActionState currentState;
+	private Duke duke;
 	private ArrayList<Position> route;
 	private Castle source;
 	private Castle target;
@@ -21,7 +25,8 @@ public class Action {
 
 	public Action(Castle source, Castle target, Army army) {
 		this.army = army;
-		this.currentState = ActionState.WAIT;
+		this.currentState = ActionState.LAUNCH;
+		this.duke = source.getDuke();
 		this.source = source;
 		this.target = target;
 		this.route = source.getBoard().computeArmyRoute(source, target);
@@ -30,7 +35,9 @@ public class Action {
 	/*** METHODS **************************************************/
 
 	public void launch() {
-
+		this.army.getListEntities().stream().filter(e -> (e.getCurrentState() == EntityState.SLEEP)).limit(CASTLE_DOOR_SIZE(this.source.getLevel())).forEach(e -> launch());
+		if (this.army.getListEntities().stream().filter(e -> (e.getCurrentState() == EntityState.SLEEP)).count() == 0)
+			this.currentState = ActionState.MOVE;
 	}
 
 	public Position getNextPosition(Position position, int speed) throws ExceptionPositionOutOfRoute {
@@ -46,8 +53,19 @@ public class Action {
 		// if begins: send 3 entities (slowest) per turn
 		// if target is owned by the source: entities join the castle
 		// if target stock is empty: target is owned (keep only treasure and level)
-		for (Entity entity: this.army.getListEntities())
-			entity.nextTurn();
+		if (this.currentState == ActionState.LAUNCH) {
+			launch();
+		} else if (this.currentState == ActionState.MOVE) {
+			for (Entity entity : this.army.getListEntities())
+				entity.nextTurn();
+		} else if (this.currentState == ActionState.ATTACK) {
+			for (Entity entity : this.army.getListEntities())
+				entity.nextTurn();
+			if (this.target.getDuke() == this.source.getDuke())
+				this.source.finishAction();
+			if (this.target.getStock().getNbEntities() == 0)
+				this.target.receiveConquer(this.duke);
+		}
 	}
 
 	public String toString() {

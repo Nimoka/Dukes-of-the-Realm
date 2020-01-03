@@ -61,6 +61,30 @@ public abstract class EntityGroup {
 			this.listPikemen.add(new Pikeman());
 	}
 
+	public ArrayList<Entity> getListEntities() {
+		ArrayList<Entity> result = new ArrayList<>();
+		result.addAll(this.listPikemen);
+		result.addAll(this.listKnights);
+		result.addAll(this.listCatapults);
+		return result;
+	}
+
+	public int getNbCatapults() {
+		return this.listCatapults.size();
+	}
+
+	public int getNbEntities() {
+		return ((this.listCatapults.size()) + (this.listKnights.size()) + (this.listPikemen.size()));
+	}
+
+	public int getNbKnights() {
+		return this.listKnights.size();
+	}
+
+	public int getNbPikemen() {
+		return this.listPikemen.size();
+	}
+
 	public void removeEntity(Entity entity) {
 		if (entity.getClass() == Catapult.class)
 			this.listCatapults.remove((Catapult) entity);
@@ -90,35 +114,11 @@ public abstract class EntityGroup {
 		return this.listCatapults;
 	}
 
-	public ArrayList<Entity> getListEntities() {
-		ArrayList<Entity> result = new ArrayList<>();
-		result.addAll(this.listCatapults);
-		result.addAll(this.listKnights);
-		result.addAll(this.listPikemen);
-		return result;
-	}
-
 	public ArrayList<Knight> getListKnights() {
 		return this.listKnights;
 	}
 
 	public ArrayList<Pikeman> getListPikemen() {
 		return this.listPikemen;
-	}
-
-	public int getNbCatapults() {
-		return this.listCatapults.size();
-	}
-
-	public int getNbEntities() {
-		return ((this.listCatapults.size()) + (this.listKnights.size()) + (this.listPikemen.size()));
-	}
-
-	public int getNbKnights() {
-		return this.listKnights.size();
-	}
-
-	public int getNbPikemen() {
-		return this.listPikemen.size();
 	}
 }

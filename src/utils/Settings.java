@@ -1,5 +1,6 @@
 package utils;
 
+import game.DukeType;
 import javafx.geometry.Insets;
 import javafx.scene.paint.Color;
 
@@ -85,7 +86,9 @@ public abstract class Settings {
 		return 3 + (currentLevel / 10);
 	}
 
-	public static int CASTLE_LEVEL_GAIN(int currentLevel) {
+	public static int CASTLE_LEVEL_GAIN(int currentLevel, DukeType dukeType) {
+		if (dukeType == DukeType.BARON)
+			return currentLevel;
 		return (10 * currentLevel);
 	}
 

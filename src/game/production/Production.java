@@ -17,7 +17,7 @@ public abstract class Production {
 	public void nextTurn() {
 		this.timer--;
 		try {
-			this.castle.terminateProduction();
+			this.castle.finishProduction();
 		} catch (ExceptionDukeNotPlayer | ExceptionEmptyProductionQueue e) {
 			e.printStackTrace();
 		}
