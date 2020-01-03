@@ -14,7 +14,8 @@ public abstract class Settings {
 	public static double BOARD_CELL_STYLE_WIDTH = 24;
 	public static int BOARD_DIM_HEIGHT = 32;
 	public static int BOARD_DIM_WIDTH = 48;
-	public static int BOARD_NB_DUKES = 16;
+	public static int BOARD_NB_DUKES_PLAYERS = 8;
+	public static int BOARD_NB_DUKES_BARONS = 16;
 	public static Color BOARD_STYLE_BACKGROUND_COLOR = Color.rgb(0, 165, 0);
 	public static Color BOARD_STYLE_LINES_COLOR = Color.rgb(0, 145, 0);
 	public static double BOARD_STYLE_LINES_WIDTH = 1.;

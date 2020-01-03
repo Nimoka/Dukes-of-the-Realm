@@ -92,8 +92,10 @@ public class Board {
 	}
 
 	private void createDukes() {
-		for (int i = 0; i < BOARD_NB_DUKES + 1; i++)
-			this.dukes.add(new Duke());
+		for (int i = 0; i < (BOARD_NB_DUKES_PLAYERS + 1); i++)
+			this.dukes.add(new Duke(DukeType.PLAYER));
+		for (int i = 0; i < (BOARD_NB_DUKES_BARONS + 1); i++)
+			this.dukes.add(new Duke(DukeType.BARON));
 	}
 
 	public Position getCastleDoorPosition(Castle castle) {
