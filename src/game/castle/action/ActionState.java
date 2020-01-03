@@ -1,4 +1,8 @@
 package game.castle.action;
 
-public class ActionState {
+public enum ActionState {
+	LAUNCH,
+	MOVE,
+	ATTACK,
+	END;
 }

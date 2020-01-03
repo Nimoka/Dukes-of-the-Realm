@@ -12,6 +12,7 @@ public class Action {
 	/*** VARIABLES ************************************************/
 
 	private Army army;
+	private ActionState currentState;
 	private ArrayList<Position> route;
 	private Castle source;
 	private Castle target;
@@ -56,6 +57,10 @@ public class Action {
 
 	public Army getArmy() {
 		return this.army;
+	}
+
+	public ActionState getCurrentState() {
+		return this.currentState;
 	}
 
 	public Castle getTarget() {
