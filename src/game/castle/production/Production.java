@@ -1,5 +1,6 @@
 package game.castle.production;
 
+import exceptions.game.ExceptionDukeNotPlayer;
 import game.castle.Castle;
 
 public abstract class Production {
@@ -14,7 +15,11 @@ public abstract class Production {
 
 	public void nextTurn() {
 		this.timer--;
-		this.castle.terminateProduction();
+		try {
+			this.castle.terminateProduction();
+		} catch (ExceptionDukeNotPlayer e) {
+			e.printStackTrace();
+		}
 	}
 
 	/*** GETTER/SETTER ********************************************/

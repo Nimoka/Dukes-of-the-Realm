@@ -61,6 +61,20 @@ public abstract class EntityGroup {
 			this.listPikemen.add(new Pikeman());
 	}
 
+	public String toString() {
+		String message = this.getClass().toString() + " { catapults: [ ";
+		for (Catapult catapult: this.listCatapults)
+			message += catapult.toString() + ", ";
+		message += "], knights: [ ";
+		for (Knight knight: this.listKnights)
+			message += knight.toString() + ", ";
+		message += "], pikemen: [ ";
+		for (Pikeman pikeman: this.listPikemen)
+			message += pikeman.toString() + ", ";
+		message += "] }";
+		return message;
+	}
+
 	/*** GETTER/SETTER ********************************************/
 
 	public ArrayList<Catapult> getListCatapults() {

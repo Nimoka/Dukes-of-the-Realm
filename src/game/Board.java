@@ -125,11 +125,11 @@ public class Board {
 	}
 
 	public String toString() {
-		String result = "Board { castles:\n";
+		String message = "Board { castles: [ ";
 		for (Castle castle: this.castles)
-			result += '\t' + castle.toString() + '\n';
-		result += "}";
-		return result;
+			message += castle.toString() + ", ";
+		message += "], turn: " + this.currentTurn + " }";
+		return message;
 	}
 
 	/*** GETTER/SETTER ********************************************/

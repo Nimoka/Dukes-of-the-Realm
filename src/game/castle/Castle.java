@@ -35,7 +35,7 @@ public class Castle {
 		// if duke don't play: level, treasure and (big) stock random
 
 		this.board = board;
-		this.direction = CastleDirection.getRandom();
+		this.direction = CastleDirection.random();
 		this.duke = duke;
 		this.level = CASTLE_DEFAULT_LEVEL;
 		this.position = position;

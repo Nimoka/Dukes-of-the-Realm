@@ -2,6 +2,7 @@ package game.entity;
 
 import exceptions.game.ExceptionPositionOutOfRoute;
 import game.castle.action.Action;
+import utils.NameGenerator;
 import utils.Position;
 
 public abstract class Entity {
@@ -9,6 +10,7 @@ public abstract class Entity {
 
 	protected Action currentAction;
 	protected EntityState currentState;
+	protected String name;
 	protected int pointAttack;
 	protected int pointHealth;
 	protected Position position;
@@ -17,6 +19,7 @@ public abstract class Entity {
 	/*** CONSTRUCTORS *********************************************/
 
 	public Entity() {
+		this.name = NameGenerator.random();
 		this.currentState = EntityState.SLEEP;
 	}
 
@@ -42,6 +45,10 @@ public abstract class Entity {
 			if (this.pointAttack <= 0)
 				this.currentState = EntityState.DIE;
 		}
+	}
+
+	public String toString() {
+		return this.getClass().toString() + " { name: " + this.name + ", state: " + this.currentState + ", position: " + this.position.toString() + ", pointAttack: " + this.pointAttack + ", pointHealth: " + this.pointHealth + ", speed: " + this.speed + " }";
 	}
 
 	/*** GETTER/SETTER ********************************************/

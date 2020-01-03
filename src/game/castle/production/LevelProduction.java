@@ -14,6 +14,12 @@ public class LevelProduction extends Production {
 		this.timer = CASTLE_LEVEL_PROD_TIME(currentLevel);
 	}
 
+	/*** METHODS **************************************************/
+
+	public String toString() {
+		return "LevelProduction { level: " + (Integer) this.object + ", timer: " + this.timer + ", cost: " + this.cost + " }";
+	}
+
 	/*** GETTER/SETTER ********************************************/
 
 	public int getLevel() {

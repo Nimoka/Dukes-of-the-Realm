@@ -24,6 +24,12 @@ public class EntityProduction extends Production {
 		}
 	}
 
+	/*** METHODS **************************************************/
+
+	public String toString() {
+		return "EntityProduction { object: " + this.object + ", timer: " + this.timer + ", cost: " + this.cost + " }";
+	}
+
 	/*** GETTER/SETTER ********************************************/
 
 	public Entity getEntity() {

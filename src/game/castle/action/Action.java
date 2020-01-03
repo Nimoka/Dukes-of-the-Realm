@@ -44,6 +44,14 @@ public class Action {
 			entity.nextTurn();
 	}
 
+	public String toString() {
+		String message = "Action { from: " + this.source.toString() + ", target: " + this.target.toString() + ", army: " + this.army.toString() + ", route: [ ";
+		for (Position position: this.route)
+			message += position.toString() + ", ";
+		message += "] }";
+		return message;
+	}
+
 	/*** GETTER/SETTER ********************************************/
 
 	public Army getArmy() {
