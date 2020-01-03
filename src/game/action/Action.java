@@ -1,4 +1,4 @@
-package game.castle.action;
+package game.action;
 
 import exceptions.game.ExceptionPositionOutOfRoute;
 import game.castle.Castle;
@@ -21,12 +21,17 @@ public class Action {
 
 	public Action(Castle source, Castle target, Army army) {
 		this.army = army;
+		this.currentState = ActionState.WAIT;
 		this.source = source;
 		this.target = target;
 		this.route = source.getBoard().computeArmyRoute(source, target);
 	}
 
 	/*** METHODS **************************************************/
+
+	public void launch() {
+
+	}
 
 	public Position getNextPosition(Position position, int speed) throws ExceptionPositionOutOfRoute {
 		if (!this.route.contains(position))
@@ -61,6 +66,10 @@ public class Action {
 
 	public ActionState getCurrentState() {
 		return this.currentState;
+	}
+
+	public Castle getSource() {
+		return this.source;
 	}
 
 	public Castle getTarget() {
