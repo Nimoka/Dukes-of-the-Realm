@@ -97,7 +97,8 @@ public class Castle {
 
 	public void nextTurn() {
 		this.treasure += CASTLE_LEVEL_GAIN(this.level, this.duke.getType());
-		this.currentAction.nextTurn();
+		if (this.currentAction != null)
+			this.currentAction.nextTurn();
 		Production production = this.productions.peek();
 		if (production != null)
 			production.nextTurn();

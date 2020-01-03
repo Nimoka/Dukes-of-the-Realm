@@ -17,6 +17,7 @@ public class ArmyRender extends Render {
 
 	public ArmyRender(Army army) {
 		this.army = army;
+		this.entityRenders = new ArrayList<>();
 		initialize();
 	}
 
@@ -32,7 +33,7 @@ public class ArmyRender extends Render {
 
 	private void checkEntitiesState() {
 		Iterator iterator = this.entityRenders.iterator();
-		Entity entity = null;
+		Entity entity;
 		while (iterator.hasNext()) {
 			entity = ((EntityRender) iterator.next()).getEntity();
 			if (entity.isDead())
