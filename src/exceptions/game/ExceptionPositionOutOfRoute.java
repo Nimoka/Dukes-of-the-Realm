@@ -1,4 +1,4 @@
-package exceptions.castle;
+package exceptions.game;
 
 import utils.Position;
 

@@ -1,7 +1,9 @@
 package game.castle;
 
+import exceptions.game.ExceptionDukeNotPlayer;
 import game.Board;
 import game.Duke;
+import game.DukeType;
 import game.castle.action.Action;
 import game.castle.production.EntityProduction;
 import game.castle.production.LevelProduction;
@@ -42,18 +44,24 @@ public class Castle {
 
 	/*** METHODS **************************************************/
 
-	public void launchNewAction(Castle target, int nbCatapults, int nbKnights, int nbPikemen) {
+	public void launchNewAction(Castle target, int nbCatapults, int nbKnights, int nbPikemen) throws ExceptionDukeNotPlayer {
+		if (this.duke.getType() == DukeType.BARON)
+			throw new ExceptionDukeNotPlayer(this.duke, "launchNewAction");
 		Army army = this.stock.createArmy(nbCatapults, nbKnights, nbPikemen);
 		currentAction = new Action(this, target, army);
 		// to continue
 	}
 
-	public void launchLevelProduction() {
+	public void launchLevelProduction() throws ExceptionDukeNotPlayer {
+		if (this.duke.getType() == DukeType.BARON)
+			throw new ExceptionDukeNotPlayer(this.duke, "launchLevelProduction");
 		if (production == null)
 			this.production = new LevelProduction(this);
 	}
 
-	public void launchEntityProduction(Class<Entity> type) {
+	public void launchEntityProduction(Class<Entity> type) throws ExceptionDukeNotPlayer {
+		if (this.duke.getType() == DukeType.BARON)
+			throw new ExceptionDukeNotPlayer(this.duke, "launchEntityProduction");
 		if (production == null)
 			this.production = new EntityProduction(this, type);
 	}
@@ -68,7 +76,9 @@ public class Castle {
 		this.stock.receiveAttack();
 	}
 
-	public void terminateProduction() {
+	public void terminateProduction() throws ExceptionDukeNotPlayer {
+		if (this.duke.getType() == DukeType.BARON)
+			throw new ExceptionDukeNotPlayer(this.duke, "terminateProduction");
 		if (production.getClass() == LevelProduction.class)
 			this.level = ((LevelProduction) production).getLevel();
 		else if (production.getClass() == EntityProduction.class)
@@ -78,7 +88,7 @@ public class Castle {
 	}
 
 	public String toString() {
-		return "Castle { position: " + this.position.toString() + " }";
+		return "Castle { duke: " + this.duke.toString() + ", position: " + this.position.toString() + " }";
 	}
 
 	/*** GETTER/SETTER ********************************************/

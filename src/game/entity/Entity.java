@@ -1,6 +1,6 @@
 package game.entity;
 
-import exceptions.castle.ExceptionPositionOutOfRoute;
+import exceptions.game.ExceptionPositionOutOfRoute;
 import game.castle.action.Action;
 import utils.Position;
 
