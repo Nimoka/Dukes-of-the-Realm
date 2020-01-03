@@ -1,7 +1,7 @@
 package game.action;
 
 import exceptions.ExceptionPositionOutOfRoute;
-import game.Duke;
+import game.duke.Duke;
 import game.castle.Castle;
 import game.entity.EntityState;
 import game.entity.group.Army;
@@ -50,9 +50,6 @@ public class Action {
 	}
 
 	public void nextTurn() {
-		// if begins: send 3 entities (slowest) per turn
-		// if target is owned by the source: entities join the castle
-		// if target stock is empty: target is owned (keep only treasure and level)
 		if (this.currentState == ActionState.LAUNCH) {
 			launch();
 		} else if (this.currentState == ActionState.MOVE) {

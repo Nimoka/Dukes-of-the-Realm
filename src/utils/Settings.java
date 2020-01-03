@@ -1,6 +1,6 @@
 package utils;
 
-import game.DukeType;
+import game.duke.DukeType;
 import javafx.geometry.Insets;
 import javafx.scene.paint.Color;
 

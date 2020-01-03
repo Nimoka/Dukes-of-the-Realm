@@ -1,6 +1,6 @@
 package exceptions;
 
-import game.Duke;
+import game.duke.Duke;
 
 public class ExceptionDukeNotPlayer extends Exception {
 	/*** VARIABLES ************************************************/

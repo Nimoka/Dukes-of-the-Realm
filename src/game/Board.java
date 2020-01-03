@@ -1,6 +1,8 @@
 package game;
 
 import game.castle.Castle;
+import game.duke.Duke;
+import game.duke.DukeType;
 import utils.Position;
 import static utils.Settings.*;
 

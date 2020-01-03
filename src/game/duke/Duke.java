@@ -1,4 +1,4 @@
-package game;
+package game.duke;
 
 import utils.NameGenerator;
 

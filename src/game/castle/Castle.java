@@ -3,8 +3,8 @@ package game.castle;
 import exceptions.ExceptionDukeNotPlayer;
 import exceptions.ExceptionEmptyProductionQueue;
 import game.Board;
-import game.Duke;
-import game.DukeType;
+import game.duke.Duke;
+import game.duke.DukeType;
 import game.action.Action;
 import game.production.EntityProduction;
 import game.production.LevelProduction;
@@ -97,8 +97,10 @@ public class Castle {
 
 	public void nextTurn() {
 		this.treasure += CASTLE_LEVEL_GAIN(this.level, this.duke.getType());
-		this.productions.peek().nextTurn();
 		this.currentAction.nextTurn();
+		Production production = this.productions.peek();
+		if (production != null)
+			production.nextTurn();
 	}
 
 	public void receiveAttack() {

@@ -1,6 +1,5 @@
 package exceptions;
 
-import game.Duke;
 import game.castle.Castle;
 
 public class ExceptionEmptyProductionQueue extends Throwable {
