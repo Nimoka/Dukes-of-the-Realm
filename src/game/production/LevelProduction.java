@@ -1,4 +1,4 @@
-package game.castle.production;
+package game.production;
 
 import game.castle.Castle;
 import static utils.Settings.*;

@@ -1,4 +1,4 @@
-package game.castle.production;
+package game.production;
 
 import exceptions.game.ExceptionDukeNotPlayer;
 import game.castle.Castle;
