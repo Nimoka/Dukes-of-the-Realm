@@ -4,7 +4,6 @@ import game.Board;
 import static utils.Settings.*;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
 import game.castle.Castle;
 import game.entity.group.Army;

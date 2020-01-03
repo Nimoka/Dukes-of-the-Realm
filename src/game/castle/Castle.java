@@ -1,13 +1,13 @@
 package game.castle;
 
-import exceptions.game.ExceptionDukeNotPlayer;
+import exceptions.ExceptionDukeNotPlayer;
 import game.Board;
 import game.Duke;
 import game.DukeType;
-import game.castle.action.Action;
-import game.castle.production.EntityProduction;
-import game.castle.production.LevelProduction;
-import game.castle.production.Production;
+import game.action.Action;
+import game.production.EntityProduction;
+import game.production.LevelProduction;
+import game.production.Production;
 import game.entity.group.Army;
 import game.entity.Entity;
 import game.entity.group.Stock;
@@ -99,6 +99,10 @@ public class Castle {
 
 	public CastleDirection getDirection() {
 		return this.direction;
+	}
+
+	public Duke getDuke() {
+		return this.duke;
 	}
 
 	public int getLevel() {

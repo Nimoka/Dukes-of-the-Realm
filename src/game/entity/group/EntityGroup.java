@@ -24,9 +24,9 @@ public abstract class EntityGroup {
 
 	public EntityGroup(int nbCatapults, int nbKnights, int nbPikemen) {
 		this();
-		this.addCatapults(nbCatapults);
-		this.addKnights(nbKnights);
-		this.addPikemen(nbPikemen);
+		this.createCatapults(nbCatapults);
+		this.createKnights(nbKnights);
+		this.createPikemen(nbPikemen);
 	}
 
 	public EntityGroup(ArrayList<Catapult> listCatapults, ArrayList<Knight> listKnights, ArrayList<Pikeman> listPikemen) {
@@ -37,7 +37,7 @@ public abstract class EntityGroup {
 
 	/*** METHODS **************************************************/
 
-	public void add(Entity entity) {
+	public void addEntity(Entity entity) {
 		if (entity.getClass() == Catapult.class)
 			this.listCatapults.add((Catapult) entity);
 		else if (entity.getClass() == Knight.class)
@@ -46,19 +46,28 @@ public abstract class EntityGroup {
 			this.listPikemen.add((Pikeman) entity);
 	}
 
-	private void addCatapults(int nb) {
+	private void createCatapults(int nb) {
 		for (int i = 0; i < nb; i++)
 			this.listCatapults.add(new Catapult());
 	}
 
-	private void addKnights(int nb) {
+	private void createKnights(int nb) {
 		for (int i = 0; i < nb; i++)
 			this.listKnights.add(new Knight());
 	}
 
-	private void addPikemen(int nb) {
+	private void createPikemen(int nb) {
 		for (int i = 0; i < nb; i++)
 			this.listPikemen.add(new Pikeman());
+	}
+
+	public void removeEntity(Entity entity) {
+		if (entity.getClass() == Catapult.class)
+			this.listCatapults.remove((Catapult) entity);
+		else if (entity.getClass() == Knight.class)
+			this.listKnights.remove((Knight) entity);
+		else if (entity.getClass() == Pikeman.class)
+			this.listPikemen.remove((Pikeman) entity);
 	}
 
 	public String toString() {

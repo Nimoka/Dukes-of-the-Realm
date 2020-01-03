@@ -1,6 +1,6 @@
 package game.production;
 
-import exceptions.game.ExceptionDukeNotPlayer;
+import exceptions.ExceptionDukeNotPlayer;
 import game.castle.Castle;
 
 public abstract class Production {
