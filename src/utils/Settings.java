@@ -20,6 +20,16 @@ public abstract class Settings {
 	public static Color BOARD_STYLE_LINES_COLOR = Color.rgb(0, 145, 0);
 	public static double BOARD_STYLE_LINES_WIDTH = 1.;
 
+	public static int CASTLE_BARON_LEVEL_MIN = 5;
+	public static int CASTLE_BARON_LEVEL_MAX = 30;
+	public static int CASTLE_BARON_NB_CATAPULT_MIN = 10;
+	public static int CASTLE_BARON_NB_CATAPULT_MAX = 30;
+	public static int CASTLE_BARON_NB_KNIGHT_MIN = 10;
+	public static int CASTLE_BARON_NB_KNIGHT_MAX = 30;
+	public static int CASTLE_BARON_NB_PIKEMAN_MIN = 10;
+	public static int CASTLE_BARON_NB_PIKEMAN_MAX = 30;
+	public static int CASTLE_BARON_TREASURE_MIN = 10000;
+	public static int CASTLE_BARON_TREASURE_MAX = 100000;
 	public static int CASTLE_DEFAULT_LEVEL = 1;
 	public static int CASTLE_DEFAULT_NB_CATAPULT = 0;
 	public static int CASTLE_DEFAULT_NB_KNIGHT = 0;
@@ -70,6 +80,10 @@ public abstract class Settings {
 	public static String WINDOW_TITLE = "Dukes of the Realm";
 
 	/*** METHODS **************************************************/
+
+	public static int CASTLE_DOOR_SIZE(int currentLevel) {
+		return 3 + (currentLevel / 10);
+	}
 
 	public static int CASTLE_LEVEL_GAIN(int currentLevel) {
 		return (10 * currentLevel);

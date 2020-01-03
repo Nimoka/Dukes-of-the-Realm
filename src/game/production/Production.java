@@ -1,6 +1,7 @@
 package game.production;
 
 import exceptions.ExceptionDukeNotPlayer;
+import exceptions.ExceptionEmptyProductionQueue;
 import game.castle.Castle;
 
 public abstract class Production {
@@ -17,7 +18,7 @@ public abstract class Production {
 		this.timer--;
 		try {
 			this.castle.terminateProduction();
-		} catch (ExceptionDukeNotPlayer e) {
+		} catch (ExceptionDukeNotPlayer | ExceptionEmptyProductionQueue e) {
 			e.printStackTrace();
 		}
 	}

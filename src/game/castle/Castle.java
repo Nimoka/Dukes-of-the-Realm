@@ -1,6 +1,7 @@
 package game.castle;
 
 import exceptions.ExceptionDukeNotPlayer;
+import exceptions.ExceptionEmptyProductionQueue;
 import game.Board;
 import game.Duke;
 import game.DukeType;
@@ -12,6 +13,10 @@ import game.entity.group.Army;
 import game.entity.Entity;
 import game.entity.group.Stock;
 import utils.Position;
+
+import java.util.Queue;
+import java.util.Random;
+
 import static utils.Settings.*;
 
 public class Castle {
@@ -25,24 +30,36 @@ public class Castle {
 	private Duke duke;
 	private int level;
 	private Position position;
-	private Production production;
+	private Queue<Production> productions;
 	private Stock stock;
 	private int treasure;
 
 	/*** CONSTRUCTORS *********************************************/
 
 	public Castle(Board board, Duke duke, Position position) {
-		// if duke don't play: level, treasure and (big) stock random
-
 		this.board = board;
 		this.direction = CastleDirection.random();
 		this.duke = duke;
-		this.level = CASTLE_DEFAULT_LEVEL;
 		this.position = position;
-		this.stock = new Stock(CASTLE_DEFAULT_NB_CATAPULT, CASTLE_DEFAULT_NB_KNIGHT, CASTLE_DEFAULT_NB_PIKEMAN);
+		if (duke.getType() == DukeType.PLAYER)
+			initializeDukePlayer();
+		else if (duke.getType() == DukeType.BARON)
+			initializeDukeBaron();
 	}
 
 	/*** METHODS **************************************************/
+
+	private void initializeDukePlayer() {
+		this.level = CASTLE_DEFAULT_LEVEL;
+		this.stock = new Stock(CASTLE_DEFAULT_NB_CATAPULT, CASTLE_DEFAULT_NB_KNIGHT, CASTLE_DEFAULT_NB_PIKEMAN);
+	}
+
+	private void initializeDukeBaron() {
+		Random generator = new Random();
+		this.level = CASTLE_BARON_LEVEL_MIN + generator.nextInt(CASTLE_BARON_LEVEL_MAX - CASTLE_BARON_LEVEL_MIN);
+		this.stock = new Stock((CASTLE_BARON_NB_CATAPULT_MIN + generator.nextInt(CASTLE_BARON_NB_CATAPULT_MAX - CASTLE_BARON_NB_CATAPULT_MIN)), (CASTLE_BARON_NB_KNIGHT_MIN + generator.nextInt(CASTLE_BARON_NB_KNIGHT_MAX - CASTLE_BARON_NB_KNIGHT_MIN)), (CASTLE_BARON_NB_PIKEMAN_MIN + generator.nextInt(CASTLE_BARON_NB_PIKEMAN_MAX - CASTLE_BARON_NB_PIKEMAN_MIN)));
+		this.treasure = CASTLE_BARON_TREASURE_MIN + generator.nextInt(CASTLE_BARON_TREASURE_MAX - CASTLE_BARON_TREASURE_MIN);
+	}
 
 	public void launchNewAction(Castle target, int nbCatapults, int nbKnights, int nbPikemen) throws ExceptionDukeNotPlayer {
 		if (this.duke.getType() == DukeType.BARON)
@@ -55,20 +72,18 @@ public class Castle {
 	public void launchLevelProduction() throws ExceptionDukeNotPlayer {
 		if (this.duke.getType() == DukeType.BARON)
 			throw new ExceptionDukeNotPlayer(this.duke, "launchLevelProduction");
-		if (production == null)
-			this.production = new LevelProduction(this);
+		this.productions.add(new LevelProduction(this));
 	}
 
 	public void launchEntityProduction(Class<Entity> type) throws ExceptionDukeNotPlayer {
 		if (this.duke.getType() == DukeType.BARON)
 			throw new ExceptionDukeNotPlayer(this.duke, "launchEntityProduction");
-		if (production == null)
-			this.production = new EntityProduction(this, type);
+		this.productions.add(new EntityProduction(this, type));
 	}
 
 	public void nextTurn() {
 		this.treasure += CASTLE_LEVEL_GAIN(this.level);
-		this.production.nextTurn();
+		this.productions.peek().nextTurn();
 		this.currentAction.nextTurn();
 	}
 
@@ -76,15 +91,17 @@ public class Castle {
 		this.stock.receiveAttack();
 	}
 
-	public void terminateProduction() throws ExceptionDukeNotPlayer {
+	public void terminateProduction() throws ExceptionDukeNotPlayer, ExceptionEmptyProductionQueue {
 		if (this.duke.getType() == DukeType.BARON)
 			throw new ExceptionDukeNotPlayer(this.duke, "terminateProduction");
+		Production production = this.productions.poll();
+		if (production == null)
+			throw new ExceptionEmptyProductionQueue(this);
 		if (production.getClass() == LevelProduction.class)
 			this.level = ((LevelProduction) production).getLevel();
 		else if (production.getClass() == EntityProduction.class)
-			this.stock.add(((EntityProduction) production).getEntity());
-		this.treasure -= this.production.getCost();
-		this.production = null;
+			this.stock.addEntity(((EntityProduction) production).getEntity());
+		this.treasure -= production.getCost();
 	}
 
 	public String toString() {
