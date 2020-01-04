@@ -19,7 +19,7 @@ public class Board {
 	public Board(ArrayList<Player> players) {
 		this.players = players;
 		this.createCastles();
-		this.currentTurn = 1;
+		this.currentTurn = BOARD_FIRST_TURN;
 	}
 
 	/*** METHODS **************************************************/

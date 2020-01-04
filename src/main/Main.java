@@ -6,16 +6,16 @@ import player.ComputerPlayer;
 import player.Player;
 import player.UserPlayer;
 import render.BoardRender;
+import render.CastleRender;
+import render.HUDRender;
 import static utils.Settings.*;
 
+import java.util.ArrayList;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import render.CastleRender;
-
-import java.util.ArrayList;
 
 public class Main extends Application {
 	/*** VARIABLES ************************************************/
@@ -26,6 +26,7 @@ public class Main extends Application {
 
 	private Board board;
 	private BoardRender boardRender;
+	private HUDRender hudRender;
 	private Player mainPlayer;
 	private ArrayList<Player> players;
 	private CastleRender selectedCastleRender;
@@ -36,6 +37,10 @@ public class Main extends Application {
 	private void createBoard() {
 		this.board = new Board(this.players);
 		this.boardRender = new BoardRender(this.board, this);
+	}
+
+	private void initializeHUD() {
+		this.hudRender = new HUDRender();
 	}
 
 	private void initializePlayers() {
@@ -88,15 +93,18 @@ public class Main extends Application {
 			this.selectedCastleRender.unselectCastle();
 		this.selectedCastleRender = castleRender;
 		this.selectedCastleIsOwnedByMainPlayer = (this.selectedCastleRender.getCastle().getDuke() == this.mainPlayer.getDuke());
+		this.hudRender.showCastleInformations(castleRender.getCastle(), selectedCastleIsOwnedByMainPlayer);
 	}
 
 	@Override
 	public void start(Stage stage) throws Exception {
 		initializePlayers();
 		createBoard();
+		initializeHUD();
 		initializeStage(stage, false);
 		initializeTimer();
 		this.rootGroup.getChildren().add(this.boardRender.getCanvas());
+		this.rootGroup.getChildren().add(this.hudRender.getCanvas());
 
 		// add a hud (on-click: duke, level (+ revenue), nb entities, treasure)
 		// add actions (hud: add/remove production, on-click x2: send entities from first to second)
@@ -107,6 +115,7 @@ public class Main extends Application {
 	private void updateGame() {
 		this.board.nextTurn();
 		this.boardRender.update();
+		this.hudRender.update(this.board.getCurrentTurn());
 		this.players.stream().forEach(p -> p.nextTurn());
 	}
 }
