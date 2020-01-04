@@ -5,7 +5,12 @@ import game.duke.Duke;
 public abstract class Player {
 	/*** VARIABLES ************************************************/
 
-	private Duke duke;
+	protected Duke duke;
+
+	/*** METHODS **************************************************/
+
+	public void nextTurn() {
+	}
 
 	/*** GETTER/SETTER ********************************************/
 

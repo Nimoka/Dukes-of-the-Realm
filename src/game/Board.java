@@ -1,8 +1,7 @@
 package game;
 
 import game.castle.Castle;
-import game.duke.Duke;
-import game.duke.DukeType;
+import player.Player;
 import utils.Position;
 import static utils.Settings.*;
 
@@ -12,14 +11,13 @@ public class Board {
 	/*** VARIABLES ************************************************/
 
 	private ArrayList<Castle> castles;
-	private ArrayList<Duke> dukes;
+	private ArrayList<Player> players;
 	private int currentTurn;
 
 	/*** CONSTRUCTORS *********************************************/
 
-	public Board() {
-		this.dukes = new ArrayList<>();
-		this.createDukes();
+	public Board(ArrayList<Player> players) {
+		this.players = players;
 		this.createCastles();
 		this.currentTurn = 1;
 	}
@@ -83,21 +81,14 @@ public class Board {
 
 	private void createCastles() {
 		this.castles = new ArrayList<>();
-		for (Duke duke: this.dukes) {
+		for (Player player: this.players) {
 			Position position;
 			do {
 				position = Position.random((BOARD_DIM_WIDTH - 2), (BOARD_DIM_HEIGHT - 2));
 				position.translate(1, 1);
 			} while (!checkCastleDistance(position));
-			this.castles.add(new Castle(this, duke, position));
+			this.castles.add(new Castle(this, player.getDuke(), position));
 		}
-	}
-
-	private void createDukes() {
-		for (int i = 0; i < (BOARD_NB_DUKES_PLAYERS + 1); i++)
-			this.dukes.add(new Duke(DukeType.PLAYER));
-		for (int i = 0; i < (BOARD_NB_DUKES_BARONS + 1); i++)
-			this.dukes.add(new Duke(DukeType.BARON));
 	}
 
 	public Position getCastleDoorPosition(Castle castle) {
@@ -144,7 +135,7 @@ public class Board {
 		return this.currentTurn;
 	}
 
-	public ArrayList<Duke> getDukes() {
-		return this.dukes;
+	public ArrayList<Player> getPlayers() {
+		return this.players;
 	}
 }

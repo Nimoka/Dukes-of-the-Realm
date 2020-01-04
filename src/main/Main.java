@@ -1,7 +1,10 @@
 package main;
 
 import game.Board;
+import player.Baron;
+import player.ComputerPlayer;
 import player.Player;
+import player.UserPlayer;
 import render.BoardRender;
 import static utils.Settings.*;
 
@@ -11,6 +14,8 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import render.CastleRender;
+
+import java.util.ArrayList;
 
 public class Main extends Application {
 	/*** VARIABLES ************************************************/
@@ -22,14 +27,25 @@ public class Main extends Application {
 	private Board board;
 	private BoardRender boardRender;
 	private Player mainPlayer;
+	private ArrayList<Player> players;
 	private CastleRender selectedCastleRender;
 	private boolean selectedCastleIsOwnedByMainPlayer;
 
 	/*** METHODS **************************************************/
 
 	private void createBoard() {
-		this.board = new Board();
+		this.board = new Board(this.players);
 		this.boardRender = new BoardRender(this.board, this);
+	}
+
+	private void initializePlayers() {
+		this.players = new ArrayList<>();
+		this.mainPlayer = new UserPlayer();
+		this.players.add(this.mainPlayer);
+		for (int i = 0; i < BOARD_NB_DUKES_PLAYERS; i++)
+			this.players.add(new ComputerPlayer());
+		for (int i = 0; i < BOARD_NB_DUKES_BARONS; i++)
+			this.players.add(new Baron());
 	}
 
 	private void initializeTimer() {
@@ -76,6 +92,7 @@ public class Main extends Application {
 
 	@Override
 	public void start(Stage stage) throws Exception {
+		initializePlayers();
 		createBoard();
 		initializeStage(stage, false);
 		initializeTimer();
@@ -90,5 +107,6 @@ public class Main extends Application {
 	private void updateGame() {
 		this.board.nextTurn();
 		this.boardRender.update();
+		this.players.stream().forEach(p -> p.nextTurn());
 	}
 }
