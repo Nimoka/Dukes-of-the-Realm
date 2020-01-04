@@ -19,7 +19,7 @@ public class Board {
 	public Board(ArrayList<Player> players) {
 		this.players = players;
 		this.createCastles();
-		this.currentTurn = BOARD_FIRST_TURN;
+		this.currentTurn = (BOARD_FIRST_TURN - 1);
 	}
 
 	/*** METHODS **************************************************/
@@ -112,6 +112,7 @@ public class Board {
 
 	public void nextTurn() {
 		this.currentTurn++;
+		System.out.println("[Board] Turn " + this.currentTurn);
 		for (Castle castle: this.castles)
 			castle.nextTurn();
 		checkMatchState();

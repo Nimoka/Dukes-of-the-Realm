@@ -89,11 +89,16 @@ public class Main extends Application {
 	}
 
 	public void selectCastle(CastleRender castleRender) {
-		if (this.selectedCastleRender != null)
-			this.selectedCastleRender.unselectCastle();
-		this.selectedCastleRender = castleRender;
-		this.selectedCastleIsOwnedByMainPlayer = (this.selectedCastleRender.getCastle().getDuke() == this.mainPlayer.getDuke());
-		this.hudRender.showCastleInformations(castleRender.getCastle(), selectedCastleIsOwnedByMainPlayer);
+		if (this.selectedCastleRender == castleRender) {
+			castleRender.unselectCastle();
+			this.selectedCastleRender = null;
+		} else {
+			if (this.selectedCastleRender != null)
+				this.selectedCastleRender.unselectCastle();
+			this.selectedCastleRender = castleRender;
+			this.selectedCastleIsOwnedByMainPlayer = (this.selectedCastleRender.getCastle().getDuke() == this.mainPlayer.getDuke());
+			this.hudRender.showCastleInformations(castleRender.getCastle(), selectedCastleIsOwnedByMainPlayer);
+		}
 	}
 
 	@Override

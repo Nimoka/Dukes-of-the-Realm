@@ -14,6 +14,5 @@ public class ComputerPlayer extends Player {
 
 	@Override
 	public void nextTurn() {
-		System.err.println("New turn action asked for " + this.duke.getName());
 	}
 }

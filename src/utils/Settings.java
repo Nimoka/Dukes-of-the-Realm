@@ -1,6 +1,10 @@
 package utils;
 
+import game.castle.Castle;
 import game.duke.DukeType;
+import static utils.Utils.*;
+import static utils.Utils.interpretNumber;
+
 import javafx.geometry.Insets;
 import javafx.scene.paint.Color;
 
@@ -74,7 +78,7 @@ public abstract class Settings {
 
 	public static double GAME_TURN_DURATION = 1.2; // in seconds
 
-	public static double HUD_STYLE_HEIGHT = 80.; // in pixels
+	public static double HUD_STYLE_HEIGHT = 100.; // in pixels
 	public static Insets HUD_STYLE_PADDING = new Insets(15, 15, 15, 15);
 
 	public static double WINDOW_DEFAULT_HEIGHT = 800; // in pixels
@@ -101,5 +105,21 @@ public abstract class Settings {
 
 	public static int CASTLE_LEVEL_PROD_TIME(int currentLevel) {
 		return (100 + 50 * (currentLevel + 1));
+	}
+
+	public static String HUD_LABEL_DUKE_NAME(Castle castle) {
+		return ((castle.getDuke().getType() == DukeType.PLAYER) ? "Duc" : "Baron") + " " + castle.getDuke().getName();
+	}
+
+	public static String HUD_LABEL_LEVEL(Castle castle) {
+		return "Niveau " + castle.getLevel() + " (+ " + CASTLE_LEVEL_GAIN(castle.getLevel(), castle.getDuke().getType()) + " florins/tour)";
+	}
+
+	public static String HUD_LABEL_STOCK(Castle castle) {
+		return interpretNumber(castle.getStock().getNbPikemen(), "piquier") + '\n' + interpretNumber(castle.getStock().getNbKnights(), "chevalier") + '\n' + interpretNumber(castle.getStock().getNbCatapults(), "catapulte");
+	}
+
+	public static String HUD_LABEL_TREASURE(Castle castle) {
+		return interpretNumber(castle.getTreasure(), "florin");
 	}
 }
