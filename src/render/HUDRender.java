@@ -61,8 +61,10 @@ public class HUDRender extends Render {
 		this.treasureLabel = new Label();
 		VBox castleInformationsACanvas = new VBox(this.dukeNameLabel, this.levelLabel, this.treasureLabel);
 		castleInformationsACanvas.setSpacing(4);
+		castleInformationsACanvas.setPrefWidth(200);
 		VBox castleInformationsBCanvas = new VBox(this.stockLabel);
 		castleInformationsBCanvas.setSpacing(4);
+		castleInformationsBCanvas.setPrefWidth(100);
 		this.hboxCanvas.getChildren().addAll(castleInformationsACanvas, castleInformationsBCanvas);
 	}
 
@@ -74,15 +76,21 @@ public class HUDRender extends Render {
 			cleanHUD();
 		} else {
 			this.currentCastle = castle;
-			this.dukeNameLabel.setText(HUD_LABEL_DUKE_NAME(castle));
-			this.levelLabel.setText(HUD_LABEL_LEVEL(castle));
-			this.stockLabel.setText(HUD_LABEL_STOCK(castle));
-			this.treasureLabel.setText(HUD_LABEL_TREASURE(castle));
+			updateCastleInformations();
 		}
 	}
 
 	public void update(int turn) {
-		this.turnCounter.setText(String.valueOf(turn));
-		showCastleInformations(this.currentCastle, false);
+		this.turnCounter.setText(HUD_LABEL_TURN(turn));
+		updateCastleInformations();
+	}
+
+	private void updateCastleInformations() {
+		if (this.currentCastle != null) {
+			this.dukeNameLabel.setText(HUD_LABEL_CASTLE_DUKE_NAME(this.currentCastle));
+			this.levelLabel.setText(HUD_LABEL_CASTLE_LEVEL(this.currentCastle));
+			this.stockLabel.setText(HUD_LABEL_CASTLE_STOCK(this.currentCastle));
+			this.treasureLabel.setText(HUD_LABEL_CASTLE_TREASURE(this.currentCastle));
+		}
 	}
 }

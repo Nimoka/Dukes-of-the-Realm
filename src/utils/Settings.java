@@ -107,19 +107,23 @@ public abstract class Settings {
 		return (100 + 50 * (currentLevel + 1));
 	}
 
-	public static String HUD_LABEL_DUKE_NAME(Castle castle) {
+	public static String HUD_LABEL_CASTLE_DUKE_NAME(Castle castle) {
 		return ((castle.getDuke().getType() == DukeType.PLAYER) ? "Duc" : "Baron") + " " + castle.getDuke().getName();
 	}
 
-	public static String HUD_LABEL_LEVEL(Castle castle) {
-		return "Niveau " + castle.getLevel() + " (+ " + CASTLE_LEVEL_GAIN(castle.getLevel(), castle.getDuke().getType()) + " florins/tour)";
+	public static String HUD_LABEL_CASTLE_LEVEL(Castle castle) {
+		return "Niveau " + castle.getLevel() + " (+ " + interpretNumber(CASTLE_LEVEL_GAIN(castle.getLevel(), castle.getDuke().getType()), "florin") +  "/tour)";
 	}
 
-	public static String HUD_LABEL_STOCK(Castle castle) {
+	public static String HUD_LABEL_CASTLE_STOCK(Castle castle) {
 		return interpretNumber(castle.getStock().getNbPikemen(), "piquier") + '\n' + interpretNumber(castle.getStock().getNbKnights(), "chevalier") + '\n' + interpretNumber(castle.getStock().getNbCatapults(), "catapulte");
 	}
 
-	public static String HUD_LABEL_TREASURE(Castle castle) {
+	public static String HUD_LABEL_CASTLE_TREASURE(Castle castle) {
 		return interpretNumber(castle.getTreasure(), "florin");
+	}
+
+	public static String HUD_LABEL_TURN(int currentTurn) {
+		return "Tour " + currentTurn;
 	}
 }
