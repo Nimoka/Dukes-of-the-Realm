@@ -46,6 +46,15 @@ public class Castle {
 
 	/*** METHODS **************************************************/
 
+	public void clearProductionQueue() {
+		try {
+			while (productions.size() != 0)
+				removeLastProduction();
+		} catch (ExceptionEmptyProductionQueue e) {
+			e.printStackTrace();
+		}
+	}
+
 	public void finishAction() {
 		this.currentAction = null;
 	}
@@ -60,7 +69,6 @@ public class Castle {
 			this.level = ((LevelProduction) production).getLevel();
 		else if (production.getClass() == EntityProduction.class)
 			this.stock.addEntity(((EntityProduction) production).getEntity());
-		this.treasure -= production.getCost();
 	}
 
 	private void initializeDukePlayer() {
@@ -86,13 +94,17 @@ public class Castle {
 	public void launchLevelProduction() throws ExceptionDukeNotPlayer {
 		if (this.duke.getType() == DukeType.BARON)
 			throw new ExceptionDukeNotPlayer(this.duke, "launchLevelProduction");
-		this.productions.add(new LevelProduction(this));
+		Production production = new LevelProduction(this);
+		this.productions.add(production);
+		this.treasure -= production.getCost();
 	}
 
 	public void launchEntityProduction(Class<Entity> type) throws ExceptionDukeNotPlayer {
 		if (this.duke.getType() == DukeType.BARON)
 			throw new ExceptionDukeNotPlayer(this.duke, "launchEntityProduction");
-		this.productions.add(new EntityProduction(this, type));
+		Production production = new EntityProduction(this, type);
+		this.productions.add(production);
+		this.treasure -= production.getCost();
 	}
 
 	public void nextTurn() {
@@ -111,6 +123,14 @@ public class Castle {
 	public void receiveConquer(Duke newDuke) {
 		this.duke = newDuke;
 		this.productions.clear();
+	}
+
+	public void removeLastProduction() throws ExceptionEmptyProductionQueue {
+		Production production = this.productions.poll();
+		if (production == null)
+			throw new ExceptionEmptyProductionQueue(this);
+		if (productions.peek() != null)
+			this.treasure += production.getCost();
 	}
 
 	public String toString() {
