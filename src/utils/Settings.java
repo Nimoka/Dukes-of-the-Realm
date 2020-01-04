@@ -42,6 +42,7 @@ public abstract class Settings {
 	public static double CASTLE_STYLE_CASTLE_WIDTH = BOARD_CELL_STYLE_WIDTH * .8; // in pixels
 	public static double CASTLE_STYLE_DOOR_HEIGHT = CASTLE_STYLE_STROKE_WIDTH * 2; // in pixels
 	public static double CASTLE_STYLE_DOOR_WIDTH = BOARD_CELL_STYLE_WIDTH * .4; // in pixels
+	public static Color CASTLE_STYLE_SELECTED_FILL_COLOR = Color.rgb(255, 255, 255);
 
 	public static int ENTITY_CATAPULT_ATTACK = 10;
 	public static int ENTITY_CATAPULT_HEALTH = 5;

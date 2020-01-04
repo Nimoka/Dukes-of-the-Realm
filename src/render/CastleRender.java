@@ -1,13 +1,17 @@
 package render;
 
 import game.castle.Castle;
+import main.Main;
 import static utils.Settings.*;
 
+import javafx.event.EventHandler;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Rectangle;
 
 public class CastleRender extends Render {
 	/*** VARIABLES ************************************************/
 
+	private Main environment;
 	private Castle castle;
 
 	private Rectangle castleShape;
@@ -15,8 +19,9 @@ public class CastleRender extends Render {
 
 	/*** CONSTRUCTORS *********************************************/
 
-	public CastleRender(Castle castle) {
+	public CastleRender(Castle castle, Main environment) {
 		this.castle = castle;
+		this.environment = environment;
 		initialize();
 	}
 
@@ -34,6 +39,12 @@ public class CastleRender extends Render {
 	private void initializeCanvas() {
 		this.canvas.setPrefWidth(BOARD_CELL_STYLE_WIDTH);
 		this.canvas.setPrefHeight(BOARD_CELL_STYLE_HEIGHT);
+		this.canvas.addEventHandler(MouseEvent.MOUSE_PRESSED, new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent event) {
+				selectCastle();
+			}
+		});
 	}
 
 	private void initializeCastleShape() {
@@ -72,6 +83,23 @@ public class CastleRender extends Render {
 				this.canvas.setRotate(270);
 				break;
 		}
+	}
+
+	public void selectCastle() {
+		this.environment.selectCastle(this);
+		showSelected();
+	}
+
+	private void showNotSelected() {
+		this.castleShape.setFill(CASTLE_STYLE_FILL_COLOR);
+	}
+
+	private void showSelected() {
+		this.castleShape.setFill(CASTLE_STYLE_SELECTED_FILL_COLOR);
+	}
+
+	public void unselectCastle() {
+		showNotSelected();
 	}
 
 	public void update() {

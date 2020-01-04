@@ -1,4 +1,7 @@
+package main;
+
 import game.Board;
+import player.Player;
 import render.BoardRender;
 import static utils.Settings.*;
 
@@ -7,6 +10,7 @@ import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import render.CastleRender;
 
 public class Main extends Application {
 	/*** VARIABLES ************************************************/
@@ -17,12 +21,15 @@ public class Main extends Application {
 
 	private Board board;
 	private BoardRender boardRender;
+	private Player mainPlayer;
+	private CastleRender selectedCastleRender;
+	private boolean selectedCastleIsOwnedByMainPlayer;
 
 	/*** METHODS **************************************************/
 
 	private void createBoard() {
 		this.board = new Board();
-		this.boardRender = new BoardRender(this.board);
+		this.boardRender = new BoardRender(this.board, this);
 	}
 
 	private void initializeTimer() {
@@ -60,6 +67,13 @@ public class Main extends Application {
 		stage.show();
 	}
 
+	public void selectCastle(CastleRender castleRender) {
+		if (this.selectedCastleRender != null)
+			this.selectedCastleRender.unselectCastle();
+		this.selectedCastleRender = castleRender;
+		this.selectedCastleIsOwnedByMainPlayer = (this.selectedCastleRender.getCastle().getDuke() == this.mainPlayer.getDuke());
+	}
+
 	@Override
 	public void start(Stage stage) throws Exception {
 		createBoard();
@@ -67,7 +81,6 @@ public class Main extends Application {
 		initializeTimer();
 		this.rootGroup.getChildren().add(this.boardRender.getCanvas());
 
-		// add timer (ApplicationHandler) to update the game
 		// add a hud (on-click: duke, level (+ revenue), nb entities, treasure)
 		// add actions (hud: add/remove production, on-click x2: send entities from first to second)
 		// add pause (space bar)

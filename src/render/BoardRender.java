@@ -1,6 +1,7 @@
 package render;
 
 import game.Board;
+import main.Main;
 import static utils.Settings.*;
 
 import java.util.ArrayList;
@@ -15,6 +16,8 @@ public class BoardRender extends Render {
 	/*** VARIABLES ************************************************/
 
 	private Board board;
+	private Main environment;
+
 	private Rectangle background;
 	private ArrayList<Line> lines;
 
@@ -26,8 +29,9 @@ public class BoardRender extends Render {
 
 	/*** CONSTRUCTORS *********************************************/
 
-	public BoardRender(Board board) {
+	public BoardRender(Board board, Main environment) {
 		this.board = board;
+		this.environment = environment;
 		initialize();
 	}
 
@@ -43,7 +47,7 @@ public class BoardRender extends Render {
 
 	private void addCastleToRender(Castle castle) {
 		if (getCastleRenderFromCastle(castle) == null) {
-			CastleRender castleRender = new CastleRender(castle);
+			CastleRender castleRender = new CastleRender(castle, this.environment);
 			this.castleRenders.add(castleRender);
 			this.castlesCanvas.getChildren().add(castleRender.getCanvas());
 		}
