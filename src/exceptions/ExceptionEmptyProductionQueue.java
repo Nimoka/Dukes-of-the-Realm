@@ -2,26 +2,41 @@ package exceptions;
 
 import game.castle.Castle;
 
-public class ExceptionEmptyProductionQueue extends Throwable {
-	/*** VARIABLES ************************************************/
+/**
+ * Exception thrown when trying to get a production on an empty production queue.
+ */
+public class ExceptionEmptyProductionQueue extends Exception {
+	/* VARIABLES **************************************************/
 
-	private Castle castle;
+	private Castle castle;                  /** Castle of the production queue involved. */
 
-	/*** CONSTRUCTORS *********************************************/
+	/* CONSTRUCTORS ***********************************************/
 
+	/**
+	 * Construct an exception object and write warning message in System.err.
+	 * @param castle Castle of the production queue involved.
+	 */
 	public ExceptionEmptyProductionQueue(Castle castle) {
 		this.castle = castle;
 		System.err.println(toString());
 	}
 
-	/*** METHODS **************************************************/
+	/* METHODS ****************************************************/
 
+	/**
+	 * Write a warning message using the duke object and the action name.
+	 * @return Warning message created.
+	 */
 	public String toString() {
 		return "Call on an Empty Production Queue: in " + this.castle.toString();
 	}
 
-	/*** GETTER/SETTER ********************************************/
+	/* GETTER/SETTER **********************************************/
 
+	/**
+	 * Getter on castle.
+	 * @return Castle of the production queue involved.
+	 */
 	public Castle getCastle() {
 		return this.castle;
 	}

@@ -2,21 +2,34 @@ package render;
 
 import javafx.scene.layout.Pane;
 
+/**
+ * A render.
+ */
 public abstract class Render {
-	/*** VARIABLES ************************************************/
+	/* VARIABLES **************************************************/
 
-	protected Pane canvas;
+	protected Pane canvas;                  /** Base canvas of the render. */
 
-	/*** METHODS **************************************************/
+	/* METHODS ****************************************************/
 
+	/**
+	 * Initialize the render.
+	 */
 	protected void initialize() {
 		this.canvas = new Pane();
 	}
 
+	/**
+	 * Update the render.
+	 */
 	public void update() {}
 
-	/*** GETTER/SETTER ********************************************/
+	/* GETTER/SETTER **********************************************/
 
+	/**
+	 * Getter of canvas.
+	 * @return Base canvas of the render.
+	 */
 	public Pane getCanvas() {
 		return this.canvas;
 	}

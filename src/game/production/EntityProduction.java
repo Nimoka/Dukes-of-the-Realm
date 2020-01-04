@@ -4,9 +4,17 @@ import game.castle.Castle;
 import game.entity.*;
 import static utils.Settings.*;
 
+/**
+ * A production of entity.
+ */
 public class EntityProduction extends Production {
-	/*** CONSTRUCTORS *********************************************/
+	/* CONSTRUCTORS ***********************************************/
 
+	/**
+	 * Construct the production and the entity.
+	 * @param castle Castle where the production is made.
+	 * @param type Type of entity to create.
+	 */
 	public EntityProduction(Castle castle, Class<Entity> type) {
 		this.castle = castle;
 		if (Catapult.class.equals(type)) {
@@ -24,14 +32,22 @@ public class EntityProduction extends Production {
 		}
 	}
 
-	/*** METHODS **************************************************/
+	/* METHODS ****************************************************/
 
+	/**
+	 * Write a message that contains all information of the production.
+	 * @return Message that contains all information of the production.
+	 */
 	public String toString() {
 		return "EntityProduction { object: " + this.object + ", timer: " + this.timer + ", cost: " + this.cost + " }";
 	}
 
-	/*** GETTER/SETTER ********************************************/
+	/* GETTER/SETTER **********************************************/
 
+	/**
+	 * Getter on object (cast as Entity).
+	 * @return Entity created during the production.
+	 */
 	public Entity getEntity() {
 		return (Entity) this.object;
 	}

@@ -1,29 +1,36 @@
 package render;
 
 import game.entity.*;
+import static utils.Settings.*;
 
-import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import utils.Position;
 
-import static utils.Settings.*;
-import static utils.Settings.ENTITY_KNIGHT_STYLE_WIDTH;
-
+/**
+ * A render of an entity.
+ */
 public class EntityRender extends Render {
-	/*** VARIABLES ************************************************/
+	/* VARIABLES **************************************************/
 
-	private Entity entity;
-	private Rectangle entityShape;
+	private Entity entity;                  /** The entity to render. */
+	private Rectangle entityShape;          /** Shape of the entity. */
 
-	/*** CONSTRUCTORS *********************************************/
+	/* CONSTRUCTORS ***********************************************/
 
+	/**
+	 * Construct a new render of the entity.
+	 * @param entity The entity to render.
+	 */
 	public EntityRender(Entity entity) {
 		this.entity = entity;
 		initialize();
 	}
 
-	/*** METHODS **************************************************/
+	/* METHODS ****************************************************/
 
+	/**
+	 * Initialize the render.
+	 */
 	protected void initialize() {
 		super.initialize();
 		if (Catapult.class.equals(this.entity.getClass())) {
@@ -36,6 +43,9 @@ public class EntityRender extends Render {
 		update();
 	}
 
+	/**
+	 * Initialize the shape as a catapult.
+	 */
 	private void initializeShapeAsCatapult() {
 		this.entityShape = new Rectangle();
 		this.entityShape.setFill(ENTITY_CATAPULT_STYLE_COLOR);
@@ -44,6 +54,9 @@ public class EntityRender extends Render {
 		this.canvas.getChildren().add(this.entityShape);
 	}
 
+	/**
+	 * Initialize the shape as a knight.
+	 */
 	private void initializeShapeAsKnight() {
 		this.entityShape = new Rectangle();
 		this.entityShape.setFill(ENTITY_KNIGHT_STYLE_COLOR);
@@ -52,6 +65,9 @@ public class EntityRender extends Render {
 		this.canvas.getChildren().add(this.entityShape);
 	}
 
+	/**
+	 * Initialize the shape as a pikeman.
+	 */
 	private void initializeShapeAsPikeman() {
 		this.entityShape = new Rectangle();
 		this.entityShape.setFill(ENTITY_PIKEMAN_STYLE_COLOR);
@@ -60,6 +76,10 @@ public class EntityRender extends Render {
 		this.canvas.getChildren().add(this.entityShape);
 	}
 
+	/**
+	 * Update the position of the shape.
+	 * Called at each new turn.
+	 */
 	public void update() {
 		Position displayPosition = this.entity.getPosition().convertBoardToDisplay();
 		displayPosition.translate(Position.random(BOARD_CELL_STYLE_WIDTH, BOARD_CELL_STYLE_HEIGHT));
@@ -67,8 +87,12 @@ public class EntityRender extends Render {
 		this.entityShape.setY(displayPosition.getY());
 	}
 
-	/*** GETTER/SETTER ********************************************/
+	/* GETTER/SETTER **********************************************/
 
+	/**
+	 * Getter on entity.
+	 * @return The entity to render.
+	 */
 	public Entity getEntity() {
 		return this.entity;
 	}

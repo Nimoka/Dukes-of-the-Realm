@@ -7,28 +7,36 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
+/**
+ * A HUD render.
+ */
 public class HUDRender extends Render {
-	/*** VARIABLES ************************************************/
+	/* VARIABLES **************************************************/
 
-	private HBox hboxCanvas;
+	private HBox hboxCanvas;                /** The base canvas of the HUD render. */
 
-	private Castle currentCastle;
+	private Castle currentCastle;           /** Castle whose information are displayed. */
 
-	private Label dukeNameLabel;
-	private Label levelLabel;
-	private Label stockLabel;
-	private Label treasureLabel;
+	private Label dukeNameLabel;            /** Label of the duke name. */
+	private Label levelLabel;               /** Label of the level. */
+	private Label stockLabel;               /** Label of the stock. */
+	private Label treasureLabel;            /** Label of the treasure. */
+	private Label turnCounter;              /** Label of the turn counter. */
 
-	private Label turnCounter;
+	/* CONSTRUCTORS ***********************************************/
 
-	/*** CONSTRUCTORS *********************************************/
-
+	/**
+	 * Construct a new HUD render.
+	 */
 	public HUDRender() {
 		initialize();
 	}
 
-	/*** METHODS **************************************************/
+	/* METHODS ****************************************************/
 
+	/**
+	 * Clean the castle-based labels.
+	 */
 	private void cleanHUD() {
 		this.dukeNameLabel.setText("");
 		this.levelLabel.setText("");
@@ -36,6 +44,23 @@ public class HUDRender extends Render {
 		this.treasureLabel.setText("");
 	}
 
+	/**
+	 * Enable the action buttons.
+	 */
+	private void enableCastleActionsBox() {
+
+	}
+
+	/**
+	 * Disable the action buttons.
+	 */
+	private void disableCastleActionsBox() {
+
+	}
+
+	/**
+	 * Initialize the render.
+	 */
 	protected void initialize() {
 		super.initialize();
 		this.canvas.setPrefHeight(HUD_STYLE_HEIGHT);
@@ -43,18 +68,24 @@ public class HUDRender extends Render {
 		this.canvas.setTranslateY(BOARD_CELL_STYLE_HEIGHT * BOARD_DIM_HEIGHT);
 		this.hboxCanvas = new HBox();
 		this.hboxCanvas.setPadding(HUD_STYLE_PADDING);
-		initializeCastleInformationsBox();
+		initializeCastleInformationBox();
 		initializeCastleActionsBox();
 		initializeTurnCounterBox();
 		this.canvas.getChildren().add(this.hboxCanvas);
 	}
 
+	/**
+	 * Initialize the turn counter box.
+	 */
 	private void initializeTurnCounterBox() {
 		this.turnCounter = new Label(String.valueOf(BOARD_FIRST_TURN));
 		this.hboxCanvas.getChildren().add(this.turnCounter);
 	}
 
-	private void initializeCastleInformationsBox() {
+	/**
+	 * Initialize the castle information box.
+	 */
+	private void initializeCastleInformationBox() {
 		this.dukeNameLabel = new Label();
 		this.levelLabel = new Label();
 		this.stockLabel = new Label();
@@ -68,24 +99,44 @@ public class HUDRender extends Render {
 		this.hboxCanvas.getChildren().addAll(castleInformationsACanvas, castleInformationsBCanvas);
 	}
 
+	/**
+	 * Initialize the castle actions box.
+	 */
 	private void initializeCastleActionsBox() {
 	}
 
-	public void showCastleInformations(Castle castle, boolean withActions) {
+	/**
+	 * Display the castle information.
+	 * @param castle Castle to display.
+	 * @param withActions Enable the action buttons.
+	 */
+	public void showCastleInformation(Castle castle, boolean withActions) {
 		if (castle == null) {
 			cleanHUD();
+			disableCastleActionsBox();
 		} else {
 			this.currentCastle = castle;
-			updateCastleInformations();
+			updateCastleInformation();
+			if (withActions)
+				enableCastleActionsBox();
+			else
+				disableCastleActionsBox();
 		}
 	}
 
+	/**
+	 * Update the labels.
+	 * @param turn Current turn.
+	 */
 	public void update(int turn) {
 		this.turnCounter.setText(HUD_LABEL_TURN(turn));
-		updateCastleInformations();
+		updateCastleInformation();
 	}
 
-	private void updateCastleInformations() {
+	/**
+	 * Update the castle information labels.
+	 */
+	private void updateCastleInformation() {
 		if (this.currentCastle != null) {
 			this.dukeNameLabel.setText(HUD_LABEL_CASTLE_DUKE_NAME(this.currentCastle));
 			this.levelLabel.setText(HUD_LABEL_CASTLE_LEVEL(this.currentCastle));

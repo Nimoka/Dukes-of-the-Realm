@@ -2,9 +2,15 @@ package game.entity;
 
 import static utils.Settings.*;
 
+/**
+ * A pikeman.
+ */
 public class Pikeman extends Entity {
-	/*** CONSTRUCTORS *********************************************/
+	/* CONSTRUCTORS ***********************************************/
 
+	/**
+	 * Construct a new pikeman.
+	 */
 	public Pikeman() {
 		super();
 		this.pointAttack = ENTITY_PIKEMAN_ATTACK;
@@ -12,8 +18,12 @@ public class Pikeman extends Entity {
 		this.speed = ENTITY_PIKEMAN_SPEED;
 	}
 
-	/*** METHODS **************************************************/
+	/* METHODS ****************************************************/
 
+	/**
+	 * Make the pikeman lives.
+	 * Called at each new turn.
+	 */
 	public void nextTurn() {
 		super.nextTurn();
 	}

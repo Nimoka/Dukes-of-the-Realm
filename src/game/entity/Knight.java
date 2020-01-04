@@ -2,9 +2,15 @@ package game.entity;
 
 import static utils.Settings.*;
 
+/**
+ * A knight.
+ */
 public class Knight extends Entity {
-	/*** CONSTRUCTORS *********************************************/
+	/* CONSTRUCTORS ***********************************************/
 
+	/**
+	 * Construct a new knight.
+	 */
 	public Knight() {
 		super();
 		this.pointAttack = ENTITY_KNIGHT_ATTACK;
@@ -12,8 +18,12 @@ public class Knight extends Entity {
 		this.speed = ENTITY_KNIGHT_SPEED;
 	}
 
-	/*** METHODS **************************************************/
+	/* METHODS ****************************************************/
 
+	/**
+	 * Make the knight lives.
+	 * Called at each new turn.
+	 */
 	public void nextTurn() {
 		super.nextTurn();
 	}

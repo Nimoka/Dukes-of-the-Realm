@@ -1,42 +1,53 @@
 package render;
 
 import game.Board;
+import game.castle.Castle;
+import game.entity.group.Army;
 import main.Main;
 import static utils.Settings.*;
 
 import java.util.ArrayList;
-
-import game.castle.Castle;
-import game.entity.group.Army;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 
+/**
+ * A render of a board.
+ */
 public class BoardRender extends Render {
-	/*** VARIABLES ************************************************/
+	/* VARIABLES **************************************************/
 
-	private Board board;
-	private Main environment;
+	private Board board;                                        /** The board to render. */
+	private Main environment;                                   /** The environment (application) of render. */
 
-	private Rectangle background;
-	private ArrayList<Line> lines;
+	private Rectangle background;                               /** Background shape of the render. */
+	private ArrayList<Line> lines;                              /** List of the lines shapes of the render. */
 
-	private Pane castlesCanvas;
-	private ArrayList<CastleRender> castleRenders;
+	private Pane castlesCanvas;                                 /** Canvas of the castles renders. */
+	private ArrayList<CastleRender> castleRenders;              /** List of the renders of the castles of the board. */
 
-	private Pane armiesCanvas;
-	private ArrayList<ArmyRender> armyRenders;
+	private Pane armiesCanvas;                                  /** Canvas of the armies renders. */
+	private ArrayList<ArmyRender> armyRenders;                  /** List of the renders of the armies of the board. */
 
-	/*** CONSTRUCTORS *********************************************/
+	/* CONSTRUCTORS ***********************************************/
 
+	/**
+	 * Construct a new render for a board in an environment.
+	 * @param board The board to render.
+	 * @param environment The environment (application) of render.
+	 */
 	public BoardRender(Board board, Main environment) {
 		this.board = board;
 		this.environment = environment;
 		initialize();
 	}
 
-	/*** METHODS **************************************************/
+	/* METHODS ****************************************************/
 
+	/**
+	 * Add an army to render.
+	 * @param army Army to add.
+	 */
 	private void addArmyToRender(Army army) {
 		if (getArmyRenderFromArmy(army) == null) {
 			ArmyRender armyRender = new ArmyRender(army);
@@ -45,6 +56,10 @@ public class BoardRender extends Render {
 		}
 	}
 
+	/**
+	 * Add a castle to render.
+	 * @param castle Castle to add.
+	 */
 	private void addCastleToRender(Castle castle) {
 		if (getCastleRenderFromCastle(castle) == null) {
 			CastleRender castleRender = new CastleRender(castle, this.environment);
@@ -53,6 +68,11 @@ public class BoardRender extends Render {
 		}
 	}
 
+	/**
+	 * Get the render of an army using itself.
+	 * @param army Army of the render to find.
+	 * @return Render of the army.
+	 */
 	private ArmyRender getArmyRenderFromArmy(Army army) {
 		for (ArmyRender armyRender: this.armyRenders) {
 			if (armyRender.getArmy() == army)
@@ -61,6 +81,11 @@ public class BoardRender extends Render {
 		return null;
 	}
 
+	/**
+	 * Get the render of a castle using itself.
+	 * @param castle Castle of the render to find.
+	 * @return Render of the castle.
+	 */
 	private CastleRender getCastleRenderFromCastle(Castle castle) {
 		for (CastleRender castleRender: this.castleRenders) {
 			if (castleRender.getCastle() == castle)
@@ -69,6 +94,9 @@ public class BoardRender extends Render {
 		return null;
 	}
 
+	/**
+	 * Initialize the render.
+	 */
 	protected void initialize() {
 		super.initialize();
 		initializeBackground();
@@ -78,6 +106,9 @@ public class BoardRender extends Render {
 		update();
 	}
 
+	/**
+	 * Initialize the background shape of the render.
+	 */
 	private void initializeBackground() {
 		this.background = new Rectangle();
 		this.background.setHeight(BOARD_CELL_STYLE_HEIGHT * BOARD_DIM_HEIGHT);
@@ -86,6 +117,9 @@ public class BoardRender extends Render {
 		this.canvas.getChildren().add(this.background);
 	}
 
+	/**
+	 * Initialize the castles renders.
+	 */
 	private void initializeCastleRenders() {
 		this.castleRenders = new ArrayList<>();
 		this.castlesCanvas = new Pane();
@@ -94,12 +128,18 @@ public class BoardRender extends Render {
 			addCastleToRender(castle);
 	}
 
+	/**
+	 * Initialize the army renders.
+	 */
 	private void initializeArmyRenders() {
 		this.armyRenders = new ArrayList<>();
 		this.armiesCanvas = new Pane();
 		this.canvas.getChildren().add(armiesCanvas);
 	}
 
+	/**
+	 * Initialize the lines shapes of the render.
+	 */
 	private void initializeLines() {
 		this.lines = new ArrayList<>();
 		for (int i = 0; i <= BOARD_DIM_WIDTH; i++) {
@@ -125,6 +165,10 @@ public class BoardRender extends Render {
 		this.canvas.getChildren().addAll(this.lines);
 	}
 
+	/**
+	 * Remove an army to render.
+	 * @param army Army to remove.
+	 */
 	private void removeArmyToRender(Army army) {
 		ArmyRender armyRender = getArmyRenderFromArmy(army);
 		if (armyRender != null) {
@@ -133,6 +177,10 @@ public class BoardRender extends Render {
 		}
 	}
 
+	/**
+	 * Remove a castle to render.
+	 * @param castle Castle to remove.
+	 */
 	private void removeCastleToRender(Castle castle) {
 		CastleRender castleRender = getCastleRenderFromCastle(castle);
 		if (castleRender != null) {
@@ -141,23 +189,37 @@ public class BoardRender extends Render {
 		}
 	}
 
+	/**
+	 * Update the castles and armies.
+	 * Called at each new turn.
+	 */
 	public void update() {
 		updateCastles();
 		updateArmy();
 	}
 
+	/**
+	 * Call update() on each armies.
+	 */
 	private void updateArmy() {
 		for (ArmyRender armyRender: this.armyRenders)
 			armyRender.update();
 	}
 
+	/**
+	 * Call update() on each castles.
+	 */
 	private void updateCastles() {
 		for (CastleRender castleRender: this.castleRenders)
 			castleRender.update();
 	}
 
-	/*** GETTER/SETTER ********************************************/
+	/* GETTER/SETTER **********************************************/
 
+	/**
+	 * Getter on board.
+	 * @return The board to render.
+	 */
 	public Board getBoard() {
 		return this.board;
 	}

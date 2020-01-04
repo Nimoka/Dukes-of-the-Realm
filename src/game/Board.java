@@ -7,25 +7,37 @@ import static utils.Settings.*;
 
 import java.util.ArrayList;
 
+/**
+ * A board where all players are playing, with castles and armies.
+ */
 public class Board {
-	/*** VARIABLES ************************************************/
+	/* VARIABLES **************************************************/
 
-	private ArrayList<Castle> castles;
-	private ArrayList<Player> players;
-	private int currentTurn;
+	private ArrayList<Castle> castles;      /** List of the castles on the board. */
+	private int currentTurn;                /** Current turn of the match. */
+	private ArrayList<Player> players;      /** List of the players playing on the board. */
 
-	/*** CONSTRUCTORS *********************************************/
+	/* CONSTRUCTORS ***********************************************/
 
+	/**
+	 * Construct a board for certain players.
+	 * @param players List of the players playing on the board.
+	 */
 	public Board(ArrayList<Player> players) {
 		this.players = players;
 		this.createCastles();
 		this.currentTurn = (BOARD_FIRST_TURN - 1);
 	}
 
-	/*** METHODS **************************************************/
+	/* METHODS ****************************************************/
 
 	// make load and save (using ObjectOutputStream and ObjectInputStream)
 
+	/**
+	 * Check if a board's cell contains a castle.
+	 * @param position Position of the cell to check.
+	 * @return Board's cell is empty.
+	 */
 	public boolean checkEmptyCell(Position position) {
 		for (Castle castle: this.castles) {
 			if (castle.getPosition().equals(position))
@@ -34,6 +46,11 @@ public class Board {
 		return true;
 	}
 
+	/**
+	 * Check if the distance between castles and a position is met.
+	 * @param position Position of the cell to check.
+	 * @return Condition is met.
+	 */
 	public boolean checkCastleDistance(Position position) {
 		for (Castle castle: this.castles) {
 			if (castle.getPosition().distance(position) < CASTLE_DISTANCE)
@@ -42,6 +59,12 @@ public class Board {
 		return true;
 	}
 
+	/**
+	 * Create a route from a source castle door to a target castle, avoiding others.
+	 * @param source Source castle of the route.
+	 * @param target Target castle of the route.
+	 * @return Route created.
+	 */
 	public ArrayList<Position> computeArmyRoute(Castle source, Castle target) {
 		ArrayList<Position> route = new ArrayList<>();
 		Position targetPosition = target.getPosition();
@@ -74,11 +97,17 @@ public class Board {
 		return route;
 	}
 
+	/**
+	 * Check if the match is over.
+	 */
 	public void checkMatchState() {
 		// check nb of castles per duke
 		// if only one have castle(s) => end
 	}
 
+	/**
+	 * Create a castle per player.
+	 */
 	private void createCastles() {
 		this.castles = new ArrayList<>();
 		for (Player player: this.players) {
@@ -91,6 +120,11 @@ public class Board {
 		}
 	}
 
+	/**
+	 * Get the position facing a castle door.
+	 * @param castle Castle involved.
+	 * @return Position facing the castle door.
+	 */
 	public Position getCastleDoorPosition(Castle castle) {
 		Position position = new Position(castle.getPosition());
 		switch (castle.getDirection()) {
@@ -110,6 +144,10 @@ public class Board {
 		return position;
 	}
 
+	/**
+	 * Increase the turn counter, call nextTurn() for each castle and check the match state.
+	 * Called at each new turn.
+	 */
 	public void nextTurn() {
 		this.currentTurn++;
 		System.out.println("[Board] Turn " + this.currentTurn);
@@ -118,6 +156,10 @@ public class Board {
 		checkMatchState();
 	}
 
+	/**
+	 * Write a message that contains all information of the board.
+	 * @return Message that contains all information of the board.
+	 */
 	public String toString() {
 		String message = "Board { castles: [ ";
 		for (Castle castle: this.castles)
@@ -126,16 +168,28 @@ public class Board {
 		return message;
 	}
 
-	/*** GETTER/SETTER ********************************************/
+	/* GETTER/SETTER **********************************************/
 
+	/**
+	 * Getter on castles.
+	 * @return List of the castles on the board.
+	 */
 	public ArrayList<Castle> getCastles() {
 		return this.castles;
 	}
 
+	/**
+	 * Getter on currentTurn.
+	 * @return Current turn of the match.
+	 */
 	public int getCurrentTurn() {
 		return this.currentTurn;
 	}
 
+	/**
+	 * Getter on players.
+	 * @return List of the players playing on the board.
+	 */
 	public ArrayList<Player> getPlayers() {
 		return this.players;
 	}
