@@ -136,12 +136,14 @@ public class Main extends Application {
 			return true;
 		} else {
 			if (this.selectedCastleRender.getCastle().getDuke() == this.mainPlayer.getDuke()) {
-				try {
-					this.selectedCastleRender.getCastle().launchNewAction(castleRender.getCastle(), 2, 2, 2);
-				} catch (ExceptionDukeNotPlayer e) {
-					e.printStackTrace();
-				} catch (ExceptionActionAlreadyLaunched e) {
-					e.printStackTrace();
+				if (!this.selectedCastleRender.getCastle().haveAction()) {
+					try {
+						this.selectedCastleRender.getCastle().launchNewAction(castleRender.getCastle(), 2, 2, 2);
+					} catch (ExceptionDukeNotPlayer e) {
+						e.printStackTrace();
+					} catch (ExceptionActionAlreadyLaunched e) {
+						e.printStackTrace();
+					}
 				}
 			}
 		}
@@ -193,5 +195,13 @@ public class Main extends Application {
 	 */
 	public Stage getStage() {
 		return this.stage;
+	}
+
+	/**
+	 * Getter on mainPlayer.
+	 * @return Main player of the game (that controls the UI).
+	 */
+	public Player getMainPlayer() {
+		return this.mainPlayer;
 	}
 }

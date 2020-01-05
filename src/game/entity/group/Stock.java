@@ -62,7 +62,10 @@ public class Stock extends EntityGroup {
 	 * Remove health point to a random entity.
 	 */
 	public void receiveAttack() {
-		EntityType type = EntityType.random();
+		EntityType type;
+		do {
+			type = EntityType.random();
+		} while (((type == EntityType.CATAPULT) && (listCatapults.size() == 0)) || ((type == EntityType.KNIGHT) && (listKnights.size() == 0)) || ((type == EntityType.PIKEMAN) && (listPikemen.size() == 0)));
 		if (type == EntityType.CATAPULT) {
 			Catapult catapult = this.listCatapults.get(0);
 			catapult.receiveAttack();

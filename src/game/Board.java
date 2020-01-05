@@ -85,12 +85,12 @@ public class Board {
 	 */
 	public ArrayList<Position> computeArmyRoute(Castle source, Castle target) {
 		ArrayList<Position> route = new ArrayList<>();
-		Position targetPosition = target.getPosition();
+		Position targetPosition = getCastleDoorPosition(target);
 		Position position = getCastleDoorPosition(source);
 		route.add(position);
 		int dx = targetPosition.getX() - position.getX();
 		int dy = targetPosition.getY() - position.getY();
-		while (position.distance(targetPosition) > 1) {
+		while (!position.equals(targetPosition)) {
 			Position next = new Position(position);
 			if (Math.abs(dy) > Math.abs(dx)) {
 				next.translate(0, (dy > 0 ? 1 : -1));
@@ -112,6 +112,7 @@ public class Board {
 			position = next;
 			route.add(position);
 		}
+		route.add(target.getPosition());
 		return route;
 	}
 

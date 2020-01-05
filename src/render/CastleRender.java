@@ -1,6 +1,7 @@
 package render;
 
 import game.castle.Castle;
+import javafx.scene.paint.Color;
 import main.Main;
 import static utils.Settings.*;
 
@@ -70,9 +71,9 @@ public class CastleRender extends Render {
 		this.castleShape.setY((BOARD_CELL_STYLE_HEIGHT - CASTLE_STYLE_CASTLE_WIDTH) / 2);
 		this.castleShape.setHeight(CASTLE_STYLE_CASTLE_HEIGHT);
 		this.castleShape.setWidth(CASTLE_STYLE_CASTLE_WIDTH);
-		this.castleShape.setFill(CASTLE_STYLE_FILL_COLOR);
 		this.castleShape.setStroke(CASTLE_STYLE_STROKE_COLOR);
 		this.castleShape.setStrokeWidth(CASTLE_STYLE_STROKE_WIDTH);
+		showNotSelected();
 		this.canvas.getChildren().add(this.castleShape);
 	}
 
@@ -120,7 +121,10 @@ public class CastleRender extends Render {
 	 * Show the render as not selected.
 	 */
 	private void showNotSelected() {
-		this.castleShape.setFill(CASTLE_STYLE_FILL_COLOR);
+		if (this.castle.getDuke() == this.environment.getMainPlayer().getDuke())
+			this.castleShape.setFill(Color.BLUE);
+		else
+			this.castleShape.setFill(CASTLE_STYLE_FILL_COLOR);
 	}
 
 	/**

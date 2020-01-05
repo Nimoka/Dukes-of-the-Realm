@@ -46,13 +46,12 @@ public class ArmyRender extends Render {
 	 * Check each entities if it's dead: if so, it's not rendered anymore.
 	 */
 	private void checkEntitiesState() {
-		Iterator iterator = this.entityRenders.iterator();
-		Entity entity;
-		while (iterator.hasNext()) {
-			entity = ((EntityRender) iterator.next()).getEntity();
-			if (entity.isDead())
-				removeEntityToRender(entity);
+		ArrayList<Entity> entitiesToRemove = new ArrayList<>();
+		for (EntityRender entityRender: this.entityRenders) {
+			if (entityRender.getEntity().isDead())
+				entitiesToRemove.add(entityRender.getEntity());
 		}
+		entitiesToRemove.stream().forEach(e -> removeEntityToRender(e));
 	}
 
 	/**
@@ -101,6 +100,8 @@ public class ArmyRender extends Render {
 	 * Called at each new turn.
 	 */
 	public void update() {
+		for (EntityRender entityRender: this.entityRenders)
+			entityRender.update();
 		checkEntitiesState();
 	}
 

@@ -95,6 +95,14 @@ public class Castle {
 	}
 
 	/**
+	 * Tell if there is an action.
+	 * @return There is an action.
+	 */
+	public boolean haveAction() {
+		return (this.currentAction != null);
+	}
+
+	/**
 	 * Tell if there is a production.
 	 * @return There is a production.
 	 */

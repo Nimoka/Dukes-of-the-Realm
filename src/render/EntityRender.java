@@ -76,17 +76,30 @@ public class EntityRender extends Render {
 		this.canvas.getChildren().add(this.entityShape);
 	}
 
+	private boolean entityStateSet = false;
+
 	/**
 	 * Update the position of the shape.
 	 * Called at each new turn.
 	 */
 	public void update() {
-		if (this.entity.getCurrentState() == EntityState.MOVE) {
+		if (this.entity.getCurrentState() == EntityState.SLEEP) {
+			if (!entityStateSet) {
+				this.canvas.setVisible(false);
+				entityStateSet = true;
+			}
+		} else if ((this.entity.getCurrentState() == EntityState.MOVE) || !(this.entityStateSet)) {
+			if (entityStateSet) {
+				this.canvas.setVisible(true);
+				entityStateSet = false;
+			}
 			Position displayPosition = this.entity.getPosition().convertBoardToDisplay();
-			displayPosition.translate(Position.random(BOARD_CELL_STYLE_WIDTH, BOARD_CELL_STYLE_HEIGHT));
-			this.entityShape.setX(displayPosition.getX());
-			this.entityShape.setY(displayPosition.getY());
+			displayPosition.translate(Position.random((BOARD_CELL_STYLE_WIDTH - this.entityShape.getWidth()), (BOARD_CELL_STYLE_HEIGHT - this.entityShape.getHeight())));
+			this.canvas.setTranslateX(displayPosition.getX());
+			this.canvas.setTranslateY(displayPosition.getY());
 		}
+		if (this.entity.getCurrentState() == EntityState.ATTACK)
+			this.entityStateSet = true;
 	}
 
 	/* GETTER/SETTER **********************************************/

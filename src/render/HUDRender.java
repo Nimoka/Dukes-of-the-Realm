@@ -11,6 +11,7 @@ import game.entity.Knight;
 import game.entity.Pikeman;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -103,6 +104,7 @@ public class HUDRender extends Render {
 		this.hboxCanvas = new HBox();
 		this.hboxCanvas.setPadding(HUD_STYLE_PADDING);
 		this.hboxCanvas.setSpacing(HUD_STYLE_PADDING.getLeft());
+		this.hboxCanvas.setAlignment(Pos.CENTER_LEFT);
 		initializeTurnCounterBox();
 		initializeCastleInformationBox();
 		initializeCastleActionsBox();
@@ -292,6 +294,9 @@ public class HUDRender extends Render {
 		}
 	}
 
+	/**
+	 * Clear the current castle value and update the labels.
+	 */
 	public void unselectCastle() {
 		this.currentCastle = null;
 		showCastleInformation(null, false);
