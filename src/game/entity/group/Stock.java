@@ -1,8 +1,6 @@
 package game.entity.group;
 
-import game.entity.Catapult;
-import game.entity.Knight;
-import game.entity.Pikeman;
+import game.entity.*;
 
 import java.util.ArrayList;
 import java.util.stream.Collectors;
@@ -64,6 +62,22 @@ public class Stock extends EntityGroup {
 	 * Remove health point to a random entity.
 	 */
 	public void receiveAttack() {
-
+		EntityType type = EntityType.random();
+		if (type == EntityType.CATAPULT) {
+			Catapult catapult = this.listCatapults.get(0);
+			catapult.receiveAttack();
+			if (catapult.isDead())
+				this.listCatapults.remove(catapult);
+		} else if (type == EntityType.KNIGHT) {
+			Knight knight = this.listKnights.get(0);
+			knight.receiveAttack();
+			if (knight.isDead())
+				this.listKnights.remove(knight);
+		} else if (type == EntityType.PIKEMAN) {
+			Pikeman pikeman = this.listPikemen.get(0);
+			pikeman.receiveAttack();
+			if (pikeman.isDead())
+				this.listPikemen.remove(pikeman);
+		}
 	}
 }

@@ -80,6 +80,14 @@ public abstract class Entity {
 	}
 
 	/**
+	 * Remove health point to the entity.
+	 */
+	public void receiveAttack() {
+		if (this.pointHealth > 0)
+			this.pointHealth--;
+	}
+
+	/**
 	 * Write a message that contains all information of the entity.
 	 * @return Message that contains all information of the entity.
 	 */
