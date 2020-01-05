@@ -36,9 +36,9 @@ public abstract class Settings {
 	public static int CASTLE_BARON_TREASURE_MIN = 10000;        /** Minimum treasure of a baron's castle. */
 	public static int CASTLE_BARON_TREASURE_MAX = 100000;       /** Maximum treasure of a baron's castle. */
 	public static int CASTLE_DEFAULT_LEVEL = 1;                 /** Default level of a castle. */
-	public static int CASTLE_DEFAULT_NB_CATAPULT = 0;           /** Default number of catapult of a castle. */
-	public static int CASTLE_DEFAULT_NB_KNIGHT = 0;             /** Default number of knight of a castle. */
-	public static int CASTLE_DEFAULT_NB_PIKEMAN = 0;            /** Default number of pikeman of a castle. */
+	public static int CASTLE_DEFAULT_NB_CATAPULT = 5;           /** Default number of catapult of a castle. */
+	public static int CASTLE_DEFAULT_NB_KNIGHT = 5;             /** Default number of knight of a castle. */
+	public static int CASTLE_DEFAULT_NB_PIKEMAN = 5;            /** Default number of pikeman of a castle. */
 	public static int CASTLE_DISTANCE = 4;                      /** Minimum distance between two castles. */
 	public static Color CASTLE_STYLE_FILL_COLOR = Color.rgb(150, 150, 150);         /** Color of a castle. */
 	public static Color CASTLE_STYLE_STROKE_COLOR = Color.rgb(120, 120, 120);       /** Color of the wall of a castle. */
