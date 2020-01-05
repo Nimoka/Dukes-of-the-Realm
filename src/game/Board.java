@@ -8,6 +8,7 @@ import utils.Position;
 import static utils.Settings.*;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  * A board where all players are playing, with castles and armies.
@@ -37,8 +38,6 @@ public class Board {
 	}
 
 	/* METHODS ****************************************************/
-
-	// make load and save (using ObjectOutputStream and ObjectInputStream)
 
 	/**
 	 * Check if a board's cell contains a castle.
@@ -176,6 +175,15 @@ public class Board {
 		for (Castle castle: this.castles)
 			castle.nextTurn();
 		checkMatchState();
+	}
+
+	/**
+	 * Return a random castle from castle list.
+	 * @return Random castle.
+	 */
+	public Castle randomCastle() {
+		Random generator = new Random();
+		return this.castles.get(generator.nextInt(this.castles.size()));
 	}
 
 	/**

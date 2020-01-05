@@ -135,7 +135,7 @@ public class Main extends Application {
 		this.mainPlayer = new UserPlayer();
 		this.players.add(this.mainPlayer);
 		for (int i = 0; i < BOARD_NB_DUKES_PLAYERS; i++)
-			this.players.add(new ComputerPlayer());
+			this.players.add(new ComputerPlayer(this));
 		for (int i = 0; i < BOARD_NB_DUKES_BARONS; i++)
 			this.players.add(new Baron());
 	}
@@ -259,11 +259,11 @@ public class Main extends Application {
 	/* GETTER/SETTER **********************************************/
 
 	/**
-	 * Getter on stage.
-	 * @return Primary stage.
+	 * Getter on board.
+	 * @return Board of the game.
 	 */
-	public Stage getStage() {
-		return this.stage;
+	public Board getBoard() {
+		return this.board;
 	}
 
 	/**
@@ -272,5 +272,13 @@ public class Main extends Application {
 	 */
 	public Player getMainPlayer() {
 		return this.mainPlayer;
+	}
+
+	/**
+	 * Getter on stage.
+	 * @return Primary stage.
+	 */
+	public Stage getStage() {
+		return this.stage;
 	}
 }
