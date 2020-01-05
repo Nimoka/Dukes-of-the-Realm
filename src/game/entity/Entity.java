@@ -37,7 +37,7 @@ public abstract class Entity {
 	 * @return The entity is dead.
 	 */
 	public boolean isDead() {
-		return this.currentState == EntityState.DIE;
+		return (this.currentState == EntityState.DIE) || (this.pointHealth == 0);
 	}
 
 	/**

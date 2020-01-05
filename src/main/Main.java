@@ -143,7 +143,6 @@ public class Main extends Application {
 		this.rootGroup.getChildren().add(this.boardRender.getCanvas());
 		this.rootGroup.getChildren().add(this.hudRender.getCanvas());
 
-		// add a hud (on-click: duke, level (+ revenue), nb entities, treasure)
 		// add actions (hud: add/remove production, on-click x2: send entities from first to second)
 		// add pause (space bar)
 		// check user interactions
@@ -154,9 +153,14 @@ public class Main extends Application {
 	 * Called at each new turn.
 	 */
 	private void updateGame() {
-		this.board.nextTurn();
-		this.boardRender.update();
-		this.hudRender.update(this.board.getCurrentTurn());
-		this.players.stream().forEach(p -> p.nextTurn());
+		this.board.checkMatchState();
+		if (this.board.getMatchState() == false) {
+			// to continue
+		} else {
+			this.board.nextTurn();
+			this.boardRender.update();
+			this.hudRender.update(this.board.getCurrentTurn());
+			this.players.stream().forEach(p -> p.nextTurn());
+		}
 	}
 }

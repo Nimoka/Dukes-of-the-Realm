@@ -1,6 +1,7 @@
 package game;
 
 import game.castle.Castle;
+import game.duke.Duke;
 import player.Player;
 import utils.Position;
 import static utils.Settings.*;
@@ -15,6 +16,7 @@ public class Board {
 
 	private ArrayList<Castle> castles;      /** List of the castles on the board. */
 	private int currentTurn;                /** Current turn of the match. */
+	private boolean matchState;             /** State of the match (false = over). */
 	private ArrayList<Player> players;      /** List of the players playing on the board. */
 
 	/* CONSTRUCTORS ***********************************************/
@@ -27,6 +29,7 @@ public class Board {
 		this.players = players;
 		this.createCastles();
 		this.currentTurn = (BOARD_FIRST_TURN - 1);
+		this.matchState = true;
 	}
 
 	/* METHODS ****************************************************/
@@ -57,6 +60,18 @@ public class Board {
 				return false;
 		}
 		return true;
+	}
+
+	/**
+	 * Check if the match is over.
+	 */
+	public void checkMatchState() {
+		Duke duke = this.castles.get(0).getDuke();
+		for (Castle castle: this.castles) {
+			if (duke != castle.getDuke())
+				return;
+		}
+		this.matchState = false;
 	}
 
 	/**
@@ -95,14 +110,6 @@ public class Board {
 			route.add(position);
 		}
 		return route;
-	}
-
-	/**
-	 * Check if the match is over.
-	 */
-	public void checkMatchState() {
-		// check nb of castles per duke
-		// if only one have castle(s) => end
 	}
 
 	/**
@@ -145,6 +152,16 @@ public class Board {
 	}
 
 	/**
+	 * Get the winner duke of the match.
+	 * @return Winner duke.
+	 */
+	public Duke getWinner() {
+		if (matchState == true)
+			return null;
+		return this.castles.get(0).getDuke();
+	}
+
+	/**
 	 * Increase the turn counter, call nextTurn() for each castle and check the match state.
 	 * Called at each new turn.
 	 */
@@ -184,6 +201,14 @@ public class Board {
 	 */
 	public int getCurrentTurn() {
 		return this.currentTurn;
+	}
+
+	/**
+	 * Getter on matchState.
+	 * @return State of the match (false = over).
+	 */
+	public boolean getMatchState() {
+		return this.matchState;
 	}
 
 	/**
