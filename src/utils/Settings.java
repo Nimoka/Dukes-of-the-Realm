@@ -78,7 +78,7 @@ public abstract class Settings {
 
 	public static double GAME_TURN_DURATION = 1.2;              /** Duration of a turn (in seconds). */
 
-	public static double HUD_STYLE_HEIGHT = 100.;               /** Height of the HUD (in pixels). */
+	public static double HUD_STYLE_HEIGHT = 90.;               /** Height of the HUD (in pixels). */
 	public static Insets HUD_STYLE_PADDING = new Insets(15, 15, 15, 15);            /** Padding of the HUD (in pixels). */
 
 	public static double WINDOW_DEFAULT_HEIGHT = 800;           /** Default height of the window (in pixels). */

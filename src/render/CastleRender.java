@@ -112,8 +112,8 @@ public class CastleRender extends Render {
 	 * Select the castle.
 	 */
 	public void selectCastle() {
-		showSelected();
-		this.environment.selectCastle(this);
+		if (this.environment.selectCastle(this))
+			showSelected();
 	}
 
 	/**

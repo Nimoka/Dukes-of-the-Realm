@@ -19,6 +19,7 @@ public class LevelProduction extends Production {
 		this.object = (Integer) (currentLevel + 1);
 		this.cost = CASTLE_LEVEL_PROD_COST(currentLevel);
 		this.timer = CASTLE_LEVEL_PROD_TIME(currentLevel);
+		System.out.println("[LevelProduction] New level (level " + (Integer) object + ") asked by " + castle.getDuke().getName());
 	}
 
 	/* METHODS ****************************************************/

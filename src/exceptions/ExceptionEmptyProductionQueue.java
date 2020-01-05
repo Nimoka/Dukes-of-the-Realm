@@ -13,12 +13,11 @@ public class ExceptionEmptyProductionQueue extends Exception {
 	/* CONSTRUCTORS ***********************************************/
 
 	/**
-	 * Construct an exception object and write warning message in System.err.
+	 * Construct an exception object.
 	 * @param castle Castle of the production queue involved.
 	 */
 	public ExceptionEmptyProductionQueue(Castle castle) {
 		this.castle = castle;
-		System.err.println(toString());
 	}
 
 	/* METHODS ****************************************************/

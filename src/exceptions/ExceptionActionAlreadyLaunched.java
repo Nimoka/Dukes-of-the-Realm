@@ -11,12 +11,11 @@ public class ExceptionActionAlreadyLaunched extends Exception {
 	/* CONSTRUCTORS ***********************************************/
 
 	/**
-	 * Construct an exception object and write warning message in System.err.
+	 * Construct an exception object.
 	 * @param castle Castle involved.
 	 */
 	public ExceptionActionAlreadyLaunched(Castle castle) {
 		this.castle = castle;
-		System.err.println(toString());
 	}
 
 	/* METHODS ****************************************************/

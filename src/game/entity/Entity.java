@@ -41,6 +41,16 @@ public abstract class Entity {
 	}
 
 	/**
+	 * Launch the entity.
+	 * @param action Action where entity is involved.
+	 */
+	public void launch(Action action) {
+		this.currentAction = action;
+		this.currentState = EntityState.MOVE;
+		this.position = action.getFirstPosition();
+	}
+
+	/**
 	 * Make the entity join a castle stock.
 	 * @param castle Castle to join.
 	 */

@@ -1,6 +1,7 @@
 package tests;
 
 import game.*;
+import main.Main;
 import player.ComputerPlayer;
 import player.Player;
 import utils.NameGenerator;
@@ -19,7 +20,7 @@ public class Playground {
 	public static void printBoard() {
 		ArrayList<Player> players = new ArrayList<>();
 		players.add(new ComputerPlayer());
-		Board board = new Board(players);
+		Board board = new Board(players, new Main());
 		System.out.println(board.toString());
 	}
 

@@ -14,14 +14,13 @@ public class ExceptionDukeNotPlayer extends Exception {
 	/* CONSTRUCTORS ***********************************************/
 
 	/**
-	 * Construct an exception object and write warning message in System.err.
+	 * Construct an exception object.
 	 * @param duke Name of the action when exception was thrown.
 	 * @param action Duke object that caused this exception.
 	 */
 	public ExceptionDukeNotPlayer(Duke duke, String action) {
 		this.duke = duke;
 		this.action = action;
-		System.err.println(toString());
 	}
 
 	/* METHODS ****************************************************/

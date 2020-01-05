@@ -47,7 +47,7 @@ public class Castle {
 		this.direction = CastleDirection.random();
 		this.duke = duke;
 		this.position = position;
-		this.productions = new PriorityQueue<>();
+		this.productions = new LinkedList<>();
 		if (duke.getType() == DukeType.PLAYER)
 			initializeDukePlayer();
 		else if (duke.getType() == DukeType.BARON)
@@ -60,9 +60,10 @@ public class Castle {
 	 * Clear the production queue.
 	 */
 	public void clearProductionQueue() {
+		productions.poll();
 		try {
 			while (productions.size() != 0)
-				removeLastProduction();
+				removeLastProduction(true);
 		} catch (ExceptionEmptyProductionQueue | ExceptionDukeNotPlayer e) {
 			e.printStackTrace();
 		}
@@ -90,6 +91,15 @@ public class Castle {
 			this.level = ((LevelProduction) production).getLevel();
 		else if (production.getClass() == EntityProduction.class)
 			this.stock.addEntity(((EntityProduction) production).getEntity());
+		System.out.println("[Castle] Production finished.");
+	}
+
+	/**
+	 * Tell if there is a production.
+	 * @return There is a production.
+	 */
+	public boolean haveProduction() {
+		return (this.productions.peek() != null);
 	}
 
 	/**
@@ -126,7 +136,7 @@ public class Castle {
 			throw new ExceptionActionAlreadyLaunched(this);
 		Army army = this.stock.createArmy(nbCatapults, nbKnights, nbPikemen);
 		currentAction = new Action(this, target, army);
-		// to continue
+		this.board.getEnvironment().launchArmyRender(army);
 	}
 
 	/**
@@ -146,7 +156,7 @@ public class Castle {
 	 * @param type Type of the entity to make.
 	 * @throws ExceptionDukeNotPlayer Thrown if the duke of the castle is not playing: he can't ask a production.
 	 */
-	public void launchEntityProduction(Class<Entity> type) throws ExceptionDukeNotPlayer {
+	public void launchEntityProduction(Class<? extends Entity> type) throws ExceptionDukeNotPlayer {
 		if (this.duke.getType() == DukeType.BARON)
 			throw new ExceptionDukeNotPlayer(this.duke, "launchEntityProduction");
 		Production production = new EntityProduction(this, type);
@@ -185,17 +195,18 @@ public class Castle {
 
 	/**
 	 * Remove the last production of the queue.
+	 * @param isCleanMode Tell the context of call (true = during cleaning).
 	 * @throws ExceptionDukeNotPlayer Thrown if the duke of the castle is not playing: he couldn't ask a production.
 	 * @throws ExceptionEmptyProductionQueue Thrown if the production queue is empty: there is no current production.
 	 */
-	public void removeLastProduction() throws ExceptionEmptyProductionQueue, ExceptionDukeNotPlayer {
+	public void removeLastProduction(boolean isCleanMode) throws ExceptionEmptyProductionQueue, ExceptionDukeNotPlayer {
 		if (this.duke.getType() == DukeType.BARON)
 			throw new ExceptionDukeNotPlayer(this.duke, "launchEntityProduction");
 		Production production = this.productions.poll();
 		if (production == null)
 			throw new ExceptionEmptyProductionQueue(this);
-		if (productions.peek() != null)
-			this.treasure += production.getCost();
+		if ((this.productions.peek() != null) || isCleanMode)
+		this.treasure += production.getCost();
 	}
 
 	/**

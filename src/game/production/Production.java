@@ -23,10 +23,12 @@ public abstract class Production {
 	 */
 	public void nextTurn() {
 		this.timer--;
-		try {
-			this.castle.finishProduction();
-		} catch (ExceptionDukeNotPlayer | ExceptionEmptyProductionQueue e) {
-			e.printStackTrace();
+		if (timer <= 0) {
+			try {
+				this.castle.finishProduction();
+			} catch (ExceptionDukeNotPlayer | ExceptionEmptyProductionQueue e) {
+				e.printStackTrace();
+			}
 		}
 	}
 

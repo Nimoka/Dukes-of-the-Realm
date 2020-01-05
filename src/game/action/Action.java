@@ -48,9 +48,17 @@ public class Action {
 	 * When all entities of the army are outside the source castle, the army starts to move.
 	 */
 	public void launch() {
-		this.army.getListEntities().stream().filter(e -> (e.getCurrentState() == EntityState.SLEEP)).limit(CASTLE_DOOR_SIZE(this.source.getLevel())).forEach(e -> launch());
+		this.army.getListEntities().stream().filter(e -> (e.getCurrentState() == EntityState.SLEEP)).limit(CASTLE_DOOR_SIZE(this.source.getLevel())).forEach(e -> e.launch(this));
 		if (this.army.getListEntities().stream().filter(e -> (e.getCurrentState() == EntityState.SLEEP)).count() == 0)
 			this.currentState = ActionState.MOVE;
+	}
+
+	/**
+	 * Get the first position of the route.
+	 * @return First position of the route.
+	 */
+	public Position getFirstPosition() {
+		return this.route.get(0);
 	}
 
 	/**

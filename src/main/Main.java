@@ -1,6 +1,9 @@
 package main;
 
+import exceptions.ExceptionActionAlreadyLaunched;
+import exceptions.ExceptionDukeNotPlayer;
 import game.Board;
+import game.entity.group.Army;
 import player.Baron;
 import player.ComputerPlayer;
 import player.Player;
@@ -25,6 +28,7 @@ public class Main extends Application {
 
 	private Group rootGroup;                            /** Root group of the scene. */
 	private Scene scene;                                /** Scene of the stage. */
+	private Stage stage;                                /** Primary stage. */
 	private AnimationTimer timer;                       /** Timer of the game. */
 
 	private Board board;                                /** Board of the game. */
@@ -41,7 +45,7 @@ public class Main extends Application {
 	 * Create the board and its render.
 	 */
 	private void createBoard() {
-		this.board = new Board(this.players);
+		this.board = new Board(this.players, this);
 		this.boardRender = new BoardRender(this.board, this);
 	}
 
@@ -49,7 +53,7 @@ public class Main extends Application {
 	 * Create the HUD.
 	 */
 	private void initializeHUD() {
-		this.hudRender = new HUDRender();
+		this.hudRender = new HUDRender(this);
 	}
 
 	/**
@@ -111,21 +115,37 @@ public class Main extends Application {
 		stage.show();
 	}
 
+	public void launchArmyRender(Army army) {
+		this.boardRender.addArmyToRender(army);
+	}
+
 	/**
 	 * Select a castle on the render.
 	 * @param castleRender Render of the castle selected.
+	 * @return Show as selected (true = show).
 	 */
-	public void selectCastle(CastleRender castleRender) {
+	public boolean selectCastle(CastleRender castleRender) {
 		if (this.selectedCastleRender == castleRender) {
 			castleRender.unselectCastle();
 			this.selectedCastleRender = null;
-		} else {
-			if (this.selectedCastleRender != null)
-				this.selectedCastleRender.unselectCastle();
+			hudRender.unselectCastle();
+		} else if (this.selectedCastleRender == null) {
 			this.selectedCastleRender = castleRender;
 			this.selectedCastleIsOwnedByMainPlayer = (this.selectedCastleRender.getCastle().getDuke() == this.mainPlayer.getDuke());
 			this.hudRender.showCastleInformation(castleRender.getCastle(), selectedCastleIsOwnedByMainPlayer);
+			return true;
+		} else {
+			if (this.selectedCastleRender.getCastle().getDuke() == this.mainPlayer.getDuke()) {
+				try {
+					this.selectedCastleRender.getCastle().launchNewAction(castleRender.getCastle(), 2, 2, 2);
+				} catch (ExceptionDukeNotPlayer e) {
+					e.printStackTrace();
+				} catch (ExceptionActionAlreadyLaunched e) {
+					e.printStackTrace();
+				}
+			}
 		}
+		return false;
 	}
 
 	/**
@@ -135,6 +155,7 @@ public class Main extends Application {
 	 */
 	@Override
 	public void start(Stage stage) throws Exception {
+		this.stage = stage;
 		initializePlayers();
 		createBoard();
 		initializeHUD();
@@ -162,5 +183,15 @@ public class Main extends Application {
 			this.hudRender.update(this.board.getCurrentTurn());
 			this.players.stream().forEach(p -> p.nextTurn());
 		}
+	}
+
+	/* GETTER/SETTER **********************************************/
+
+	/**
+	 * Getter on stage.
+	 * @return Primary stage.
+	 */
+	public Stage getStage() {
+		return this.stage;
 	}
 }

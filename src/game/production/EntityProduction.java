@@ -15,7 +15,7 @@ public class EntityProduction extends Production {
 	 * @param castle Castle where the production is made.
 	 * @param type Type of entity to create.
 	 */
-	public EntityProduction(Castle castle, Class<Entity> type) {
+	public EntityProduction(Castle castle, Class<? extends Entity> type) {
 		this.castle = castle;
 		if (Catapult.class.equals(type)) {
 			this.object = new Catapult();
@@ -30,6 +30,7 @@ public class EntityProduction extends Production {
 			this.timer = ENTITY_PIKEMAN_PROD_TIME;
 			this.cost = ENTITY_PIKEMAN_PROD_COST;
 		}
+		System.out.println("[EntityProduction] New " + type.getName() + " asked by " + castle.getDuke().getName());
 	}
 
 	/* METHODS ****************************************************/

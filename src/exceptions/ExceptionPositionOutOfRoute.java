@@ -16,14 +16,13 @@ public class ExceptionPositionOutOfRoute extends Exception {
 	/* CONSTRUCTORS ***********************************************/
 
 	/**
-	 * Construct an exception object and write warning message in System.err.
+	 * Construct an exception object.
 	 * @param route Route involved.
 	 * @param position Position out of the route involved.
 	 */
 	public ExceptionPositionOutOfRoute(ArrayList<Position> route, Position position) {
 		this.route = route;
 		this.position = position;
-		System.err.println(toString());
 	}
 
 	/* METHODS ****************************************************/

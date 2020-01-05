@@ -2,6 +2,7 @@ package game;
 
 import game.castle.Castle;
 import game.duke.Duke;
+import main.Main;
 import player.Player;
 import utils.Position;
 import static utils.Settings.*;
@@ -16,6 +17,7 @@ public class Board {
 
 	private ArrayList<Castle> castles;      /** List of the castles on the board. */
 	private int currentTurn;                /** Current turn of the match. */
+	private Main environment;               /** The environment (application) of the game. */
 	private boolean matchState;             /** State of the match (false = over). */
 	private ArrayList<Player> players;      /** List of the players playing on the board. */
 
@@ -25,7 +27,8 @@ public class Board {
 	 * Construct a board for certain players.
 	 * @param players List of the players playing on the board.
 	 */
-	public Board(ArrayList<Player> players) {
+	public Board(ArrayList<Player> players, Main environment) {
+		this.environment = environment;
 		this.players = players;
 		this.createCastles();
 		this.currentTurn = (BOARD_FIRST_TURN - 1);
@@ -201,6 +204,14 @@ public class Board {
 	 */
 	public int getCurrentTurn() {
 		return this.currentTurn;
+	}
+
+	/**
+	 * Getter on environment.
+	 * @return The environment (application) of the game.
+	 */
+	public Main getEnvironment() {
+		return this.environment;
 	}
 
 	/**

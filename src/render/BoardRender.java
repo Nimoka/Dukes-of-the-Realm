@@ -48,8 +48,9 @@ public class BoardRender extends Render {
 	 * Add an army to render.
 	 * @param army Army to add.
 	 */
-	private void addArmyToRender(Army army) {
+	public void addArmyToRender(Army army) {
 		if (getArmyRenderFromArmy(army) == null) {
+			System.err.println("new army launched to render");
 			ArmyRender armyRender = new ArmyRender(army);
 			this.armyRenders.add(armyRender);
 			this.armiesCanvas.getChildren().add(armyRender.getCanvas());
@@ -60,7 +61,7 @@ public class BoardRender extends Render {
 	 * Add a castle to render.
 	 * @param castle Castle to add.
 	 */
-	private void addCastleToRender(Castle castle) {
+	public void addCastleToRender(Castle castle) {
 		if (getCastleRenderFromCastle(castle) == null) {
 			CastleRender castleRender = new CastleRender(castle, this.environment);
 			this.castleRenders.add(castleRender);

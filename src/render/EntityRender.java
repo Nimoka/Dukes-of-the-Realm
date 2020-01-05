@@ -81,10 +81,12 @@ public class EntityRender extends Render {
 	 * Called at each new turn.
 	 */
 	public void update() {
-		Position displayPosition = this.entity.getPosition().convertBoardToDisplay();
-		displayPosition.translate(Position.random(BOARD_CELL_STYLE_WIDTH, BOARD_CELL_STYLE_HEIGHT));
-		this.entityShape.setX(displayPosition.getX());
-		this.entityShape.setY(displayPosition.getY());
+		if (this.entity.getCurrentState() == EntityState.MOVE) {
+			Position displayPosition = this.entity.getPosition().convertBoardToDisplay();
+			displayPosition.translate(Position.random(BOARD_CELL_STYLE_WIDTH, BOARD_CELL_STYLE_HEIGHT));
+			this.entityShape.setX(displayPosition.getX());
+			this.entityShape.setY(displayPosition.getY());
+		}
 	}
 
 	/* GETTER/SETTER **********************************************/
