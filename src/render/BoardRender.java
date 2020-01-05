@@ -50,7 +50,6 @@ public class BoardRender extends Render {
 	 */
 	public void addArmyToRender(Army army) {
 		if (getArmyRenderFromArmy(army) == null) {
-			System.err.println("new army launched to render");
 			ArmyRender armyRender = new ArmyRender(army);
 			this.armyRenders.add(armyRender);
 			this.armiesCanvas.getChildren().add(armyRender.getCanvas());

@@ -3,7 +3,17 @@ package main;
 import exceptions.ExceptionActionAlreadyLaunched;
 import exceptions.ExceptionDukeNotPlayer;
 import game.Board;
+import game.entity.Catapult;
+import game.entity.Entity;
+import game.entity.Knight;
+import game.entity.Pikeman;
 import game.entity.group.Army;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import player.Baron;
 import player.ComputerPlayer;
 import player.Player;
@@ -16,8 +26,10 @@ import static utils.Settings.*;
 import java.util.ArrayList;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
+import javafx.scene.control.Spinner;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 /**
@@ -54,6 +66,65 @@ public class Main extends Application {
 	 */
 	private void initializeHUD() {
 		this.hudRender = new HUDRender(this);
+	}
+
+	/**
+	 * Initialize the pop-up dialog when launching an action.
+	 * @param dialog Pop-up stage to initialize.
+	 */
+	private void initializePopUpLaunchActionDialog(Stage dialog, CastleRender castleRender) {
+		Spinner catapultSpinner = new Spinner(0, selectedCastleRender.getCastle().getStock().getNbCatapults(), 0, 1);
+		Label catapultLabel = new Label("Catapulte");
+		HBox catapultCanvas = new HBox(catapultLabel, catapultSpinner);
+		catapultCanvas.setSpacing(HUD_STYLE_PADDING.getLeft());
+
+		Spinner knightSpinner = new Spinner(0, selectedCastleRender.getCastle().getStock().getNbKnights(), 0, 1);
+		Label knightLabel = new Label("Chevalier");
+		HBox knightCanvas = new HBox(knightLabel, knightSpinner);
+		knightCanvas.setSpacing(HUD_STYLE_PADDING.getLeft());
+
+		Spinner pikemanSpinner = new Spinner(0, selectedCastleRender.getCastle().getStock().getNbPikemen(), 0, 1);
+		Label pikemanLabel = new Label("Piquier");
+		HBox pikemanCanvas = new HBox(pikemanLabel, pikemanSpinner);
+		pikemanCanvas.setSpacing(HUD_STYLE_PADDING.getLeft());
+
+		Button cancelButton = new Button("Annuler");
+		cancelButton.setCancelButton(true);
+		cancelButton.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				dialog.close();
+			}
+		});
+		Button launchButton = new Button("Lancer");
+		launchButton.setDefaultButton(true);
+		launchButton.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				int nbCatapults = (Integer) catapultSpinner.getValue();
+				int nbKnights = (Integer) knightSpinner.getValue();
+				int nbPikemen = (Integer) pikemanSpinner.getValue();
+				if ((nbCatapults != 0) || (nbKnights != 0) || (nbPikemen != 0)) {
+					try {
+						selectedCastleRender.getCastle().launchNewAction(castleRender.getCastle(), nbCatapults, nbKnights, nbPikemen);
+					} catch (ExceptionDukeNotPlayer e) {
+						e.printStackTrace();
+					} catch (ExceptionActionAlreadyLaunched e) {
+						e.printStackTrace();
+					}
+				}
+				dialog.close();
+			}
+		});
+		HBox buttonsCanvas = new HBox(cancelButton, launchButton);
+		buttonsCanvas.setSpacing(HUD_STYLE_PADDING.getLeft());
+
+		VBox canvas = new VBox(catapultCanvas, knightCanvas, pikemanCanvas, buttonsCanvas);
+		canvas.setPadding(HUD_STYLE_PADDING);
+		canvas.setSpacing(HUD_STYLE_PADDING.getLeft());
+		Scene scene = new Scene(canvas);
+		dialog.setScene(scene);
+		dialog.show();
 	}
 
 	/**
@@ -137,13 +208,11 @@ public class Main extends Application {
 		} else {
 			if (this.selectedCastleRender.getCastle().getDuke() == this.mainPlayer.getDuke()) {
 				if (!this.selectedCastleRender.getCastle().haveAction()) {
-					try {
-						this.selectedCastleRender.getCastle().launchNewAction(castleRender.getCastle(), 2, 2, 2);
-					} catch (ExceptionDukeNotPlayer e) {
-						e.printStackTrace();
-					} catch (ExceptionActionAlreadyLaunched e) {
-						e.printStackTrace();
-					}
+					Stage dialog = new Stage();
+					dialog.setTitle("Nouvelle action");
+					dialog.initModality(Modality.APPLICATION_MODAL);
+					dialog.initOwner(this.stage);
+					initializePopUpLaunchActionDialog(dialog, castleRender);
 				}
 			}
 		}

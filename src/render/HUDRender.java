@@ -173,8 +173,11 @@ public class HUDRender extends Render {
 				dialog.close();
 			}
 		});
+		HBox buttonsCanvas = new HBox(cancelButton, launchButton);
+		buttonsCanvas.setSpacing(HUD_STYLE_PADDING.getLeft());
 
-		VBox canvas = new VBox(pikemanButton, knightButton, catapultButton, levelButton, cancelButton, launchButton);
+
+		VBox canvas = new VBox(pikemanButton, knightButton, catapultButton, levelButton, buttonsCanvas);
 		canvas.setPadding(HUD_STYLE_PADDING);
 		canvas.setSpacing(HUD_STYLE_PADDING.getLeft() / 2);
 		Scene scene = new Scene(canvas);
