@@ -76,7 +76,7 @@ public abstract class Settings {
 	public static double ENTITY_PIKEMAN_STYLE_HEIGHT = BOARD_CELL_STYLE_HEIGHT * .14;   /** Height of a pikeman (in pixels). */
 	public static double ENTITY_PIKEMAN_STYLE_WIDTH = BOARD_CELL_STYLE_WIDTH * .05; /** Width of a pikeman (in pixels). */
 
-	public static double GAME_TURN_DURATION = 1.2;              /** Duration of a turn (in seconds). */
+	public static double GAME_TURN_DURATION = 3;              /** Duration of a turn (in seconds). */
 
 	public static double HUD_STYLE_HEIGHT = 90.;               /** Height of the HUD (in pixels). */
 	public static Insets HUD_STYLE_PADDING = new Insets(15, 15, 15, 15);            /** Padding of the HUD (in pixels). */

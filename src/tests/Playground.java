@@ -15,16 +15,6 @@ public class Playground {
 	/* METHODS ****************************************************/
 
 	/**
-	 * Create a random board and print his informations.
-	 */
-	public static void printBoard() {
-		ArrayList<Player> players = new ArrayList<>();
-		players.add(new ComputerPlayer());
-		Board board = new Board(players, new Main());
-		System.out.println(board.toString());
-	}
-
-	/**
 	 * Print some random names.
 	 * @param nb Number of names to print.
 	 */

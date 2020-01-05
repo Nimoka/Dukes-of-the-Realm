@@ -21,7 +21,6 @@ public class ComputerPlayer extends Player {
 	/* VARIABLES **************************************************/
 
 	private Main environment;               /** The environment (application). */
-	private ArrayList<Castle> castles;      /** List of dukes' castles. */
 
 	/* CONSTRUCTORS ***********************************************/
 
@@ -36,26 +35,14 @@ public class ComputerPlayer extends Player {
 	/* METHODS ****************************************************/
 
 	/**
-	 * Check if duke own new castles.
-	 */
-	private void checkCastles() {
-		for (Castle castle: this.environment.getBoard().getCastles()) {
-			if (castle.getDuke() == this.duke) {
-				if (!castles.contains(castle))
-					castles.add(castle);
-			}
-		}
-	}
-
-	/**
 	 * Launch a new action or production if it can.
 	 * Called at each new turn.
 	 */
 	@Override
 	public void nextTurn() {
-		checkCastles();
-		Random generator = new Random();
-		for (Castle castle: this.castles) {
+		Castle castle = this.environment.getBoard().randomCastle();
+		if (castle.getDuke() == this.duke) {
+			Random generator = new Random();
 			int value = generator.nextInt(100);
 			if (value < 10) {
 				if (!castle.haveAction()) {
