@@ -31,7 +31,7 @@ import utils.Utils;
 public class HUDRender extends Render {
 	/* VARIABLES **************************************************/
 
-	private Main environment;                                   /** The environment (application) of render. */
+	private Main environment;               /** The environment (application) of render. */
 
 	private HBox hboxCanvas;                /** The base canvas of the HUD render. */
 
@@ -43,15 +43,16 @@ public class HUDRender extends Render {
 	private Label treasureLabel;            /** Label of the treasure. */
 	private Label turnCounter;              /** Label of the turn counter. */
 
-	private boolean enableActions;
-	private Button clearProductionQueueButton;
-	private Button launchProductionButton;
-	private Button removeLastProductionButton;
+	private boolean enableActions;                              /** Actions are enabled. */
+	private Button clearProductionQueueButton;                  /** Button of the "clear production queue" action. */
+	private Button launchProductionButton;                      /** Button of the "launch production" action. */
+	private Button removeLastProductionButton;                  /** Button of the "remove last production" action. */
 
 	/* CONSTRUCTORS ***********************************************/
 
 	/**
 	 * Construct a new HUD render.
+	 * @param environment The environment (application) of render.
 	 */
 	public HUDRender(Main environment) {
 		this.environment = environment;

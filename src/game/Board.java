@@ -26,6 +26,7 @@ public class Board {
 	/**
 	 * Construct a board for certain players.
 	 * @param players List of the players playing on the board.
+	 * @param environment The environment (application) of render.
 	 */
 	public Board(ArrayList<Player> players, Main environment) {
 		this.environment = environment;
