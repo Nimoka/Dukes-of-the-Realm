@@ -25,6 +25,7 @@ public class ComputerPlayer extends Player {
 
 	/**
 	 * Construct a computer player.
+	 * @param environment The environment (application).
 	 */
 	public ComputerPlayer(Main environment) {
 		this.environment = environment;

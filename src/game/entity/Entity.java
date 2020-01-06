@@ -84,10 +84,14 @@ public abstract class Entity implements Serializable {
 					this.currentState = EntityState.ATTACK;
 			}
 		} else if (this.currentState == EntityState.ATTACK) {
-			this.currentAction.getTarget().receiveAttack();
-			this.pointAttack--;
-			if (this.pointAttack <= 0)
-				this.currentState = EntityState.DIE;
+			if (this.currentAction.getTarget().getDuke() == this.currentAction.getSource().getDuke()) {
+				joinCastleStock(this.currentAction.getTarget());
+			} else {
+				this.currentAction.getTarget().receiveAttack();
+				this.pointAttack--;
+				if (this.pointAttack <= 0)
+					this.currentState = EntityState.DIE;
+			}
 		}
 	}
 
