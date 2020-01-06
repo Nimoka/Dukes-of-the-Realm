@@ -7,13 +7,14 @@ import player.Player;
 import utils.Position;
 import static utils.Settings.*;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Random;
 
 /**
  * A board where all players are playing, with castles and armies.
  */
-public class Board {
+public class Board implements Serializable {
 	/* VARIABLES **************************************************/
 
 	private ArrayList<Castle> castles;      /** List of the castles on the board. */

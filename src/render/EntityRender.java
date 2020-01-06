@@ -2,14 +2,14 @@ package render;
 
 import game.entity.*;
 import static utils.Settings.*;
+import utils.Position;
 
 import javafx.scene.shape.Rectangle;
-import utils.Position;
 
 /**
  * A render of an entity.
  */
-public class EntityRender extends Render {
+public class EntityRender extends Render  {
 	/* VARIABLES **************************************************/
 
 	private Entity entity;                  /** The entity to render. */

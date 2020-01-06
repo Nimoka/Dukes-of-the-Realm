@@ -3,12 +3,14 @@ package render;
 import exceptions.ExceptionDukeNotPlayer;
 import exceptions.ExceptionEmptyProductionQueue;
 import game.castle.Castle;
-import static utils.Settings.*;
-
 import game.entity.Catapult;
 import game.entity.Entity;
 import game.entity.Knight;
 import game.entity.Pikeman;
+import main.Main;
+import static utils.Settings.*;
+import utils.Utils;
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
@@ -19,11 +21,8 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import main.Main;
-import utils.Utils;
 
 /**
  * A HUD render.

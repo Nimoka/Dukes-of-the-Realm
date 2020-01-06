@@ -4,10 +4,12 @@ import exceptions.ExceptionDukeNotPlayer;
 import exceptions.ExceptionEmptyProductionQueue;
 import game.castle.Castle;
 
+import java.io.Serializable;
+
 /**
  * A production made by a castle.
  */
-public abstract class Production {
+public abstract class Production implements Serializable {
 	/* VARIABLES **************************************************/
 
 	protected Castle castle;                /** Castle where the production is made. */

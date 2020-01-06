@@ -3,15 +3,12 @@ package main;
 import exceptions.ExceptionActionAlreadyLaunched;
 import exceptions.ExceptionDukeNotPlayer;
 import game.Board;
-import game.entity.Catapult;
-import game.entity.Entity;
-import game.entity.Knight;
-import game.entity.Pikeman;
 import game.entity.group.Army;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import player.Baron;
@@ -21,6 +18,7 @@ import player.UserPlayer;
 import render.BoardRender;
 import render.CastleRender;
 import render.HUDRender;
+
 import static utils.Settings.*;
 
 import java.io.*;
@@ -43,6 +41,7 @@ public class Main extends Application {
 	private Scene scene;                                /** Scene of the stage. */
 	private Stage stage;                                /** Primary stage. */
 	private AnimationTimer timer;                       /** Timer of the game. */
+	private boolean timerState;                         /** State of the timer (true = running). */
 
 	private Board board;                                /** Board of the game. */
 	private BoardRender boardRender;                    /** Render of the game's board. */
@@ -167,6 +166,20 @@ public class Main extends Application {
 			}
 		};
 		timer.start();
+		timerState = true;
+	}
+
+	private void initializeKeyboardInputs() {
+		this.scene.addEventHandler(KeyEvent.KEY_PRESSED, (key) -> {
+			switch (key.getCode()) {
+				case S:
+					saveGame();
+					break;
+				case SPACE:
+					pauseGame();
+					break;
+			}
+		});
 	}
 
 	/**
@@ -194,6 +207,7 @@ public class Main extends Application {
 			stage.setResizable(false);
 		}
 		initializeScene();
+		initializeKeyboardInputs();
 		stage.setScene(this.scene);
 		stage.show();
 	}
@@ -223,6 +237,18 @@ public class Main extends Application {
 			}
 		} catch (ClassNotFoundException | IOException e) {
 			e.printStackTrace();
+		}
+	}
+
+	private void pauseGame() {
+		if (this.board.getMatchState()) {
+			if (this.timerState == false) {
+				this.timer.start();
+				this.timerState = true;
+			} else {
+				this.timer.stop();
+				this.timerState = false;
+			}
 		}
 	}
 

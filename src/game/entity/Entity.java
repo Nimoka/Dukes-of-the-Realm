@@ -6,10 +6,12 @@ import game.action.Action;
 import utils.NameGenerator;
 import utils.Position;
 
+import java.io.Serializable;
+
 /**
  * An entity.
  */
-public abstract class Entity {
+public abstract class Entity implements Serializable {
 	/* VARIABLES **************************************************/
 
 	protected Action currentAction;         /** Current action where entity is involved. */

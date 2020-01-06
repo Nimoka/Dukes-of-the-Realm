@@ -2,10 +2,12 @@ package player;
 
 import game.duke.Duke;
 
+import java.io.Serializable;
+
 /**
  * A player of the game.
  */
-public abstract class Player {
+public abstract class Player implements Serializable {
 	/* VARIABLES **************************************************/
 
 	protected Duke duke;                    /** The duke that the player plays. */

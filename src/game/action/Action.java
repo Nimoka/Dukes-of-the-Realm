@@ -9,12 +9,13 @@ import game.entity.Entity;
 import utils.Position;
 import static utils.Settings.*;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * Action commanded by a duke, from a source castle to a target. An army of entities takes a route, then attack or join the target castle.
  */
-public class Action {
+public class Action implements Serializable {
 	/* VARIABLES **************************************************/
 
 	private Army army;                      /** Army involved in the action. */

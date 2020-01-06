@@ -5,12 +5,13 @@ import game.entity.Entity;
 import game.entity.Knight;
 import game.entity.Pikeman;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * Group of entities.
  */
-public abstract class EntityGroup {
+public abstract class EntityGroup implements Serializable {
 	/* VARIABLES **************************************************/
 
 	protected ArrayList<Catapult> listCatapults;    /** List of catapults. */

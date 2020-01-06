@@ -1,11 +1,12 @@
 package utils;
 
+import java.io.Serializable;
 import java.util.Random;
 
 /**
  * A 2D position.
  */
-public class Position {
+public class Position implements Serializable {
 	/* VARIABLES **************************************************/
 
 	protected int x = 0;                    /** X value of the position. */

@@ -2,11 +2,13 @@ package game.duke;
 
 import utils.NameGenerator;
 
+import java.io.Serializable;
+
 /**
  * Duke of board's castles.
  * Corresponds to a player on the board.
  */
-public class Duke {
+public class Duke implements Serializable {
 	/* VARIABLES **************************************************/
 
 	private String name;                    /** Name of the duke. */

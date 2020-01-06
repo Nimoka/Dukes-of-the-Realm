@@ -16,12 +16,13 @@ import game.entity.group.Stock;
 import utils.Position;
 import static utils.Settings.*;
 
+import java.io.Serializable;
 import java.util.*;
 
 /**
  * Castle on the board, owned by a duke.
  */
-public class Castle {
+public class Castle implements Serializable {
 	/* VARIABLES **************************************************/
 
 	private Board board;                    /** Board where the castle is. */

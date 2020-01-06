@@ -2,7 +2,6 @@ package utils;
 
 import game.castle.Castle;
 import game.duke.DukeType;
-import static utils.Utils.*;
 import static utils.Utils.interpretNumber;
 
 import javafx.geometry.Insets;

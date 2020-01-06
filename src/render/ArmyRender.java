@@ -3,8 +3,8 @@ package render;
 import game.entity.Entity;
 import game.entity.group.Army;
 
+import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Iterator;
 
 /**
  * A render of an army.
