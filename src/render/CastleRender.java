@@ -73,7 +73,10 @@ public class CastleRender extends Render {
 		this.castleShape.setWidth(CASTLE_STYLE_CASTLE_WIDTH);
 		this.castleShape.setStroke(CASTLE_STYLE_STROKE_COLOR);
 		this.castleShape.setStrokeWidth(CASTLE_STYLE_STROKE_WIDTH);
-		showNotSelected();
+		if (this.castle.getDuke() == this.environment.getMainPlayer().getDuke())
+			this.castleShape.setFill(CASTLE_STYLE_FILL_COLOR_MAIN);
+		else
+			this.castleShape.setFill(CASTLE_STYLE_FILL_COLOR);
 		this.canvas.getChildren().add(this.castleShape);
 	}
 
@@ -121,17 +124,16 @@ public class CastleRender extends Render {
 	 * Show the render as not selected.
 	 */
 	private void showNotSelected() {
-		if (this.castle.getDuke() == this.environment.getMainPlayer().getDuke())
-			this.castleShape.setFill(Color.BLUE);
-		else
-			this.castleShape.setFill(CASTLE_STYLE_FILL_COLOR);
+		this.castleShape.setStroke(CASTLE_STYLE_STROKE_COLOR);
+		this.castleDoorShape.setFill(CASTLE_STYLE_STROKE_COLOR);
 	}
 
 	/**
 	 * Show the render as selected.
 	 */
 	private void showSelected() {
-		this.castleShape.setFill(CASTLE_STYLE_SELECTED_FILL_COLOR);
+		this.castleShape.setStroke(CASTLE_STYLE_SELECTED_STROKE_COLOR);
+		this.castleDoorShape.setFill(CASTLE_STYLE_SELECTED_STROKE_COLOR);
 	}
 
 	/**

@@ -2,6 +2,7 @@ package render;
 
 import game.entity.Entity;
 import game.entity.group.Army;
+import javafx.event.EventDispatcher;
 
 import java.io.Serializable;
 import java.util.ArrayList;

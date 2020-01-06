@@ -10,9 +10,6 @@ import javafx.scene.paint.Color;
 public abstract class Settings {
 	/* CONSTANTS **************************************************/
 
-	// change values to make the game playable
-	// have smaller cells to make the game smooth
-
 	public static double BOARD_CELL_STYLE_HEIGHT = 24;          /** Display height of a board's cell (in pixels). */
 	public static double BOARD_CELL_STYLE_WIDTH = 24;           /** Display width of a board's cell (in pixels). */
 	public static int BOARD_DIM_HEIGHT = 32;                    /** Height of the board (in cells). */
@@ -40,19 +37,21 @@ public abstract class Settings {
 	public static int CASTLE_DEFAULT_NB_PIKEMAN = 5;            /** Default number of pikeman of a castle. */
 	public static int CASTLE_DISTANCE = 4;                      /** Minimum distance between two castles. */
 	public static Color CASTLE_STYLE_FILL_COLOR = Color.rgb(150, 150, 150);         /** Color of a castle. */
+	public static Color CASTLE_STYLE_FILL_COLOR_MAIN = Color.rgb(200, 200, 200);    /** Color of a main player's castle. */
 	public static Color CASTLE_STYLE_STROKE_COLOR = Color.rgb(120, 120, 120);       /** Color of the wall of a castle. */
 	public static double CASTLE_STYLE_STROKE_WIDTH = 4.;        /** Width of the wall of a castle (in pixels). */
 	public static double CASTLE_STYLE_CASTLE_HEIGHT = BOARD_CELL_STYLE_HEIGHT * .8; /** Height of a castle (in pixels). */
 	public static double CASTLE_STYLE_CASTLE_WIDTH = BOARD_CELL_STYLE_WIDTH * .8;   /** Width of a castle (in pixels). */
 	public static double CASTLE_STYLE_DOOR_HEIGHT = CASTLE_STYLE_STROKE_WIDTH * 2;  /** Height of the door of a castle (in pixels). */
 	public static double CASTLE_STYLE_DOOR_WIDTH = BOARD_CELL_STYLE_WIDTH * .4;     /** Width of the door of a castle (in pixels). */
-	public static Color CASTLE_STYLE_SELECTED_FILL_COLOR = Color.rgb(255, 255, 255);    /** Color of a selected castle. */
+	public static Color CASTLE_STYLE_SELECTED_STROKE_COLOR = Color.rgb(0, 140, 255);    /** Color of a selected castle. */
 
 	public static int ENTITY_CATAPULT_ATTACK = 10;              /** Attack points of a catapult. */
 	public static int ENTITY_CATAPULT_HEALTH = 5;               /** Health points of a catapult. */
 	public static int ENTITY_CATAPULT_PROD_COST = 1000;         /** Production cost of a catapult (in florins). */
 	public static int ENTITY_CATAPULT_PROD_TIME = 50;           /** Production time of a catapult (in turns). */
 	public static int ENTITY_CATAPULT_SPEED = 1;                /** Speed of a catapult (in cells/turn). */
+	public static String ENTITY_CATAPULT_TITLE = "Onagre";      /** Name of the catapult entity. */
 	public static Color ENTITY_CATAPULT_STYLE_COLOR = Color.rgb(100, 50, 20);       /** Color of a catapult. */
 	public static double ENTITY_CATAPULT_STYLE_HEIGHT = BOARD_CELL_STYLE_HEIGHT * .15;  /** Height of a catapult (in pixels). */
 	public static double ENTITY_CATAPULT_STYLE_WIDTH = BOARD_CELL_STYLE_WIDTH * .3; /** Width of a catapult (in pixels). */
@@ -62,6 +61,7 @@ public abstract class Settings {
 	public static int ENTITY_KNIGHT_PROD_COST = 500;            /** Production cost of a knight (in florins). */
 	public static int ENTITY_KNIGHT_PROD_TIME = 20;             /** Production time of a knight (in turns). */
 	public static int ENTITY_KNIGHT_SPEED = 6;                  /** Speed of a knight (in cells/turn). */
+	public static String ENTITY_KNIGHT_TITLE = "Chevalier";     /** Name of the knight entity. */
 	public static Color ENTITY_KNIGHT_STYLE_COLOR = Color.rgb(170, 170, 190);       /** Color of a kngiht. */
 	public static double ENTITY_KNIGHT_STYLE_HEIGHT = BOARD_CELL_STYLE_HEIGHT * .15;    /** Height of a knight (in pixels). */
 	public static double ENTITY_KNIGHT_STYLE_WIDTH = BOARD_CELL_STYLE_WIDTH * .1;  /** Width of a knight (in pixels). */
@@ -71,14 +71,27 @@ public abstract class Settings {
 	public static int ENTITY_PIKEMAN_PROD_COST = 100;           /** Production cost of a pikeman (in florins). */
 	public static int ENTITY_PIKEMAN_PROD_TIME = 5;             /** Production time of a pikeman (in turns). */
 	public static int ENTITY_PIKEMAN_SPEED = 2;                 /** Speed of a pikeman (in cells/turn). */
+	public static String ENTITY_PIKEMAN_TITLE = "Piquier";      /** Name of the pikeman title. */
 	public static Color ENTITY_PIKEMAN_STYLE_COLOR = Color.rgb(180, 40, 0);         /** Color of a pikeman. */
 	public static double ENTITY_PIKEMAN_STYLE_HEIGHT = BOARD_CELL_STYLE_HEIGHT * .15;   /** Height of a pikeman (in pixels). */
 	public static double ENTITY_PIKEMAN_STYLE_WIDTH = BOARD_CELL_STYLE_WIDTH * .1; /** Width of a pikeman (in pixels). */
 
 	public static double GAME_TURN_DURATION = 1.2;              /** Duration of a turn (in seconds). */
+	public static String GAME_TURN_TITLE = "tour";              /** Title of a turn. */
+	public static String GAME_FLORIN_TITLE = "florin";          /** Title of a florin. */
 
 	public static double HUD_STYLE_HEIGHT = 90.;               /** Height of the HUD (in pixels). */
 	public static Insets HUD_STYLE_PADDING = new Insets(15, 15, 15, 15);            /** Padding of the HUD (in pixels). */
+	public static String HUD_TURN_COUNTER_STYLE_TEXT = "-fx-font-size: 2em;";       /** Style of the text of the turn counter. */
+	public static double HUD_TURN_COUNTER_STYLE_MIN_WIDTH = 120.;                   /** Minimum width of the turn counter label (in pixels). */
+
+	public static String POPUP_BUTTON_CANCEL_TEXT = "Annuler";                      /** Text of the cancel button. */
+	public static String POPUP_BUTTON_LAUNCH_TEXT = "Lancer";                       /** Text of the launch button. */
+	public static String POPUP_LAUNCH_ACTION_TITLE = "Nouvelle action";             /** Title of the launch action pop-up. */
+	public static String POPUP_LAUNCH_PRODUCTION_TITLE = "Nouvelle production";     /** Title of the launch production pop-up. */
+	public static String POPUP_LAUNCH_PRODUCTION_CATAPULT_TEXT = ENTITY_CATAPULT_TITLE + " (+ " + Utils.interpretNumber(ENTITY_CATAPULT_PROD_COST, GAME_FLORIN_TITLE) + ", " + Utils.interpretNumber(ENTITY_CATAPULT_PROD_TIME, GAME_TURN_TITLE) + ")"; /** Text for the production of new catapult radio button. */
+	public static String POPUP_LAUNCH_PRODUCTION_KNIGHT_TEXT = ENTITY_KNIGHT_TITLE + " (+ " + Utils.interpretNumber(ENTITY_KNIGHT_PROD_COST, GAME_FLORIN_TITLE) + ", " + Utils.interpretNumber(ENTITY_KNIGHT_PROD_TIME, GAME_TURN_TITLE) + ")"; /** Text for the production of new knight radio button. */
+	public static String POPUP_LAUNCH_PRODUCTION_PIKEMAN_TEXT = ENTITY_PIKEMAN_TITLE + " (+ " + Utils.interpretNumber(ENTITY_PIKEMAN_PROD_COST, GAME_FLORIN_TITLE) + ", " + Utils.interpretNumber(ENTITY_PIKEMAN_PROD_TIME, GAME_TURN_TITLE) + ")"; /** Text for the production of new pikeman radio button. */
 
 	public static double WINDOW_DEFAULT_HEIGHT = 800;           /** Default height of the window (in pixels). */
 	public static double WINDOW_DEFAULT_WIDTH = 1280;           /** Default width of the window (in pixels). */
@@ -142,7 +155,7 @@ public abstract class Settings {
 	 * @return Text for the label.
 	 */
 	public static String HUD_LABEL_CASTLE_LEVEL(Castle castle) {
-		return "Niveau " + castle.getLevel() + " (+ " + interpretNumber(CASTLE_LEVEL_GAIN(castle.getLevel(), castle.getDuke().getType()), "florin") +  "/tour)";
+		return "Niveau " + castle.getLevel() + " (+ " + interpretNumber(CASTLE_LEVEL_GAIN(castle.getLevel(), castle.getDuke().getType()), GAME_FLORIN_TITLE) +  "/" + GAME_TURN_TITLE + ")";
 	}
 
 	/**
@@ -151,7 +164,7 @@ public abstract class Settings {
 	 * @return Text for the label.
 	 */
 	public static String HUD_LABEL_CASTLE_STOCK(Castle castle) {
-		return interpretNumber(castle.getStock().getNbPikemen(), "piquier") + '\n' + interpretNumber(castle.getStock().getNbKnights(), "chevalier") + '\n' + interpretNumber(castle.getStock().getNbCatapults(), "catapulte");
+		return interpretNumber(castle.getStock().getNbPikemen(), ENTITY_PIKEMAN_TITLE) + '\n' + interpretNumber(castle.getStock().getNbKnights(), ENTITY_KNIGHT_TITLE) + '\n' + interpretNumber(castle.getStock().getNbCatapults(), ENTITY_CATAPULT_TITLE);
 	}
 
 	/**
@@ -160,7 +173,7 @@ public abstract class Settings {
 	 * @return Text for the label.
 	 */
 	public static String HUD_LABEL_CASTLE_TREASURE(Castle castle) {
-		return interpretNumber(castle.getTreasure(), "florin");
+		return interpretNumber(castle.getTreasure(), GAME_FLORIN_TITLE);
 	}
 
 	/**
@@ -170,5 +183,14 @@ public abstract class Settings {
 	 */
 	public static String HUD_LABEL_TURN(int currentTurn) {
 		return "Tour " + currentTurn;
+	}
+
+	/**
+	 * Text for the production of new level radio button.
+	 * @param castle Castle of production.
+	 * @return Text for the radio button.
+	 */
+	public static String POPUP_LAUNCH_PRODUCTION_LEVEL_TEXT(Castle castle) {
+		return "Niveau supérieur (+ " + Utils.interpretNumber(CASTLE_LEVEL_PROD_COST(castle.getLevel()), GAME_FLORIN_TITLE) + ", " + Utils.interpretNumber(CASTLE_LEVEL_PROD_TIME(castle.getLevel()), GAME_TURN_TITLE) + ")";
 	}
 }

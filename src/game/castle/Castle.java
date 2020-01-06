@@ -198,6 +198,7 @@ public class Castle implements Serializable {
 	 * @param newDuke New duke of the castle.
 	 */
 	public void receiveConquer(Duke newDuke) {
+		System.err.println("[Castle] Conquered");
 		this.duke = newDuke;
 		this.productions.clear();
 	}

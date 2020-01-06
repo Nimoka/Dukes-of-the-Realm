@@ -85,21 +85,21 @@ public class Main extends Application {
 	 */
 	private void initializePopUpLaunchActionDialog(Stage dialog, CastleRender castleRender) {
 		Spinner catapultSpinner = new Spinner(0, selectedCastleRender.getCastle().getStock().getNbCatapults(), 0, 1);
-		Label catapultLabel = new Label("Catapulte");
+		Label catapultLabel = new Label(ENTITY_CATAPULT_TITLE);
 		HBox catapultCanvas = new HBox(catapultLabel, catapultSpinner);
 		catapultCanvas.setSpacing(HUD_STYLE_PADDING.getLeft());
 
 		Spinner knightSpinner = new Spinner(0, selectedCastleRender.getCastle().getStock().getNbKnights(), 0, 1);
-		Label knightLabel = new Label("Chevalier");
+		Label knightLabel = new Label(ENTITY_KNIGHT_TITLE);
 		HBox knightCanvas = new HBox(knightLabel, knightSpinner);
 		knightCanvas.setSpacing(HUD_STYLE_PADDING.getLeft());
 
 		Spinner pikemanSpinner = new Spinner(0, selectedCastleRender.getCastle().getStock().getNbPikemen(), 0, 1);
-		Label pikemanLabel = new Label("Piquier");
+		Label pikemanLabel = new Label(ENTITY_PIKEMAN_TITLE);
 		HBox pikemanCanvas = new HBox(pikemanLabel, pikemanSpinner);
 		pikemanCanvas.setSpacing(HUD_STYLE_PADDING.getLeft());
 
-		Button cancelButton = new Button("Annuler");
+		Button cancelButton = new Button(POPUP_BUTTON_CANCEL_TEXT);
 		cancelButton.setCancelButton(true);
 		cancelButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
@@ -107,7 +107,7 @@ public class Main extends Application {
 				dialog.close();
 			}
 		});
-		Button launchButton = new Button("Lancer");
+		Button launchButton = new Button(POPUP_BUTTON_LAUNCH_TEXT);
 		launchButton.setDefaultButton(true);
 		launchButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
@@ -130,7 +130,7 @@ public class Main extends Application {
 		HBox buttonsCanvas = new HBox(cancelButton, launchButton);
 		buttonsCanvas.setSpacing(HUD_STYLE_PADDING.getLeft());
 
-		VBox canvas = new VBox(catapultCanvas, knightCanvas, pikemanCanvas, buttonsCanvas);
+		VBox canvas = new VBox(pikemanCanvas, knightCanvas, catapultCanvas, buttonsCanvas);
 		canvas.setPadding(HUD_STYLE_PADDING);
 		canvas.setSpacing(HUD_STYLE_PADDING.getLeft());
 		Scene scene = new Scene(canvas);
@@ -172,9 +172,9 @@ public class Main extends Application {
 	private void initializeKeyboardInputs() {
 		this.scene.addEventHandler(KeyEvent.KEY_PRESSED, (key) -> {
 			switch (key.getCode()) {
-				case S:
-					saveGame();
-					break;
+//				case S:
+//					saveGame();
+//					break;
 				case SPACE:
 					pauseGame();
 					break;
@@ -220,25 +220,25 @@ public class Main extends Application {
 		this.boardRender.addArmyToRender(army);
 	}
 
-	/**
-	 * Load a board save file to continue a match.
-	 */
-	private void loadGame() {
-		try {
-			FileInputStream fis = new FileInputStream("Board-save.tmp");
-			ObjectInputStream ois = new ObjectInputStream(fis);
-			this.players = (ArrayList<Player>) ois.readObject();
-			this.board = (Board) ois.readObject();
-			for (Player player: this.players) {
-				if (player.getClass() == UserPlayer.class) {
-					this.mainPlayer = player;
-					break;
-				}
-			}
-		} catch (ClassNotFoundException | IOException e) {
-			e.printStackTrace();
-		}
-	}
+//	/**
+//	 * Load a board save file to continue a match.
+//	 */
+//	private void loadGame() {
+//		try {
+//			FileInputStream fis = new FileInputStream("Board-save.tmp");
+//			ObjectInputStream ois = new ObjectInputStream(fis);
+//			this.players = (ArrayList<Player>) ois.readObject();
+//			this.board = (Board) ois.readObject();
+//			for (Player player: this.players) {
+//				if (player.getClass() == UserPlayer.class) {
+//					this.mainPlayer = player;
+//					break;
+//				}
+//			}
+//		} catch (ClassNotFoundException | IOException e) {
+//			e.printStackTrace();
+//		}
+//	}
 
 	private void pauseGame() {
 		if (this.board.getMatchState()) {
@@ -252,19 +252,19 @@ public class Main extends Application {
 		}
 	}
 
-	/**
-	 * Save the board in a board save file to continue the match later.
-	 */
-	private void saveGame() {
-		try {
-			FileOutputStream fos = new FileOutputStream("Board-save.tmp");
-			ObjectOutputStream oos = new ObjectOutputStream(fos);
-			oos.writeObject(this.players);
-			oos.writeObject(this.board);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
+//	/**
+//	 * Save the board in a board save file to continue the match later.
+//	 */
+//	private void saveGame() {
+//		try {
+//			FileOutputStream fos = new FileOutputStream("Board-save.tmp");
+//			ObjectOutputStream oos = new ObjectOutputStream(fos);
+//			oos.writeObject(this.players);
+//			oos.writeObject(this.board);
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+//	}
 
 	/**
 	 * Select a castle on the render.
@@ -285,7 +285,7 @@ public class Main extends Application {
 			if (this.selectedCastleRender.getCastle().getDuke() == this.mainPlayer.getDuke()) {
 				if (!this.selectedCastleRender.getCastle().haveAction()) {
 					Stage dialog = new Stage();
-					dialog.setTitle("Nouvelle action");
+					dialog.setTitle(POPUP_LAUNCH_ACTION_TITLE);
 					dialog.initModality(Modality.APPLICATION_MODAL);
 					dialog.initOwner(this.stage);
 					initializePopUpLaunchActionDialog(dialog, castleRender);
@@ -310,10 +310,6 @@ public class Main extends Application {
 		initializeTimer();
 		this.rootGroup.getChildren().add(this.boardRender.getCanvas());
 		this.rootGroup.getChildren().add(this.hudRender.getCanvas());
-
-		// add actions (hud: add/remove production, on-click x2: send entities from first to second)
-		// add pause (space bar)
-		// check user interactions
 	}
 
 	/**

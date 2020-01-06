@@ -118,23 +118,23 @@ public class HUDRender extends Render {
 	private void initializePopUpLaunchProductionDialog(Stage dialog) {
 		ToggleGroup typeGroup = new ToggleGroup();
 
-		RadioButton pikemanButton = new RadioButton("Piquier (+ " + Utils.interpretNumber(ENTITY_PIKEMAN_PROD_COST, "florin") + ", " + Utils.interpretNumber(ENTITY_PIKEMAN_PROD_TIME, "tour") + ")");
+		RadioButton pikemanButton = new RadioButton(POPUP_LAUNCH_PRODUCTION_PIKEMAN_TEXT);
 		pikemanButton.setToggleGroup(typeGroup);
 		pikemanButton.setDisable(this.currentCastle.getTreasure() < ENTITY_PIKEMAN_PROD_COST);
 
-		RadioButton knightButton = new RadioButton("Chevalier (+ " + Utils.interpretNumber(ENTITY_KNIGHT_PROD_COST, "florin") + ", " + Utils.interpretNumber(ENTITY_KNIGHT_PROD_TIME, "tour") + ")");
+		RadioButton knightButton = new RadioButton(POPUP_LAUNCH_PRODUCTION_KNIGHT_TEXT);
 		knightButton.setToggleGroup(typeGroup);
 		knightButton.setDisable(this.currentCastle.getTreasure() < ENTITY_KNIGHT_PROD_COST);
 
-		RadioButton catapultButton = new RadioButton("Catapulte (+ " + Utils.interpretNumber(ENTITY_CATAPULT_PROD_COST, "florin") + ", " + Utils.interpretNumber(ENTITY_CATAPULT_PROD_TIME, "tour") + ")");
+		RadioButton catapultButton = new RadioButton(POPUP_LAUNCH_PRODUCTION_CATAPULT_TEXT);
 		catapultButton.setToggleGroup(typeGroup);
 		catapultButton.setDisable(this.currentCastle.getTreasure() < ENTITY_CATAPULT_PROD_COST);
 
-		RadioButton levelButton = new RadioButton("Niveau supérieur (+ " + Utils.interpretNumber(CASTLE_LEVEL_PROD_COST(this.currentCastle.getLevel()), "florin") + ", " + Utils.interpretNumber(CASTLE_LEVEL_PROD_TIME(this.currentCastle.getLevel()), "tour") + ")");
+		RadioButton levelButton = new RadioButton(POPUP_LAUNCH_PRODUCTION_LEVEL_TEXT(this.currentCastle));
 		levelButton.setToggleGroup(typeGroup);
 		levelButton.setDisable(this.currentCastle.getTreasure() < CASTLE_LEVEL_PROD_COST(this.currentCastle.getLevel()));
 
-		Button cancelButton = new Button("Annuler");
+		Button cancelButton = new Button(POPUP_BUTTON_CANCEL_TEXT);
 		cancelButton.setCancelButton(true);
 		cancelButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
@@ -142,7 +142,8 @@ public class HUDRender extends Render {
 				dialog.close();
 			}
 		});
-		Button launchButton = new Button("Lancer");
+
+		Button launchButton = new Button(POPUP_BUTTON_LAUNCH_TEXT);
 		launchButton.setDefaultButton(true);
 		launchButton.setDisable(pikemanButton.isDisable() && knightButton.isDisable() && catapultButton.isDisable() && levelButton.isDisable());
 		launchButton.setOnAction(new EventHandler<ActionEvent>() {
@@ -173,9 +174,9 @@ public class HUDRender extends Render {
 				dialog.close();
 			}
 		});
+
 		HBox buttonsCanvas = new HBox(cancelButton, launchButton);
 		buttonsCanvas.setSpacing(HUD_STYLE_PADDING.getLeft());
-
 
 		VBox canvas = new VBox(pikemanButton, knightButton, catapultButton, levelButton, buttonsCanvas);
 		canvas.setPadding(HUD_STYLE_PADDING);
@@ -190,8 +191,8 @@ public class HUDRender extends Render {
 	 */
 	private void initializeTurnCounterBox() {
 		this.turnCounter = new Label(String.valueOf(BOARD_FIRST_TURN));
-		this.turnCounter.setStyle("-fx-font-size: 2em;");
-		this.turnCounter.setMinWidth(100);
+		this.turnCounter.setStyle(HUD_TURN_COUNTER_STYLE_TEXT);
+		this.turnCounter.setMinWidth(HUD_TURN_COUNTER_STYLE_MIN_WIDTH);
 		this.hboxCanvas.getChildren().add(this.turnCounter);
 	}
 
@@ -221,7 +222,7 @@ public class HUDRender extends Render {
 			@Override
 			public void handle(ActionEvent event) {
 				final Stage dialog = new Stage();
-				dialog.setTitle("Nouvelle production");
+				dialog.setTitle(POPUP_LAUNCH_PRODUCTION_TITLE);
 				dialog.initModality(Modality.APPLICATION_MODAL);
 				dialog.initOwner(environment.getStage());
 				initializePopUpLaunchProductionDialog(dialog);
@@ -242,7 +243,7 @@ public class HUDRender extends Render {
 			}
 		});
 
-		this.clearProductionQueueButton = new Button("Production --");
+		this.clearProductionQueueButton = new Button("Production C");
 		this.clearProductionQueueButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
