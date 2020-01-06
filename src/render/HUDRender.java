@@ -191,7 +191,8 @@ public class HUDRender extends Render {
 	 */
 	private void initializeTurnCounterBox() {
 		this.turnCounter = new Label(String.valueOf(BOARD_FIRST_TURN));
-		this.turnCounter.setMinWidth(80);
+		this.turnCounter.setStyle("-fx-font-size: 2em;");
+		this.turnCounter.setMinWidth(100);
 		this.hboxCanvas.getChildren().add(this.turnCounter);
 	}
 
@@ -273,6 +274,20 @@ public class HUDRender extends Render {
 			else
 				disableCastleActionsBox();
 		}
+	}
+
+	/**
+	 * Show the end of the game when the main player loses.
+	 */
+	public void showEndLose() {
+		this.turnCounter.setText("Perdu.");
+	}
+
+	/**
+	 * Show the end of the game when the main player wins.
+	 */
+	public void showEndWin() {
+		this.turnCounter.setText("Gagné !");
 	}
 
 	/**

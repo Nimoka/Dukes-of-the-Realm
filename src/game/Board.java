@@ -66,15 +66,29 @@ public class Board {
 	}
 
 	/**
-	 * Check if the match is over.
+	 * Check if the match is over (all castles are owned by the same duke, or the main player don't have any castle).
 	 */
 	public void checkMatchState() {
+		boolean result = true;
 		Duke duke = this.castles.get(0).getDuke();
 		for (Castle castle: this.castles) {
-			if (duke != castle.getDuke())
-				return;
+			if (duke != castle.getDuke()) {
+				result = true;
+				break;
+			}
+			result = false;
 		}
-		this.matchState = false;
+		if (result) {
+			result = false;
+			duke = this.environment.getMainPlayer().getDuke();
+			for (Castle castle: this.castles) {
+				if (duke == castle.getDuke()) {
+					result = true;
+					break;
+				}
+			}
+		}
+		this.matchState = result;
 	}
 
 	/**

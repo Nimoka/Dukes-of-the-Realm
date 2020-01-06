@@ -23,6 +23,7 @@ import render.CastleRender;
 import render.HUDRender;
 import static utils.Settings.*;
 
+import java.io.*;
 import java.util.ArrayList;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
@@ -59,6 +60,17 @@ public class Main extends Application {
 	private void createBoard() {
 		this.board = new Board(this.players, this);
 		this.boardRender = new BoardRender(this.board, this);
+	}
+
+	/**
+	 * Stop the timer and show the end game message.
+	 */
+	private void endGame() {
+		this.timer.stop();
+		if (this.board.getWinner() == this.mainPlayer.getDuke())
+			this.hudRender.showEndWin();
+		else
+			this.hudRender.showEndLose();
 	}
 
 	/**
@@ -186,8 +198,46 @@ public class Main extends Application {
 		stage.show();
 	}
 
+	/**
+	 * Launch an army to render in board render.
+	 * @param army Army to render.
+	 */
 	public void launchArmyRender(Army army) {
 		this.boardRender.addArmyToRender(army);
+	}
+
+	/**
+	 * Load a board save file to continue a match.
+	 */
+	private void loadGame() {
+		try {
+			FileInputStream fis = new FileInputStream("Board-save.tmp");
+			ObjectInputStream ois = new ObjectInputStream(fis);
+			this.players = (ArrayList<Player>) ois.readObject();
+			this.board = (Board) ois.readObject();
+			for (Player player: this.players) {
+				if (player.getClass() == UserPlayer.class) {
+					this.mainPlayer = player;
+					break;
+				}
+			}
+		} catch (ClassNotFoundException | IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * Save the board in a board save file to continue the match later.
+	 */
+	private void saveGame() {
+		try {
+			FileOutputStream fos = new FileOutputStream("Board-save.tmp");
+			ObjectOutputStream oos = new ObjectOutputStream(fos);
+			oos.writeObject(this.players);
+			oos.writeObject(this.board);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -246,13 +296,13 @@ public class Main extends Application {
 	 */
 	private void updateGame() {
 		this.board.checkMatchState();
-		if (this.board.getMatchState() == false) {
-			// to continue
-		} else {
+		if (this.board.getMatchState()) {
 			this.board.nextTurn();
 			this.boardRender.update();
 			this.hudRender.update(this.board.getCurrentTurn());
 			this.players.stream().forEach(p -> p.nextTurn());
+		} else {
+			endGame();
 		}
 	}
 

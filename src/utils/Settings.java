@@ -55,7 +55,7 @@ public abstract class Settings {
 	public static int ENTITY_CATAPULT_PROD_TIME = 50;           /** Production time of a catapult (in turns). */
 	public static int ENTITY_CATAPULT_SPEED = 1;                /** Speed of a catapult (in cells/turn). */
 	public static Color ENTITY_CATAPULT_STYLE_COLOR = Color.rgb(100, 50, 20);       /** Color of a catapult. */
-	public static double ENTITY_CATAPULT_STYLE_HEIGHT = BOARD_CELL_STYLE_HEIGHT * .12;  /** Height of a catapult (in pixels). */
+	public static double ENTITY_CATAPULT_STYLE_HEIGHT = BOARD_CELL_STYLE_HEIGHT * .15;  /** Height of a catapult (in pixels). */
 	public static double ENTITY_CATAPULT_STYLE_WIDTH = BOARD_CELL_STYLE_WIDTH * .3; /** Width of a catapult (in pixels). */
 
 	public static int ENTITY_KNIGHT_ATTACK = 5;                 /** Attack points of a knight. */
@@ -64,8 +64,8 @@ public abstract class Settings {
 	public static int ENTITY_KNIGHT_PROD_TIME = 20;             /** Production time of a knight (in turns). */
 	public static int ENTITY_KNIGHT_SPEED = 6;                  /** Speed of a knight (in cells/turn). */
 	public static Color ENTITY_KNIGHT_STYLE_COLOR = Color.rgb(170, 170, 190);       /** Color of a kngiht. */
-	public static double ENTITY_KNIGHT_STYLE_HEIGHT = BOARD_CELL_STYLE_HEIGHT * .14;    /** Height of a knight (in pixels). */
-	public static double ENTITY_KNIGHT_STYLE_WIDTH = BOARD_CELL_STYLE_WIDTH * .05;  /** Width of a knight (in pixels). */
+	public static double ENTITY_KNIGHT_STYLE_HEIGHT = BOARD_CELL_STYLE_HEIGHT * .15;    /** Height of a knight (in pixels). */
+	public static double ENTITY_KNIGHT_STYLE_WIDTH = BOARD_CELL_STYLE_WIDTH * .1;  /** Width of a knight (in pixels). */
 
 	public static int ENTITY_PIKEMAN_ATTACK = 1;                /** Attack points of a pikeman. */
 	public static int ENTITY_PIKEMAN_HEALTH = 1;                /** Health points of a pikeman. */
@@ -73,10 +73,10 @@ public abstract class Settings {
 	public static int ENTITY_PIKEMAN_PROD_TIME = 5;             /** Production time of a pikeman (in turns). */
 	public static int ENTITY_PIKEMAN_SPEED = 2;                 /** Speed of a pikeman (in cells/turn). */
 	public static Color ENTITY_PIKEMAN_STYLE_COLOR = Color.rgb(180, 40, 0);         /** Color of a pikeman. */
-	public static double ENTITY_PIKEMAN_STYLE_HEIGHT = BOARD_CELL_STYLE_HEIGHT * .14;   /** Height of a pikeman (in pixels). */
-	public static double ENTITY_PIKEMAN_STYLE_WIDTH = BOARD_CELL_STYLE_WIDTH * .05; /** Width of a pikeman (in pixels). */
+	public static double ENTITY_PIKEMAN_STYLE_HEIGHT = BOARD_CELL_STYLE_HEIGHT * .15;   /** Height of a pikeman (in pixels). */
+	public static double ENTITY_PIKEMAN_STYLE_WIDTH = BOARD_CELL_STYLE_WIDTH * .1; /** Width of a pikeman (in pixels). */
 
-	public static double GAME_TURN_DURATION = 3;              /** Duration of a turn (in seconds). */
+	public static double GAME_TURN_DURATION = 1.2;              /** Duration of a turn (in seconds). */
 
 	public static double HUD_STYLE_HEIGHT = 90.;               /** Height of the HUD (in pixels). */
 	public static Insets HUD_STYLE_PADDING = new Insets(15, 15, 15, 15);            /** Padding of the HUD (in pixels). */

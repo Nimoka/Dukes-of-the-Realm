@@ -11,7 +11,6 @@ import game.entity.Pikeman;
 import main.Main;
 import static utils.Settings.*;
 
-import java.util.ArrayList;
 import java.util.Random;
 
 /**
@@ -44,19 +43,26 @@ public class ComputerPlayer extends Player {
 		if (castle.getDuke() == this.duke) {
 			Random generator = new Random();
 			int value = generator.nextInt(100);
-			if (value < 10) {
+			if (value < 30) {
 				if (!castle.haveAction()) {
 					Castle castleToAttack;
 					do {
 						castleToAttack = this.environment.getBoard().randomCastle();
 					} while (castleToAttack.getDuke() == this.duke);
 					try {
-						castle.launchNewAction(castleToAttack, generator.nextInt(castle.getStock().getNbCatapults()), generator.nextInt(castle.getStock().getNbKnights()), generator.nextInt(castle.getStock().getNbPikemen()));
+						int nbCatapults = 0, nbKnights = 0, nbPikemen = 0;
+						if (castle.getStock().getNbCatapults() > 0)
+							nbCatapults = generator.nextInt(castle.getStock().getNbCatapults());
+						if (castle.getStock().getNbKnights() > 0)
+							nbKnights = generator.nextInt(castle.getStock().getNbKnights());
+						if (castle.getStock().getNbPikemen() > 0)
+							nbPikemen = generator.nextInt(castle.getStock().getNbPikemen());
+						castle.launchNewAction(castleToAttack, nbCatapults, nbKnights, nbPikemen);
 					} catch (ExceptionDukeNotPlayer | ExceptionActionAlreadyLaunched e) {
 						e.printStackTrace();
 					}
 				}
-			} else if (value < 50) {
+			} else {
 				if (!castle.haveProduction()) {
 					value = generator.nextInt(100);
 					if (value < 40) {
